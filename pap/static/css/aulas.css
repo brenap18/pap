@@ -1,0 +1,333 @@
+/* Sidebar styles */
+.aula-sidebar {
+    position: sticky; /* Change from fixed to sticky */
+    top: 0; /* Ensure it sticks to the top */
+    bottom: 40;
+    height: 100%; /* Maintain original height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 10px; /* Optional: prevent scrollbars from overlapping content */
+    left: 0;
+    width: 250px; /* Sidebar width */
+    background-color: #1a1a1a; /* Darker background for a sleek look */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for sliding and background */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4); /* Soft shadow effect */
+    font-size: 13px; /* Larger font size for better readability */
+}
+
+
+/* Sidebar header */
+.aula-sidebar-header {
+    background-color: #222; /* Slightly lighter for contrast */
+    padding: 20px 15px;
+    color: #fff;
+    font-weight: bold;
+    border-bottom: 1px solid #444;
+}
+
+/* Custom scrollbar for the sidebar */
+.aula-sidebar::-webkit-scrollbar {
+    width: 8px;            /* Slightly wider scrollbar */
+    background-color: #333; /* Dark background for the scrollbar track */
+}
+
+/* Custom scrollbar thumb (the part you drag) */
+.aula-sidebar::-webkit-scrollbar-thumb {
+    background-color: #4a4a4a; /* Dark gray color */
+    border-radius: 10px;    /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Change the thumb color when hovered */
+.aula-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #999; /* Lighter gray when hovering */
+}
+
+/* Custom scrollbar track (the area the thumb slides on) */
+.aula-sidebar::-webkit-scrollbar-track {
+    background-color: #2a2a2a; /* Darker background for the track */
+}
+
+/* Menu item styles */
+.aula-sidebar a {
+    display: block;
+    padding: 15px 20px; /* Increased padding for larger click area */
+    color: #ccc;
+    text-decoration: none;
+    font-size: 1.2em; /* Larger font size for menu items */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.aula-sidebar a:hover {
+    background-color: #333; /* Dark background on hover */
+    color: #fff;            /* White text on hover */
+    border-radius: 5px;     /* Rounded corners on hover */
+}
+
+/* Active menu item */
+.aula-sidebar a.active {
+    background-color: #4e4e4e;
+    color: #fff;
+}
+
+/* Submenu styles */
+.submenu {
+    display: none;
+    background-color: #444;
+    padding-left: 20px;
+    border-left: 4px solid #666; /* Stylish left border */
+    margin-top: 5px;
+}
+
+.submenu a {
+    padding: 15px 20px; /* Increased padding for submenu items */
+    color: #bbb;
+    font-size: 1.2em; /* Larger font size for submenu items */
+    transition: color 0.3s ease;
+}
+
+.submenu a:hover {
+    color: #fff;
+}
+
+/* Show submenu */
+.submenu.show {
+    display: block;
+}
+
+/* Submenu toggle button styles */
+.submenu-toggle {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px; /* Increased padding for better interaction */
+    color: #ccc;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.2em; /* Larger font size for submenu toggle */
+}
+
+.submenu-toggle:hover {
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/* Arrow indicator for submenu */
+.submenu-toggle::before {
+    content: '▶';
+    margin-right: 10px;
+    font-size: 1.4em; /* Bigger arrow icon */
+}
+
+/* Change arrow when submenu is open */
+.submenu-toggle.open::before {
+    content: '▼';
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle-btn {
+    display: none; /* Keep the button hidden by default */
+}
+
+/* Make the sidebar toggle button visible on small screens */
+/* Sidebar hidden by default */
+@media (max-width: 768px) {
+    /* Sidebar hidden offscreen by default */
+    .aula-sidebar {
+        transform: translateX(-100%); /* Sidebar offscreen */
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease; /* Smooth transition for both transform and background */
+        position: fixed; /* Fixed position ensures it stays in place */
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 250px; /* Sidebar width */
+        background-color: #1a1a1a; /* Sidebar background */
+        overflow-y: auto; /* Allow scrolling if needed */
+        z-index: 999; /* Ensure the sidebar stays above the content */
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4); /* Soft shadow effect */
+    }
+
+    /* Sidebar toggle button */
+    .sidebar-toggle-btn {
+        display: block;
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        z-index: 9999; /* Ensure the button is on top of the content */
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
+        transition: background-color 0.3s ease; /* Smooth transition for button color */
+    }
+
+    /* Hover effect for the toggle button */
+    .sidebar-toggle-btn:hover {
+        background-color: #444; /* Darken button on hover */
+    }
+
+    /* When the sidebar has the 'show' class, it slides into view */
+    .aula-sidebar.show {
+        transform: translateX(0); /* Sidebar slides in */
+    }
+
+    /* Adjust the content when the sidebar is shown */
+    .main-content {
+        transition: margin-left 0.3s ease-in-out;
+    }
+
+    /* When the sidebar is visible, push content to the right */
+    .aula-sidebar.show + .main-content {
+        margin-left: 250px; /* Push content to the right */
+    }
+
+    /* Make the submenu toggle look sleek on mobile */
+    .submenu-toggle {
+        font-size: 1.1em;
+        padding: 8px 15px; /* Adjust padding for mobile */
+    }
+
+    .submenu-toggle::before {
+        content: '▶'; /* Ensure the submenu toggle shows up */
+        margin-right: 10px;
+        font-size: 1.2em;
+    }
+
+    .submenu-toggle.open::before {
+        content: '▼'; /* Change arrow when submenu is open */
+    }
+}
+
+
+
+.aulas-section-h3{
+    margin-top: 50px;
+}
+
+.aulas-section-h4{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    position: relative; /* Position relative to allow absolute positioning of the pseudo-element */
+}
+.aulas-section-h4::before {
+    content: ""; /* Required for pseudo-elements */
+    position: absolute; /* Position it absolutely */
+    left: -20px; /* Adjust this value to position the line */
+    top: 50%; /* Center the line vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    width: 5px; /* Width of the line */
+    height: 100%; /* Height of the line */
+    background-color: #4b4a8b; /* Color of the line */
+}
+
+.aulas-main-content {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex: 1 1 70%; /* Makes the content take up 70% of the available width */
+  }
+
+  @media (max-width: 767px) {
+    /* Para dispositivos móveis, faz o conteúdo ocupar 100% da largura */
+    .aulas-main-content {
+        flex: 1 1 100%; /* O conteúdo ocupa 100% da largura */
+        padding: 20px; /* Diminui o padding */
+        margin: 0; /* Remove margem para garantir que o conteúdo ocupe toda a tela */
+    }
+}
+
+
+.code-section {
+    background-color: #1e1e1e;    /* Dark background for the box */
+    color: #dcdcdc;                /* Light text color for readability */
+    border-radius: 8px;            /* Rounded corners */
+    padding: 15px;                 /* Padding inside the box */
+    overflow: auto;                /* Makes the box scrollable if content overflows */
+    max-width: 60%;                /* Max width of the box */
+    margin-top: 50px;              /* Space above the box */
+    margin-right: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
+    text-align: left;             /* Ensure text is aligned left */
+    display: block;              /* Ensures block-level behavior */
+}
+
+/* Ensure the code itself looks good */
+.code-section code {
+    font-family: 'Courier New', Courier, monospace;  /* Monospace font for code */
+    font-size: 14px;                                /* Slightly smaller font size */
+    white-space: pre-wrap;                          /* Preserve whitespace and wrap lines */
+    word-wrap: break-word;                          /* Break long words to avoid horizontal scroll */
+    display: block;                                 /* Ensures code block takes up full width */
+}
+
+/* Add scroll when code content overflows */
+.code-section pre {
+    max-height: 200px;  /* Set a max height */
+    overflow-y: auto;   /* Enable vertical scrolling */
+    margin: 0;          /* Remove any margin */
+    text-align: left;   /* Ensure text inside pre is aligned left */
+}
+
+
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,.3);
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    margin: 2.5em 0;
+    position: relative;
+  }
+
+/* CSS Styles */
+p {
+    font-size: 15px; /* Set the font size for paragraphs */
+    line-height: 1.5; /* Optional: Adjust line height for better readability */
+}
+
+ul li {
+    margin-top: 40px;
+    font-size: 16px; /* Set the font size for list items, slightly larger than paragraphs */
+    line-height: 1.5; /* Optional: Adjust line height for better readability */
+}
+
+/* Estilo para o container dos botões de navegação */
+.aulas-buttons-container {
+    margin-bottom   : 30px; /* Distância do conteúdo até o rodapé */
+  }
+
+  /* Alinhar os botões ao centro */
+  .aulas-buttons-container .container {
+    display: flex;
+    justify-content: center;
+    gap: 85.5%; /* Espaço entre os botões */
+    padding-top: 20px; /* Adiciona um pequeno padding no topo */
+  }
+
+  /* Estilo dos botões */
+  .aulas-buttons-container button {
+    width: 60%; /* Largura padrão para desktop */
+    height: 40px;
+    background: #4b4a8b;
+    border-color: #232240;
+    margin-left: 1%; /* Ajuste conforme necessário */
+    margin-top: 20px; /* Ajuste para um espaço acima do botão */
+    font-size: 120.5%;
+    border-radius: 6.25%;
+    cursor: pointer;
+    transition: 0.4s ease;
+  }
+
+  /* Efeito de hover */
+  .aulas-buttons-container button:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+  }
+
+
+
+

@@ -7,7 +7,7 @@
     color: #000000;
     font-size: 14px;
     background-color: #e8e8e8;
-    background-image: url("C:/Users/besoc/Documents/PAP/imagens/aaa.png");
+    background-image: url("http://localhost/pap/static/images/aaa.png");
     background-position: center; /* Centraliza a imagem */
     background-attachment: fixed; /* A imagem não rola com o conteúdo */
     background-size: cover; /* Cobre toda a área do hero */
@@ -70,7 +70,7 @@
 .login-btn {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #4b4a8b;
   color: white;
   border: none;
   font-size: 16px;
@@ -79,8 +79,10 @@
 }
 
 .login-btn:hover {
-  background-color: #0056b3;
+  background-color: #ffffff;
+  color: #000000;
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -1,25 +1,90 @@
 <div class="aula-sidebar">
     <a href="aulas.html" class="active">Introdução</a>
 
-    
+    <!-- Submenu for "Como programar?" -->
     <a href="#" class="submenu-toggle">Como programar?</a>
-
-    <!-- HTML Submenu -->
     <div class="submenu">
         <a href="aula1.html">Instalações</a>
         <a href="aula2.html">Primeiro programa</a>
     </div>
 
+    <!-- Submenu for "Fundamentos da Programação em C++" -->
     <a href="#" class="submenu-toggle">Fundamentos da Programação em C++</a>
-
     <div class="submenu">
         <a href="aula3.html">Sintaxe Básica</a>
-        <a href="#">Tipos de dados</a>
+        <a href="aula4.html">Tipos de dados</a>
         <a href="#">Variáveis e Constantes</a>
         <a href="#">Operadores</a>
     </div>
-    <a href="#">AAaaaa</a>
-    <a href="#">JavaScript</a>
-    <a href="#">Python</a>
-    <a href="#">SQL</a>
+    <a href="#" class="submenu-toggle">Controle de fluxo</a>
+    <div class="submenu">
+        <a href="aula3.html">Estruturas Condicionais</a>
+        <a href="aula4.html">Laços de repetição</a>
+    </div>
+
+    <a href="#" class="submenu-toggle">Funções</a>
+    <div class="submenu">
+        <a href="aula3.html">Definido e chamado funções</a>
+        <a href="aula4.html">Parâmetros de retorno de valores</a>
+        <a href="aula4.html">Funções Recursivas</a>
+    </div>
+
+    <a href="#" class="submenu-toggle">Estruturas de dados</a>
+    <div class="submenu">
+        <a href="aula3.html">Arrays</a>
+        <a href="aula4.html">Strings</a>
+        <a href="aula4.html">Estruturas &#40;struct&#41;</a>
+    </div>
+
+    <a href="#" class="submenu-toggle">Programação orientada a objetos</a>
+    <div class="submenu">
+        <a href="aula3.html">Classes e objetos</a>
+        <a href="aula4.html">Encriptamento</a>
+        <a href="aula4.html">Herança</a>
+        <a href="aula4.html">Palinorfismo</a>
+    </div>
+
+
+    <a href="aulas.html" class="active">Manipulação de arquivos</a>
+    <a href="aulas.html" class="active">Biblioteca e recursos</a>
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.querySelector('.aula-sidebar');
+            const footer = document.querySelector('footer');
+            const footerOffset = footer.offsetTop;
+
+            // Function to adjust sidebar height based on footer
+            function adjustSidebarHeight() {
+                const windowHeight = window.innerHeight;
+                const footerHeight = footer.offsetHeight;
+                const sidebarTop = sidebar.offsetTop;
+                const availableHeight = footerOffset - sidebarTop;
+
+                // Adjust the sidebar height based on available space
+                if (availableHeight > 0) {
+                    sidebar.style.maxHeight = availableHeight + 'px';
+                } else {
+                    sidebar.style.maxHeight = '100%'; // If footer is above the sidebar, make it full height
+                }
+            }
+
+            // Adjust on initial load and window resize
+            adjustSidebarHeight();
+            window.addEventListener('resize', adjustSidebarHeight);
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleButton = document.querySelector('.sidebar-toggle-btn');
+            const sidebar = document.querySelector('.aula-sidebar');
+
+            toggleButton.addEventListener('click', function() {
+                sidebar.classList.toggle('show'); // Toggle the sidebar visibility
+                toggleButton.classList.toggle('active'); // Toggle the button active state
+            });
+        });
+    </script>
 </div>

@@ -1,75 +1,63 @@
-/* Sidebar styles */
+/* Sidebar Styling */
 .aula-sidebar {
-    position: sticky; /* Change from fixed to sticky */
+    position: fixed; /* Fixed position to keep it on screen */
     top: 0; /* Ensure it sticks to the top */
-    bottom: 40;
-    height: 100%; /* Maintain original height */
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding-right: 10px; /* Optional: prevent scrollbars from overlapping content */
-    left: 0;
+    left: 0; /* Align to the left */
+    height: 100%; /* Sidebar should take full height */
     width: 250px; /* Sidebar width */
-    background-color: #1a1a1a; /* Darker background for a sleek look */
-    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for sliding and background */
+    background-color: #1a1a1a; /* Darker background */
+    font-size: 13px; /* Larger font size for readability */
+    color: #ccc; /* Text color */
+    overflow-y: auto; /* Enable vertical scrolling */
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4); /* Soft shadow effect */
-    font-size: 13px; /* Larger font size for better readability */
+    z-index: 999; /* Ensure sidebar stays above content */
+    padding-right: 10px; /* Optional: prevent scrollbars from overlapping content */
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 
-/* Sidebar header */
-.aula-sidebar-header {
-    background-color: #222; /* Slightly lighter for contrast */
-    padding: 20px 15px;
-    color: #fff;
-    font-weight: bold;
-    border-bottom: 1px solid #444;
-}
-
-/* Custom scrollbar for the sidebar */
+/* Custom scrollbar */
 .aula-sidebar::-webkit-scrollbar {
-    width: 8px;            /* Slightly wider scrollbar */
+    width: 8px; /* Slightly wider scrollbar */
     background-color: #333; /* Dark background for the scrollbar track */
 }
 
-/* Custom scrollbar thumb (the part you drag) */
 .aula-sidebar::-webkit-scrollbar-thumb {
     background-color: #4a4a4a; /* Dark gray color */
-    border-radius: 10px;    /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth transition */
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
 }
 
-/* Change the thumb color when hovered */
 .aula-sidebar::-webkit-scrollbar-thumb:hover {
     background-color: #999; /* Lighter gray when hovering */
 }
 
-/* Custom scrollbar track (the area the thumb slides on) */
 .aula-sidebar::-webkit-scrollbar-track {
     background-color: #2a2a2a; /* Darker background for the track */
 }
 
-/* Menu item styles */
+/* Sidebar Menu Styling */
 .aula-sidebar a {
     display: block;
     padding: 15px 20px; /* Increased padding for larger click area */
     color: #ccc;
     text-decoration: none;
-    font-size: 1.2em; /* Larger font size for menu items */
+    font-size: 1.2em; /* Larger font size */
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .aula-sidebar a:hover {
-    background-color: #333; /* Dark background on hover */
-    color: #fff;            /* White text on hover */
-    border-radius: 5px;     /* Rounded corners on hover */
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
 }
 
-/* Active menu item */
 .aula-sidebar a.active {
-    background-color: #4e4e4e;
+    background-color: #2a2a2a;
     color: #fff;
 }
 
-/* Submenu styles */
+/* Submenu Styles */
 .submenu {
     display: none;
     background-color: #444;
@@ -81,7 +69,7 @@
 .submenu a {
     padding: 15px 20px; /* Increased padding for submenu items */
     color: #bbb;
-    font-size: 1.2em; /* Larger font size for submenu items */
+    font-size: 1.2em;
     transition: color 0.3s ease;
 }
 
@@ -89,20 +77,19 @@
     color: #fff;
 }
 
-/* Show submenu */
 .submenu.show {
     display: block;
 }
 
-/* Submenu toggle button styles */
+/* Submenu toggle button */
 .submenu-toggle {
     display: flex;
     align-items: center;
-    padding: 15px 20px; /* Increased padding for better interaction */
+    padding: 15px 20px;
     color: #ccc;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 1.2em; /* Larger font size for submenu toggle */
+    font-size: 1.2em;
 }
 
 .submenu-toggle:hover {
@@ -111,48 +98,36 @@
     border-radius: 5px;
 }
 
-/* Arrow indicator for submenu */
 .submenu-toggle::before {
     content: '▶';
     margin-right: 10px;
-    font-size: 1.4em; /* Bigger arrow icon */
+    font-size: 1.4em;
 }
 
-/* Change arrow when submenu is open */
 .submenu-toggle.open::before {
     content: '▼';
 }
 
-/* Sidebar toggle button */
-.sidebar-toggle-btn {
-    display: none; /* Keep the button hidden by default */
-}
-
-/* Make the sidebar toggle button visible on small screens */
-/* Sidebar hidden by default */
+/* Adjustments for mobile */
 @media (max-width: 768px) {
-    /* Sidebar hidden offscreen by default */
+    /* Mobile View - Sidebar off-screen */
     .aula-sidebar {
-        transform: translateX(-100%); /* Sidebar offscreen */
-        transition: transform 0.3s ease-in-out, background-color 0.3s ease; /* Smooth transition for both transform and background */
-        position: fixed; /* Fixed position ensures it stays in place */
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+        position: fixed;
         top: 0;
         left: 0;
         height: 100%;
-        width: 250px; /* Sidebar width */
-        background-color: #1a1a1a; /* Sidebar background */
-        overflow-y: auto; /* Allow scrolling if needed */
-        z-index: 999; /* Ensure the sidebar stays above the content */
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4); /* Soft shadow effect */
+        width: 250px;
+        z-index: 999;
     }
 
-    /* Sidebar toggle button */
     .sidebar-toggle-btn {
         display: block;
         position: absolute;
         top: 20px;
         left: 20px;
-        z-index: 9999; /* Ensure the button is on top of the content */
+        z-index: 9999;
         background-color: #333;
         color: white;
         padding: 10px;
@@ -160,54 +135,87 @@
         cursor: pointer;
         font-size: 20px;
         border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Slight shadow for depth */
-        transition: background-color 0.3s ease; /* Smooth transition for button color */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        transition: background-color 0.3s ease;
     }
 
-    /* Hover effect for the toggle button */
     .sidebar-toggle-btn:hover {
-        background-color: #444; /* Darken button on hover */
+        background-color: #444;
     }
 
-    /* When the sidebar has the 'show' class, it slides into view */
+    /* Sidebar when it's open */
     .aula-sidebar.show {
-        transform: translateX(0); /* Sidebar slides in */
+        transform: translateX(0);
     }
 
-    /* Adjust the content when the sidebar is shown */
     .main-content {
         transition: margin-left 0.3s ease-in-out;
     }
 
-    /* When the sidebar is visible, push content to the right */
     .aula-sidebar.show + .main-content {
-        margin-left: 250px; /* Push content to the right */
-    }
-
-    /* Make the submenu toggle look sleek on mobile */
-    .submenu-toggle {
-        font-size: 1.1em;
-        padding: 8px 15px; /* Adjust padding for mobile */
-    }
-
-    .submenu-toggle::before {
-        content: '▶'; /* Ensure the submenu toggle shows up */
-        margin-right: 10px;
-        font-size: 1.2em;
-    }
-
-    .submenu-toggle.open::before {
-        content: '▼'; /* Change arrow when submenu is open */
+        margin-left: 250px;
     }
 }
+
+/* Footer Styling */
+footer {
+    background-color: #222;
+    color: #ccc;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.2em;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Main Content Styling */
+.main-content {
+    margin-left: 250px; /* Space for the sidebar */
+    padding: 20px;
+}
+
+/* Make the sidebar adjust dynamically based on footer position */
+.aula-sidebar {
+    position: fixed; /* Keep it fixed */
+    top: 0;
+    left: 0;
+    width: 250px;
+    background-color: #1a1a1a;
+    font-size: 13px;
+    color: #ccc;
+    z-index: 9999;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    padding-right: 10px;
+}
+
+/* Add dynamic height adjustment for sidebar */
+.aula-sidebar {
+    max-height: 100vh; /* Default height */
+}
+
+/* Sidebar Adjustments based on Footer */
+.aula-sidebar.fixed {
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    overflow-y: auto;
+    height: 100vh;
+    max-height: calc(100vh - 60px); /* Adjust based on footer height */
+}
+
 
 
 
 .aulas-section-h3{
+
     margin-top: 50px;
 }
 
 .aulas-section-h4{
+
     margin-top: 30px;
     margin-bottom: 20px;
     position: relative; /* Position relative to allow absolute positioning of the pseudo-element */
@@ -224,6 +232,7 @@
 }
 
 .aulas-main-content {
+    margin-left: 15%;
     padding: 30px;
     background-color: #fff;
     border-radius: 2px;
@@ -297,36 +306,256 @@ ul li {
 
 /* Estilo para o container dos botões de navegação */
 .aulas-buttons-container {
-    margin-bottom   : 30px; /* Distância do conteúdo até o rodapé */
-  }
+    margin-bottom: 25px; /* Distância do conteúdo até o rodapé */
+}
 
-  /* Alinhar os botões ao centro */
-  .aulas-buttons-container .container {
+/* Alinhar os botões ao centro */
+.aulas-buttons-container .container {
     display: flex;
     justify-content: center;
     gap: 85.5%; /* Espaço entre os botões */
     padding-top: 20px; /* Adiciona um pequeno padding no topo */
-  }
+}
 
-  /* Estilo dos botões */
-  .aulas-buttons-container button {
+/* Estilo dos botões */
+.aulas-buttons-container a {
     width: 60%; /* Largura padrão para desktop */
     height: 40px;
-    background: #4b4a8b;
-    border-color: #232240;
+    background: #4b4a8b; /* Cor de fundo padrão */
+    border: 1px solid #232240; /* Borda */
     margin-left: 1%; /* Ajuste conforme necessário */
     margin-top: 20px; /* Ajuste para um espaço acima do botão */
     font-size: 120.5%;
     border-radius: 6.25%;
     cursor: pointer;
-    transition: 0.4s ease;
-  }
+    text-decoration: none; /* Remove o sublinhado padrão */
+    color: white; /* Define a cor do texto */
+    display: inline-block; /* Para que o padding e a largura funcionem corretamente */
+    transition: background-color 0.4s ease, color 0.4s ease; /* Transição suave */
+}
 
-  /* Efeito de hover */
-  .aulas-buttons-container button:hover {
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-  }
+/* Efeito de hover */
+.aulas-buttons-container a:hover {
+    background-color: #ffffff; /* Cor de fundo ao passar o mouse */
+    color: rgb(0, 0, 0); /* Cor do texto ao passar o mouse */
+}
+
+/* Efeito de active (quando clicado) */
+.aulas-buttons-container a:active {
+    background-color: #4b4a8b; /* Mantém a cor de fundo ao clicar */
+    color: white; /* Mantém a cor do texto ao clicar */
+}
+
+/* Efeito de visited (após clicar) */
+.aulas-buttons-container a:visited {
+    background-color: #4b4a8b; /* Mantém a cor de fundo após visitar */
+    color: white; /* Mantém a cor do texto após visitar */
+}
+
+/* Efeito de foco (opcional) */
+.aulas-buttons-container a:focus {
+    outline: none; /* Remove o contorno padrão */
+    box-shadow: 0 0 0 2px rgba(75, 74, 139, 0.5); /* Adiciona um efeito de foco */
+}
+
+
+
+
+
+
+
+  .aulas.footer-section {
+    padding: 45px 0;
+    background: #1f1f1f; 
+}
+
+.aulas.footer-section .relative {
+    position: relative; 
+}
+
+.aulas.footer-section a { 
+    text-decoration: none;
+    color: #e1e1e1;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease; 
+}
+
+.aulas.footer-section a:hover {
+    color: rgb(109, 109, 109); 
+}
+
+.aulas.footer-section .aulas-footer-logo-wrap .aulas-footer-logo {
+    margin-left: 25%;
+    font-size: 50px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #4b4a8b; 
+    margin-bottom: 40px; /* Increased space below the logo */
+}
+
+.aulas.footer-section .aulas-subscription-form h3 {
+    margin-left: 160px; /* Remove left margin */
+    text-align: left;
+    margin-bottom: 20px; /* Spacing below the title */
+    font-size: 30px;
+    font-weight: 500;
+    color: #4b4a8b; 
+    margin-top: 25px; /* Spacing above the "Contacte-nos" title */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.aulas.footer-section .aulas-footer-email {
+    margin-left: 166px; /* Remove left margin */
+    color: #e1e1e1; /* Text color */
+    font-size: 18px; /* Font size */
+    margin-top: 10px;
+    margin-bottom: 4px; /* Spacing above and below the email */
+}
+
+.aulas.footer-section .btn.btn-primary.aulas-btn {  
+    
+    width: 60%; /* Default width for desktop */
+    height: 40px;
+    background: #4b4a8b;
+    border-color: #232240;
+    margin-left: 165px; /* Remove left margin */
+    margin-top: 20px; /* Adjust for space above the button */
+    font-size: 120.5%;
+    border-radius: 6.25%;
+    cursor: pointer;
+    transition: 0.4s ease;
+    /* Center the text vertically */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aulas.footer-section .btn.btn-primary.aulas-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+.aulas.footer-section .aulas-subscription-form {
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+    margin-top: 100px; 
+}
+
+@media (min-width: 992px) {
+    .aulas.footer-section .aulas-subscription-form {
+        margin-top: 0px;
+        margin-bottom: 80px; 
+    } 
+}
+
+.aulas.footer-section .aulas-subscription-form .form-control {
+    height: 50px;
+    border-radius: 10px;
+    font-family: "Inter", sans-serif; 
+}
+
+.aulas.footer-section .aulas-subscription-form .form-control:active, 
+.aulas.footer-section .aulas-subscription-form .form-control:focus {
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-color: #4b4a8b;
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2); 
+}
+
+.aulas.footer-section .aulas-subscription-form .form-control::-webkit-input-placeholder {
+    font-size: 14px; 
+}
+
+.aulas.footer-section .aulas-subscription-form .form-control::-moz-placeholder {
+    font-size: 14px; 
+}
+
+.aulas.footer-section .aulas-subscription-form .form-control:-ms-input-placeholder {
+    font-size: 14px; 
+}
+
+.aulas.footer-section .aulas-subscription-form .form-control:-moz-placeholder {
+    font-size: 14px; 
+}
+
+.aulas.footer-section .aulas-subscription-form .btn {
+    border-radius: 10px !important; 
+}
+
+.aulas.footer-section .sofa-img {
+    position: absolute;
+    top: -200px;
+    z-index: 1;
+    right: 0; 
+}
+
+.aulas.footer-section .sofa-img img {
+    max-width: 380px; 
+}
+
+.aulas.footer-section .aulas-links-wrap {
+    padding-bottom: -1000px;
+    padding-top: 10px;
+    padding-left: 30px;
+    display: flex; /* Aligns links horizontally */
+    justify-content: left; /* Centers links */
+}
+
+.aulas.footer-section .aulas-links-wrap .aulas-list {
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+}
+
+.aulas.footer-section .aulas-links-wrap .aulas-list li {
+    margin-bottom: 100px; /* Space between list items */
+    margin-left: 166px; /* Remove left margin */
+}
+
+.aulas.footer-section .aulas-links-wrap .aulas-list li a {
+
+    color: #e1e1e1; /* Link color */
+    font-size: 16px; /* Font size for links */
+}
+
+.aulas.footer-section .aulas-links-wrap .aulas-list li a:hover {
+    color: #4b4a8b; /* Hover color for links */
+}
+
+.aulas.footer-section .aulas-copyright {
+    padding: 20px 0; /* Padding for copyright section */
+    color: #e1e1e1; /* Copyright text color */
+}
+
+.aulas.footer-section .aulas-copyright-text {
+    font-size: 14px; /* Font size for copyright text */
+}
+
+.aulas.footer-section .aulas-terms {
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+}
+
+.aulas.footer-section .aulas-terms li {
+    display: inline; /* Displays terms as inline */
+    margin-right: 20px; /* Space between terms */
+}
+
+.aulas.footer-section .aulas-terms li a {
+    color: #e1e1e1; /* Link color for terms */
+}
+
+.aulas.footer-section .aulas-terms li a:hover {
+    color: #4b4a8b; /* Hover color for terms links */
+}
+
+  
+
+
+  
 
 
 

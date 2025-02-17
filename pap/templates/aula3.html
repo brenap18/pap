@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="shortcut icon" href="images/logo.png">
+  <link rel="shortcut icon" href="favicon.png">
   <meta name="description" content="Site dedicado ao ensino de C++" />
   <meta name="keywords" content="bootstrap, bootstrap4, C++, programação" />
 
@@ -20,7 +20,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
 
-  <title>Home - Kiocode</title>
+  <title>Aula 4 - Kiocode</title>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
     <div class="container">
       <div class="navbar-brand">
         <a href="index.html">
-          <img src="c:\Users\besoc\Documents\PAP\imagens\logo.png" alt="Logo" class="logo">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://localhost/pap/static/images/logo.png" alt="Logo" class="logo">
         </a>
       </div>
 
@@ -55,7 +55,7 @@
         </ul>
 
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-          <li><a class="nav-link" href="login.html"><img src="C:\xampp\htdocs\pap\static\images\user.svg"></a></li>
+          <li><a class="nav-link" href="login.php"><img src="http://localhost/pap/static/images/user.png"></a></li>
         </ul>
       </div>
     </div>
@@ -197,7 +197,12 @@ Ele pode ocupar várias linhas sem afetar o código.
 int y = 20;
                     </code></pre>
                 </div>
-              </div>
+                <div class="aulas-buttons-container">
+                  <div class="container text-center">
+                    <a class="btn btn-secondary me-3" href="aula2.html">Anterior</a>
+                    <a class="btn btn-secondary" href="aula4.html">Próximo</a>
+                  </div>
+                </div>
             </div>
           </div>
         </div>
@@ -206,54 +211,42 @@ int y = 20;
   </div>
 
   <!-- Footer Section -->
-  <footer class="footer-section">
-    <div class="container relative">
+  <footer class="footer-section aulas"> <!-- Added 'aulas' class here -->
+    <div class="container relative aulas"> <!-- Added 'aulas' class here -->
       <div class="row g-5 mb-5">
         <div class="col-lg-4">
-          <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Kiocode</a></div>
+          <div class="mb-4 aulas-footer-logo-wrap"><a href="#" class="aulas-footer-logo">Kiocode</a></div>
           <div class="row">
             <div class="col-lg-8">
-              <div class="subscription-form">
+              <div class="aulas-subscription-form">
                 <h3 class="d-flex align-items-center">
-                  <span class="me-1"><img src="C:\xampp\htdocs\pap\static\images\envelope-outline.svg" alt="Image" class="img-fluid"></span>
-                  <span>Contacte nos</span>
+                  <span class="me-1"><img src="http://localhost/pap/static/images/envelope-outline.svg" alt="Image" class="img-fluid"></span>
+                  <span>Contacte-nos</span>
                 </h3>
-                <p class="footer-email">kiocodecplusplus@gmail.com</p>
-                <p><a href="contact.html" class="btn btn-primary">Contacte-nos</a></p>
+                <p class="aulas-footer-email">kiocodecplusplus@gmail.com</p>
+                <p><a href="contact.html" class="btn btn-primary aulas-btn">Contacte-nos</a></p>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="col-lg-8">
-          <div class="row links-wrap">
-            <div class="col-6 col-sm-6 col-md-3">
-              <ul class="list-unstyled">
-                <li><a href="sobre.html">Sobre</a></li>
-                <li><a href="aulas.html">Aulas</a></li>
-                <li><a href="contact.html">Contactos</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
       </div>
-
-      <div class="border-top copyright">
+  
+      <div class="border-top aulas-copyright">
         <div class="row pt-4">
           <div class="col-lg-6">
-            <p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
+            <p class="mb-2 text-center text-lg-start aulas-copyright-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
           </div>
-
+  
           <div class="col-lg-6 text-center text-lg-end">
-            <ul class="list-unstyled d-inline-flex ms-auto">
-              <li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
-              <li><a href="#">Privacy Policy</a></li>
+            <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
+              <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
+              <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
             </ul>	
           </div>
         </div>
       </div>
     </div>
-  </footer>
+</footer>
 
   <script>
     // Load the sidebar dynamically

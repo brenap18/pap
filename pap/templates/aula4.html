@@ -4,24 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="favicon.png">
+
   <meta name="description" content="Site dedicado ao ensino de C++" />
   <meta name="keywords" content="bootstrap, bootstrap4, C++, programação" />
+
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
   <link href="../static/css/aulas.css" rel="stylesheet">
+
+  <!-- Link to Prism.js for syntax highlighting -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
-
-  <title>Aula 3 - Kiocode</title>
 
 
+  <title>Aula 5 - Kiocode</title>
 </head>
+
 <body>
+
   <!-- Início da Navegação -->
   <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
     <div class="container">
@@ -63,6 +66,7 @@
   <div class="aula-content-section">
     <div class="aula-container">
       <div class="aula-content-wrapper">
+
         <!-- Sidebar Container -->
         <div id="sidebar-container"></div>
 
@@ -71,44 +75,90 @@
 
         <!-- Main Content -->
         <div class="aulas-main-content">
-          <h2 class="aulas-section-title">Escrever "Hello World"</h2>
+          <h2 class="aulas-section-title">Tipos de dados</h2>
+          <h3 class="aulas-section-h3">- O que são tipos de dados?</h3>
           <p>
-            O "Hello, World!" é um programa simples que exibe "Hello, World!" na tela. Sendo um programa muito simples, é frequentemente utilizado para apresentar uma nova linguagem de programação a iniciantes. Em C++, para escrever "Hello World", usa-se o seguinte código:
+            Os tipos de dados em C++ definem a natureza dos dados que podem ser armazenados em variáveis. 
+            Eles determinam o tamanho, o intervalo e as operações que podem ser realizadas sobre esses dados.
           </p>
-          <div class="code-section">
-            <h3>Hello World:</h3>
-            <pre><code class="language-c++">   #include <iostream>
-            int main() {
-              std::cout << "Hello, World!" << std::endl;
-              return  0;
-            }
-            </code></pre>
-          </div>
+          <hr>
 
           <!-- Content Row -->
           <div class="aulas-row my-5">
-            <div class="aulas-col-6 aulas-col-md-6">
-              <div class="aulas-feature">
-                <p style="background-color: #e9e9fd; padding: 10px; border-radius: 5px; width: 40%;">
-                  <b><u>Nota:</u></b> a explicação do código está na próxima aula
-                </p>
+              <div class="aulas-col-6 aulas-col-md-6">
+                  <div class="aulas-feature">
+                    <h4 class="aulas-section-h4">Dados Primitivos</h4>
+                <p>Dados primitivos em C++ são tipos de dados básicos e pré-definidos pela linguagem, que representam valores simples. 
+                  Estes tipos não são compostos e têm uma representação direta na memória.</p>
+                <ul>
+                    <li><b>Comentário de linha única:</b> Usa // para comentar uma linha inteira. Tudo o que vem depois de // na mesma linha será ignorado pelo compilador.</li>
+                    <li><b>Comentário de várias linhas:</b> Usa /* para iniciar e */ para terminar o comentário, permitindo que o comentário ocupe várias linhas.</li>
+                </ul>
+
+                <div class="code-section">
+                    <h3>Comentário com <u>//</u></h3>
+                    <pre><code class="language-c++">
+// Este é um comentário de linha única
+int x = 10;  // A variável x recebe o valor 10
+                    </code></pre>
+                </div>
+
+                <div class="code-section">
+                    <h3>Comentário com <u>/* */</u></h3>
+                    <pre><code class="language-c++">
+/*
+Este é um comentário
+de várias linhas.
+Ele pode ocupar várias linhas sem afetar o código.
+*/
+int y = 20;
+                    </code></pre>
+                </div>
+                    <h4 class="aulas-section-h4">• Instalação do MinGW &#40;Uma distribuição do GCC para Windows&#41;</h4>
+                    <ul>
+                      <li>1- Acesse o site do MinGW</li><p>Abra o seu navegador e vá para o site oficial do MinGW: MinGW.</p>
+
+                      <li>2- Baixe o instalador</li><p>Clique em "downloads" no menu e instale o instalador do MinGW &#40;geralmente chamado mingw-get-setup.exe&#41;</p>
+
+                      <li>3- Selecionar os pacotes</li><p>Durante a instalação, verá um ecrã de configuração. Selecione o "Basic Setup" no painel à esquerda</p>
+                      <p>No painel à direita, marque as caixas para os pacotes "mingw32-base" e "mingw32-gcc-g++"</p>
+                      <p>Clique com o botão direito do mouse sobre os pacotes selecionados e escolha "Mark for Installation</p>
+
+                      <li>4- Instale os pacotes</li><p>Após marcar os pacotes, clique em "Installation" no menu superior e selecione "Apply Changes".</p>
+
+                      <li>5- Adicionar o diretório ao PATH do sistema</li>
+                      <p> - Clique com o botão direito no ícone do Windows e selecione "Sistema".</p>
+                      <p> - Clique em "Configurações avançadas do sistema" no painel à esquerda.</p>
+                      <p> - Na janela "Propriedades do Sistema", clique no botão "Variáveis de Ambiente".</p>
+                      <p> - Na seção "Variáveis do sistema", localize a variável chamada "Path", selecione-a e clique em "Editar".</p>
+                      <p> - Clique em "Novo" e adicione o caminho C:\MinGW\bin.</p>
+                      <p> - Clique em "OK" para fechar todas as janelas.</p>
+
+                      <li>6- Verificar a instalação</li><p>Abra o Prompt de Comando (cmd) e digite 'g++ --version' e Enter. Se a instalação foi bem-sucedida, verá a versão do GCC instalada</p>
+                    </ul>
+                    </div>
+                    <h4 class="aulas-section-h4">• Instalação do Visual Code</h4>
+                    <ul>
+
+                      <li>1- Acesse o site do VS</li><p>Abra o seu navegador e vá para o site oficial do Visual Studio: Visual Studio</p>
+
+                      <li>2- Baixe o instalador</li><p>Clique no botão "Baixar" e localize o ficheiro instalado. Clique 2 vezes para iniciar a instalação</p>
+
+                      <li>3- Selecionar a carga de trabalho</li><p>Na tela de instalação, haverá várias opções de carga de trabalho. Selecione a opção "Desenvolvimento de Desktop com C++" e clique no botão "Instalar"</p>
+                    </ul>
+                    <div class="aulas-buttons-container">
+                      <div class="container text-center">
+                        <a class="btn btn-secondary me-3" href="aula3.html">Anterior</a>
+                        <a class="btn btn-secondary" href="aula5.html">Próximo</a>
+                      </div>
+                    </div>
               </div>
-            </div>
-            
-          </div>
-          <!-- Botões "Próximo" e "Anterior" -->
-          <div class="aulas-buttons-container">
-            <div class="container text-center">
-              <a class="btn btn-secondary me-3" href="aula1.html">Anterior</a>
-              <a class="btn btn-secondary" href="aula3.html">Próximo</a>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  
 
   <!-- Footer Section -->
   <footer class="footer-section aulas"> <!-- Added 'aulas' class here -->
@@ -148,6 +198,7 @@
     </div>
 </footer>
 
+
   <script>
     // Load the sidebar dynamically
     document.addEventListener("DOMContentLoaded", function() {
@@ -155,7 +206,7 @@
         .then(response => response.text())
         .then(data => {
           document.getElementById('sidebar-container').innerHTML = data;
-
+  
           // Re-attach event listeners for submenu toggles after loading the sidebar
           document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
             toggleButton.addEventListener('click', function () {
@@ -164,14 +215,14 @@
               toggleButton.classList.toggle('open');  // Optionally change the icon of the button
             });
           });
-
+  
           // Attach the sidebar toggle button event listener after loading the sidebar
           const toggleBtn = document.querySelector('.sidebar-toggle-btn');
           const sidebar = document.querySelector('.aula-sidebar');
-
+  
           if (toggleBtn) {
             toggleBtn.addEventListener('click', function() {
-              sidebar.classList.toggle('show'); // Toggle the 'show' class to slide the sidebar in/out
+                sidebar.classList.toggle('show'); // Toggle the 'show' class to slide the sidebar in/out
             });
           }
         })
@@ -182,5 +233,6 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>
   <script src="js/custom.js"></script>
+
 </body>
 </html>

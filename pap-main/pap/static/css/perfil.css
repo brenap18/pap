@@ -1,0 +1,161 @@
+/* ==================== GLOBAL STYLES ==================== */
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #5a5a5a;
+    background: #f4f5f7;
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+}
+
+/* ==================== TYPOGRAPHY ==================== */
+h1 {
+    font-size: 55px;
+    color: #fbfbfb;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #fbfbfb;
+    margin-bottom: 25px;
+}
+
+/* ==================== BUTTONS ==================== */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    box-shadow: 0 4px 6px rgba(220, 53, 69, 0.2);
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    box-shadow: 0 6px 12px rgba(220, 53, 69, 0.3);
+}
+
+/* ==================== FORM STYLES ==================== */
+.form-check {
+    margin-top: 20px;
+}
+
+/* ==================== PROFILE SECTION ==================== */
+.profile-container {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: nowrap; /* Ensure items are side by side */
+    gap: 20px;
+}
+
+/* ========== PROFILE NAVIGATION ========== */
+.profile-nav {
+    flex: 1;
+    max-width: 300px;
+    height: 100%; /* Ensure it takes full height */
+}
+
+.profile-nav .user-heading {
+    background: #faf9f7;
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    padding: 35px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(53, 14, 197, 0.3);
+}
+
+.profile-nav .user-heading.round a {
+    display: inline-block;
+    border-radius: 50%;
+    border: 8px solid rgba(152, 127, 205, 0.3);
+}
+
+.profile-nav .user-heading a img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #4a4b8b;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-nav .user-heading a img:hover {
+    transform: scale(1.05);
+}
+
+.profile-nav .user-heading h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+/* Profile Navigation List */
+.profile-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-nav ul > li {
+    border-bottom: 1px solid #faf9f7;
+}
+
+.profile-nav ul > li:last-child {
+    border-bottom: none;
+}
+
+.profile-nav ul > li > a {
+    display: block;
+    border-top: 1px solid #b9b9b9; /* Correctly define the top border */
+    font-size: 18px;
+    background: #faf9f7; /* Background color */
+    color: #040404; /* Text color */
+    padding: 12px 15px; /* Top/bottom and right padding */
+    padding-left: 40px; /* Left padding to create space for text */
+    border-left: 4px solid transparent; /* Optional: small left border */
+    transition: all 0.3s ease-in-out;
+    text-align: left; /* Ensure text is aligned to the left */
+    width: 153.4%; /* Ensure the anchor takes the full width of the list item */
+    text-decoration: none; /* Remove underline from text */
+    border-top: 1px solid #b0b0b0; /* Use a lighter gray for a smoother look */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for a smoother effect */
+}
+
+.profile-nav ul > li > a:hover,
+.profile-nav ul > li > a:focus {
+    background: #4a4b8b;
+    color:#faf9f7;
+}
+
+/* ========== PROFILE INFO ========== */
+.profile-info {
+    flex: 2;
+    max-width: calc(100% - 320px);
+    display: flex; /* Ensure it can contain children properly */
+    flex-direction: column; /* Stack children vertically */
+}
+
+.bio-graph-heading {
+    background: #f2f2f2;
+    color: rgb(28, 28, 28);
+    text-align: center;
+    font-style: italic;
+    padding: 45px 120px;
+    border-radius: 8px 8px 0 0;
+    font-size: 18px;
+    font-weight: 400;
+    box-shadow : 0 4px 6px rgba(251, 192, 45, 0.3);
+}

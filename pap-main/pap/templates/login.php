@@ -1,28 +1,10 @@
 <?php
 session_start();
 
-// Redireciona se o usuário não estiver logado
-if (!isset($_SESSION['id'])) {
-    header("Location: login.php");
+// Redireciona se o usuário já estiver logado
+if (isset($_SESSION['id'])) {
+    header("Location: utilizador.php");
     exit();
-}
-
-// Inicializa o histórico de navegação se ainda não existir
-if (!isset($_SESSION['history'])) {
-    $_SESSION['history'] = [];
-}
-
-// Obtém o nome da página atual
-$current_page = basename($_SERVER['PHP_SELF']);
-
-// Evita adicionar a mesma página repetidamente
-if (empty($_SESSION['history']) || end($_SESSION['history']) !== $current_page) {
-    $_SESSION['history'][] = $current_page;
-}
-
-// Limita o histórico às últimas 5 páginas
-if (count($_SESSION['history']) > 5) {
-    array_shift($_SESSION['history']);
 }
 ?>
 <!doctype html>
@@ -60,17 +42,6 @@ if (count($_SESSION['history']) > 5) {
           <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.php">Contactos</a></li>
         </ul>
-        <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-    		<?php
-    		if (isset($_SESSION['id'])) {
-        		// User is logged in -> Direct to user page
-        		echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-    		} else {
-        		// User is NOT logged in -> Direct to login/register page
-        		echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-    		}
-    		?>
-		</ul>
       </div>
     </div>
   </nav>
@@ -79,7 +50,7 @@ if (count($_SESSION['history']) > 5) {
     <form action="contalog.php" method="post"> 
       <h2 class="login-heading">Login</h2>
       <?php if (isset($_GET['error'])) { ?>
-        <p class="error"><?php echo $_GET['error']; ?></p>
+        <p class="error"><?php echo htmlspecialchars($_GET['error']); ?></p>
       <?php } ?>
       <div class="login-form-group">
         <label for="usr_name" class="login-label">Username:</label>
@@ -89,7 +60,7 @@ if (count($_SESSION['history']) > 5) {
         <label for="pwd" class="login-label">Palavra-passe:</label>
         <input type="password" class="login-input" id="pwd" name="password" placeholder="Palavra-passe" required>
       </div>
-      <button type="submit" name="login" class="login-btn" style="width: 100%; padding: 12px; background-color: #4b4a8b; color: white; border: none; font-size: 16px; cursor: pointer; border-radius: 4px;">Entrar</button>
+      <button type="submit" name="login" class="login-btn">Entrar</button>
     </form>
     <div class="login-register-link">
       <p>Não tem conta? <a href="register.php" class="login-register-text">Registar</a></p>

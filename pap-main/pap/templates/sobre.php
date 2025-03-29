@@ -1,10 +1,16 @@
 <?php
 session_start();
-if (!isset($_SESSION['id'])) {
-    header("Location: login.php"); // Redirect logged-in users
+
+// If the user is NOT logged in AND is NOT on register.php, redirect to login.php
+// This ensures only logged-in users can access most pages, except for register.php
+
+if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php') {
+    header("Location: login.php");
     exit();
 }
+
 ?>
+
 
 <!doctype html>
 <html lang="en">

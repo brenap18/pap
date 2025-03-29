@@ -2,10 +2,12 @@
 session_start();
 
 // Redireciona se o usuário já estiver logado
+// Redirect only if the user is logged in AND NOT trying to go to register.php
 if (isset($_SESSION['id'])) {
-    header("Location: utilizador.php");
-    exit();
+  header("Location: utilizador.php");
+  exit();
 }
+
 ?>
 <!doctype html>
 <html lang="pt-BR">

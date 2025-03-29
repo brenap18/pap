@@ -3,7 +3,7 @@ session_start();
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
-}
+} 
 
 // Lista de aulas para referência no progresso
 $aulas = [
@@ -84,14 +84,10 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
     </div>
   </nav>
 
-  <!-- Barra de progresso -->
-  <div class="progress" style="height: 8px;">
-    <div class="progress-bar bg-success" role="progressbar" style="width: <?= $progresso ?>%;" aria-valuenow="<?= $progresso ?>" aria-valuemin="0" aria-valuemax="100"></div>
-  </div>
 
   <!-- Conteúdo Principal -->
   <div class="aula-content-section">
-    <div class="aula-container">
+    <div class="aula-container" style="margin-left: -40px;">
       <div class="aula-content-wrapper">
 
         <!-- Sidebar -->

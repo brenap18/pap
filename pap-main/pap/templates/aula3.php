@@ -98,7 +98,7 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
 
   <!-- Main Content Section -->
   <div class="aula-content-section">
-    <div class="aula-container">
+    <div class="aula-container" style="margin-left: -40px;">
       <div class="aula-content-wrapper">
 
         <!-- Sidebar Container -->

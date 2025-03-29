@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-// Redireciona se o usuário não estiver logado
-if (!isset($_SESSION['id'])) {
-    header("Location: login.php");
-    exit();
-}
-
 // Inicializa o histórico de navegação se ainda não existir
 if (!isset($_SESSION['history'])) {
     $_SESSION['history'] = [];

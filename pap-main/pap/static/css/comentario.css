@@ -1,0 +1,90 @@
+/* Seção de Comentários */
+.comentarios-section {
+    background-color: #c2c2c2;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulário de Comentário */
+.comentarios-section .form-group {
+    margin-bottom: 20px;
+}
+
+.comentarios-section h3{
+    padding-bottom: 1.5%;
+    padding-top: 1.5%;
+    margin-left: 15%;
+
+}
+.comentarios-section textarea {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-left: 15%;
+    width: 80%;    
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    resize: none;
+    transition: border-color 0.3s ease;
+}
+
+.comentarios-section textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.comentarios-section button {
+    margin-left: 15%;
+    padding: 10px 20px;
+    background-color: #4a4b8b;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comentarios-section button:hover {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Lista de Comentários */
+.comentarios-list {
+    margin-top: 30px;
+}
+
+.comentarios-list .comentario {
+    margin-left: 15%;
+    width: 80%;
+    background-color: #e9e9e9;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.comentarios-list .comentario p {
+    font-size: 16px;
+    color: #333;
+    margin-left: 15%;
+
+}
+
+.comentarios-list .comentario small {
+    display: block;
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}
+
+/* Adicionando uma linha separadora entre os comentários */
+.comentarios-list .comentario hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}

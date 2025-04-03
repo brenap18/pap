@@ -40,27 +40,54 @@ $aulas_visitadas = isset($_SESSION['historico_aulas']) ? count(array_unique($_SE
 $progresso = ($aulas_visitadas / $total_aulas) * 100;
 ?>
 
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sidebar</title>
+</head>
+<body>
+
 <div class="aula-sidebar">
-  <ul class="aula-sidebar-menu">
-    <li class="aula-sidebar-progress">
-      <div class="progress mt-3" style="height: 10px;">
-        <div class="progress-bar bg-success" role="progressbar" style="width: <?= $progresso ?>%;" aria-valuenow="<?= $progresso ?>" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-      <small><?= round($progresso, 1) ?>% concluído</small>
-    </li>
+    <ul class="aula-sidebar-menu">
+        <li class="aula-sidebar-progress">
+            <div class="progress mt-3" style="height: 10px;">
+                <div class="progress-bar bg-success" role="progressbar" style="width: <?= $progresso ?>%;" aria-valuenow="<?= $progresso ?>" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <small><?= round($progresso, 1) ?>% concluído</small>
+        </li>
 
-    <?php foreach ($aulas_categorias as $categoria => $aulas): ?>
-      <li class="aula-sidebar-subtitle submenu-toggle"><?= $categoria ?></li>
-      <ul class="submenu">
-        <?php foreach ($aulas as $file => $title): ?>
-          <li class="aula-sidebar-item <?= $current_page === $file ? 'active' : '' ?>">
-            <a href="<?= $file ?>"><?= $title ?></a>
-          </li>
+        <?php foreach ($aulas_categorias as $categoria => $aulas): ?>
+            <li class="submenu-toggle">
+                <span class="toggle-icon"></span> <?= $categoria ?>
+            </li>
+            <ul class="submenu">
+                <?php foreach ($aulas as $file => $title): ?>
+                    <li class="aula-sidebar-item <?= $current_page === $file ? 'active' : '' ?>">
+                        <a href="<?= $file ?>"><?= $title ?></a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
         <?php endforeach; ?>
-      </ul>
-    <?php endforeach; ?>
-
-    <!-- Barra de progresso -->
-    
-  </ul>
+    </ul>
 </div>
+
+<!-- JavaScript for Submenu Toggle -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".submenu-toggle").forEach(toggle => {
+        toggle.addEventListener("click", function () {
+            let submenu = this.nextElementSibling;
+
+            if (submenu && submenu.classList.contains("submenu")) {
+                submenu.classList.toggle("show"); // Toggle visibility class
+                this.classList.toggle("open"); // Toggle the icon change
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>

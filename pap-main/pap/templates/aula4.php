@@ -21,6 +21,58 @@ $pagina_atual = basename($_SERVER['PHP_SELF']);
 if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['historico_aulas'])) {
     $_SESSION['historico_aulas'][] = $pagina_atual;
 }
+
+
+// Conexão com o banco de dados
+$servername = "localhost";
+$username = "root"; // Substitua com seu nome de usuário
+$password = ""; // Substitua com sua senha
+$dbname = "test_db"; // Substitua com o nome do seu banco de dados
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Função para obter os comentários
+function getComentarios($conn, $aula_id) {
+    $sql = "SELECT comentario, data, usuario_id FROM comentarios WHERE aula_id = ? ORDER BY data DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $aula_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $comentarios = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $comentarios[] = $row;
+    }
+    
+    $stmt->close();
+    return $comentarios;
+}
+
+// Processar o envio de um novo comentário
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comentario'])) {
+    $comentario = $_POST['comentario'];
+    $aula_id = 1; // Defina o ID da aula (pode ser dinâmico, dependendo da página)
+    $usuario_id = $_SESSION['id']; // ID do usuário logado
+    
+    // Insere o comentário no banco de dados
+    $sql = "INSERT INTO comentarios (comentario, aula_id, usuario_id, data) VALUES (?, ?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sii", $comentario, $aula_id, $usuario_id);
+    $stmt->execute();
+    $stmt->close();
+    
+    // Redireciona para a página atual para exibir o comentário recém-adicionado
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// Obtém os comentários para a aula atual
+$comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
+?>
 ?>
 
 
@@ -38,6 +90,8 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
   <link href="../static/css/aulas.css" rel="stylesheet">
+  <link href="../static/css/comentario.css" rel="stylesheet">
+
 
   <!-- Link to Prism.js for syntax highlighting -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
@@ -195,6 +249,7 @@ enum DiaDaSemana {Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado};
         </div>
     </div>
 </div>
+
 
 
   <!-- Footer Section -->

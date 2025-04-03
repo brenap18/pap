@@ -22,10 +22,57 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
     $_SESSION['historico_aulas'][] = $pagina_atual;
 }
 
-// Calcular progresso
-$total_aulas = count($aulas);
-$aulas_visitadas = count($_SESSION['historico_aulas']);
-$progresso = ($aulas_visitadas / $total_aulas) * 100;
+
+// Conexão com o banco de dados
+$servername = "localhost";
+$username = "root"; // Substitua com seu nome de usuário
+$password = ""; // Substitua com sua senha
+$dbname = "test_db"; // Substitua com o nome do seu banco de dados
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Função para obter os comentários
+function getComentarios($conn, $aula_id) {
+    $sql = "SELECT comentario, data, usuario_id FROM comentarios WHERE aula_id = ? ORDER BY data DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $aula_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $comentarios = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $comentarios[] = $row;
+    }
+    
+    $stmt->close();
+    return $comentarios;
+}
+
+// Processar o envio de um novo comentário
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comentario'])) {
+    $comentario = $_POST['comentario'];
+    $aula_id = 1; // Defina o ID da aula (pode ser dinâmico, dependendo da página)
+    $usuario_id = $_SESSION['id']; // ID do usuário logado
+    
+    // Insere o comentário no banco de dados
+    $sql = "INSERT INTO comentarios (comentario, aula_id, usuario_id, data) VALUES (?, ?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sii", $comentario, $aula_id, $usuario_id);
+    $stmt->execute();
+    $stmt->close();
+    
+    // Redireciona para a página atual para exibir o comentário recém-adicionado
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// Obtém os comentários para a aula atual
+$comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
+?>
 ?>
 
 <!doctype html>
@@ -42,6 +89,8 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
   <link href="../static/css/aulas.css" rel="stylesheet">
+  <link href="../static/css/comentario.css" rel="stylesheet">
+
 
   <!-- Prism.js para syntax highlighting -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
@@ -122,7 +171,7 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
           <div class="aulas-buttons-container">
             <div class="container text-center">
               <a class="btn btn-secondary me-3" href="index.php">Sair</a>
-              <a class="btn btn-secondary" href="aula2.php">Próximo</a>
+              <a class="btn btn-secondary" href="aula1.php">Próximo</a>
             </div>
           </div>
 
@@ -130,6 +179,7 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
       </div>
     </div>
   </div>
+  
 
   <!-- Footer -->
   <footer class="footer-section aulas">
@@ -179,9 +229,10 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
           document.getElementById('sidebar-container').innerHTML = data;
 
           document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
-            toggleButton.addEventListener('click', function() {
-              const submenu = this.nextElementSibling;
-              submenu.classList.toggle('open');
+            toggleButton.addEventListener('click', function () {
+              const submenu = toggleButton.nextElementSibling;  // The next sibling is the submenu
+              submenu.classList.toggle('show');  // Toggle the visibility by adding/removing the 'show' class
+              toggleButton.classList.toggle('open');  // Optionally change the icon of the button
             });
           });
         });

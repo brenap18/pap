@@ -21,6 +21,56 @@ $pagina_atual = basename($_SERVER['PHP_SELF']);
 if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['historico_aulas'])) {
     $_SESSION['historico_aulas'][] = $pagina_atual;
 }
+
+// Conexão com o banco de dados
+$servername = "localhost";
+$username = "root"; // Substitua com seu nome de usuário
+$password = ""; // Substitua com sua senha
+$dbname = "test_db"; // Substitua com o nome do seu banco de dados
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Função para obter os comentários
+function getComentarios($conn, $aula_id) {
+    $sql = "SELECT comentario, data, usuario_id FROM comentarios WHERE aula_id = ? ORDER BY data DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $aula_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $comentarios = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $comentarios[] = $row;
+    }
+    
+    $stmt->close();
+    return $comentarios;
+}
+
+// Processar o envio de um novo comentário
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comentario'])) {
+    $comentario = $_POST['comentario'];
+    $aula_id = 1; // Defina o ID da aula (pode ser dinâmico, dependendo da página)
+    $usuario_id = $_SESSION['id']; // ID do usuário logado
+    
+    // Insere o comentário no banco de dados
+    $sql = "INSERT INTO comentarios (comentario, aula_id, usuario_id, data) VALUES (?, ?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sii", $comentario, $aula_id, $usuario_id);
+    $stmt->execute();
+    $stmt->close();
+    
+    // Redireciona para a página atual para exibir o comentário recém-adicionado
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// Obtém os comentários para a aula atual
+$comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
 ?>
 
 <!doctype html>
@@ -34,6 +84,7 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
+  <link href="../static/css/comentario.css" rel="stylesheet">
   <link href="../static/css/aulas.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -74,86 +125,82 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
   <!-- Fim da Navegação -->
 
   <!-- Main Content Section -->
-<div class="aula-content-section">
-  <div class="aula-container" style="margin-left: -40px;"> 
-    <div class="aula-content-wrapper">
+  <div class="aula-content-section">
+    <div class="aula-container" style="margin-left: -40px;"> 
+      <div class="aula-content-wrapper">
 
-      <!-- Sidebar Container -->
-      <div id="sidebar-container"></div>
+        <!-- Sidebar Container -->
+        <div id="sidebar-container"></div>
 
-      <!-- Sidebar Toggle Button -->
-      <button class="sidebar-toggle-btn">></button>
+        <!-- Sidebar Toggle Button -->
+        <button class="sidebar-toggle-btn">></button>
 
-      <!-- Main Content -->
-      <div class="aulas-main-content">
-        <h2 class="aulas-section-title">Instalar um compilador</h2>
-        <h3 class="aulas-section-h3">- O que é um compilador?</h3>
-        <p>
-          Um compilador é um programa que traduz o código-fonte escrito em uma linguagem de programação (como C++) para código de máquina que o computador pode executar. 
-          Sem um compilador, não é possível executar programas escritos em C++.
-        </p>
-        <hr>
+        <!-- Main Content -->
+        <div class="aulas-main-content">
+          <h2 class="aulas-section-title">Instalar um compilador</h2>
+          <h3 class="aulas-section-h3">- O que é um compilador?</h3>
+          <p>
+            Um compilador é um programa que traduz o código-fonte escrito em uma linguagem de programação (como C++) para código de máquina que o computador pode executar. 
+            Sem um compilador, não é possível executar programas escritos em C++.
+          </p>
+          <hr>
 
-        <!-- Content Row -->
-        <div class="aulas-row my-5">
-            <div class="aulas-col-6 aulas-col-md-6">
-                <div class="aulas-feature">
-                  <h2 class="aulas-section-title">Escolher um compilador</h2>
-                  <p>
-                    Existem várias opções de compiladores disponíveis. Mas as mais comuns são:
-                  </p>
-                  <ul>
-                    <li>GCC (GNU Compiler Collection): Um compilador amplamente utilizado em sistemas Linux e disponível para Windows através do MinGW.</li>
-                    <li>Clang: Um compilador moderno que faz parte do projeto LLVM, disponível em várias plataformas, incluindo Windows, Linux e macOS.</li>
-                    <li>MSVC (Microsoft Visual C++): O compilador da Microsoft, que vem integrado no Visual Studio.</li>
-                  </ul>
-                  <p>Neste caso, iremos usar o GCC</p>
-                  <h4 class="aulas-section-h4">• Instalação do MinGW &#40;Uma distribuição do GCC para Windows&#41;</h4>
-                  <ul>
-                    <li>1- Acesse o site do MinGW</li><p>Abra o seu navegador e vá para o site oficial do MinGW: MinGW.</p>
-
-                    <li>2- Baixe o instalador</li><p>Clique em "downloads" no menu e instale o instalador do MinGW &#40;geralmente chamado mingw-get-setup.exe&#41;</p>
-
-                    <li>3- Selecionar os pacotes</li><p>Durante a instalação, verá um ecrã de configuração. Selecione o "Basic Setup" no painel à esquerda</p>
-                    <p>No painel à direita, marque as caixas para os pacotes "mingw32-base" e "mingw32-gcc-g++"</p>
-                    <p>Clique com o botão direito do mouse sobre os pacotes selecionados e escolha "Mark for Installation</p>
-
-                    <li>4- Instale os pacotes</li><p>Após marcar os pacotes, clique em "Installation" no menu superior e selecione "Apply Changes".</p>
-
-                    <li>5- Adicionar o diretório ao PATH do sistema</li>
-                    <p> - Clique com o botão direito no ícone do Windows e selecione "Sistema".</p>
-                    <p> - Clique em "Configurações avançadas do sistema" no painel à esquerda.</p>
-                    <p> - Na janela "Propriedades do Sistema", clique no botão "Variáveis de Ambiente".</p>
-                    <p> - Na seção "Variáveis do sistema", localize a variável chamada "Path", selecione-a e clique em "Editar".</p>
-                    <p> - Clique em "Novo" e adicione o caminho C:\MinGW\bin.</p>
-                    <p> - Clique em "OK" para fechar todas as janelas.</p>
-
-                    <li>6- Verificar a instalação</li><p>Abra o Prompt de Comando (cmd) e digite 'g++ --version' e Enter. Se a instalação foi bem-sucedida, verá a versão do GCC instalada</p>
-                  </ul>
-                  </div>
-                  <h4 class="aulas-section-h4">• Instalação do Visual Code</h4>
-                  <ul>
-
-                    <li>1- Acesse o site do VS</li><p>Abra o seu navegador e vá para o site oficial do Visual Studio: Visual Studio</p>
-
-                    <li>2- Baixe o instalador</li><p>Clique no botão "Baixar" e localize o ficheiro instalado. Clique 2 vezes para iniciar a instalação</p>
-
-                    <li>3- Selecionar a carga de trabalho</li><p>Na tela de instalação, haverá várias opções de carga de trabalho. Selecione a opção "Desenvolvimento de Desktop com C++" e clique no botão "Instalar"</p>
-                  </ul>
-                  <div class="aulas-buttons-container">
-                    <div class="container text-center">
-                      <a class="btn btn-secondary me-3" href="aulas.php">Anterior</a>
-                      <a class="btn btn-secondary" href="aula2.php">Próximo</a>
+          <!-- Content Row -->
+          <div class="aulas-row my-5">
+              <div class="aulas-col-6 aulas-col-md-6">
+                  <div class="aulas-feature">
+                    <h2 class="aulas-section-title">Escolher um compilador</h2>
+                    <p>
+                      Existem várias opções de compiladores disponíveis. Mas as mais comuns são:
+                    </p>
+                    <ul>
+                      <li>GCC (GNU Compiler Collection): Um compilador amplamente utilizado em sistemas Linux e disponível para Windows através do MinGW.</li>
+                      <li>Clang: Um compilador moderno que faz parte do projeto LLVM, disponível em várias plataformas, incluindo Windows, Linux e macOS.</li>
+                      <li>MSVC (Microsoft Visual C++): O compilador da Microsoft, que vem integrado no Visual Studio.</li>
+                    </ul>
+                    <p>Neste caso, iremos usar o GCC</p>
+                    <h4 class="aulas-section-h4">• Instalação do MinGW &#40;Uma distribuição do GCC para Windows&#41;</h4>
+                    <ul>
+                      <!-- Lista de instruções da instalação do MinGW aqui... -->
+                    </ul>
+                    <div class="aulas-buttons-container">
+                      <div class="container text-center">
+                        <a class="btn btn-secondary me-3" href="aulas.php">Anterior</a>
+                        <a class="btn btn-secondary" href="aula2.php">Próximo</a>
+                      </div>
                     </div>
-                  </div>
-              </div>
+                </div>
+            </div>
           </div>
-        </div>
+        </div>        
       </div>
     </div>
   </div>
+  <div class="comentarios-section">
+          <h3>Comentários</h3>
+          <form action="" method="POST">
+            <div class="form-group">
+              <textarea name="comentario" class="form-control" rows="4" placeholder="Escreva um comentário..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+          </form>
+          
+          <!-- Exibir os comentários -->
+          <div class="comentarios-list">
+    <?php foreach ($comentarios as $comentario): ?>
+        <div class="comentario" style="background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                <a href="#">
+                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
+                </a>
+                <h1 style="color: black; font-size: 14px;"><?= $_SESSION['name']; ?></h1>
+            </div>
+            <p style="font-size: 16px; color: #333;  margin-left: -0.1%;"><?= htmlspecialchars($comentario['comentario']) ?></p>
+            <small style="display: block; font-size: 12px; color: #777; margin-top: 10px;">Publicado em: <?= $comentario['data'] ?></small>
+            <hr style="border: 0; border-top: 1px solid #ddd; margin-top: 15px; margin-bottom: 10px;">
+        </div>
+    <?php endforeach; ?>
 </div>
-
 
   <!-- Footer Section -->
   <footer class="footer-section aulas">

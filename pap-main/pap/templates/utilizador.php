@@ -33,6 +33,7 @@ $pageNames = [
 $total_aulas = count($pageNames);
 $aulas_visitadas = count(array_unique($_SESSION['historico_aulas']));
 $progresso = ($aulas_visitadas / $total_aulas) * 100;
+$historico = array_reverse($_SESSION['historico_aulas']);
 ?>
 
 <!doctype html>
@@ -41,38 +42,35 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="favicon.png">
-  <meta name="description" content="Site dedicado ao ensino de C++" />
-  <meta name="keywords" content="bootstrap, bootstrap4, C++, programação" />
+  <meta name="description" content="Site dedicado ao ensino de C++">
+  <meta name="keywords" content="bootstrap, bootstrap4, C++, programação">
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/perfil.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Perfil - Kiocode</title>
 </head>
 
 <body>
   <!-- Início da Navegação -->
-  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
+  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container">
-      <div class="navbar-brand">
-        <a href="index.php">
-          <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
-        </a>
-      </div>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+      <a href="index.php" class="navbar-brand">
+        <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarsFurni">
-        <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre nós</a></li>
           <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.php">Contactos</a></li>
         </ul>
-        <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+        <ul class="navbar-nav ms-5">
           <?php
           if (isset($_SESSION['id'])) {
               echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
@@ -84,7 +82,6 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
       </div>
     </div>
   </nav>
-  <!-- Fim da Navegação -->
 
   <div class="container mt-5">
     <h1>Olá, <?php echo $_SESSION['name']; ?></h1>
@@ -98,7 +95,7 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
             <a href="#">
               <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
             </a>
-            <h1 style="color: black; margin-top: 5px;"><?php echo $_SESSION['name']; ?></h1>
+            <h1 style="color: black;"><?php echo $_SESSION['name']; ?></h1>
           </div>
           <ul class="nav nav-pills nav-stacked">
             <li><a href="#"> <i class="fa fa-edit"></i> Editar perfil</a></li>
@@ -127,15 +124,35 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
                 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $progresso; ?>%;" aria-valuenow="<?php echo $progresso; ?>" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small><?php echo round($progresso, 2); ?>% do total de aulas concluídas.</small>
+          </div>
 
-        </div>
+          <!-- Gráfico de Progresso -->
+          <div class="progress-container mt-4">
+            <canvas id="progressChart"></canvas>
+          </div>
 
-        <form action="logout.php" method="post" style="display: inline;">
-            <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
+          <form action="logout.php" method="post">
+              <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
         </div>
       </div>
     </div>
   </div>
+
+  <script>
+    const progresso = <?php echo $progresso; ?>;
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Concluído', 'Restante'],
+        datasets: [{
+          data: [progresso, 100 - progresso],
+          backgroundColor: ['#28a745', '#e0e0e0']
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+  </script>
 </body>
 </html>

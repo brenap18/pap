@@ -21,6 +21,58 @@ $pagina_atual = basename($_SERVER['PHP_SELF']);
 if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['historico_aulas'])) {
     $_SESSION['historico_aulas'][] = $pagina_atual;
 }
+
+
+// Conexão com o banco de dados
+$servername = "localhost";
+$username = "root"; // Substitua com seu nome de usuário
+$password = ""; // Substitua com sua senha
+$dbname = "test_db"; // Substitua com o nome do seu banco de dados
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Função para obter os comentários
+function getComentarios($conn, $aula_id) {
+    $sql = "SELECT comentario, data, usuario_id FROM comentarios WHERE aula_id = ? ORDER BY data DESC";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $aula_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $comentarios = [];
+    
+    while ($row = $result->fetch_assoc()) {
+        $comentarios[] = $row;
+    }
+    
+    $stmt->close();
+    return $comentarios;
+}
+
+// Processar o envio de um novo comentário
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comentario'])) {
+    $comentario = $_POST['comentario'];
+    $aula_id = 1; // Defina o ID da aula (pode ser dinâmico, dependendo da página)
+    $usuario_id = $_SESSION['id']; // ID do usuário logado
+    
+    // Insere o comentário no banco de dados
+    $sql = "INSERT INTO comentarios (comentario, aula_id, usuario_id, data) VALUES (?, ?, ?, NOW())";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sii", $comentario, $aula_id, $usuario_id);
+    $stmt->execute();
+    $stmt->close();
+    
+    // Redireciona para a página atual para exibir o comentário recém-adicionado
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+// Obtém os comentários para a aula atual
+$comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
+?>
 ?>
 
 <!doctype html>
@@ -34,6 +86,7 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
+  <link href="../static/css/comentario.css" rel="stylesheet">
   <link href="../static/css/aulas.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
@@ -43,8 +96,6 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
 
   <title>Aula 3 - Kiocode</title>
-
-
 </head>
 <body>
   <!-- Início da Navegação -->
@@ -94,7 +145,7 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
 
   <!-- Main Content Section -->
   <div class="aula-content-section">
-    <div class="aula-container" style="margin-left: -40px;"> <!--<div class="aula-container" style="margin-left: -40px;"> -->
+    <div class="aula-container" style="margin-left: -40px;">
       <div class="aula-content-wrapper">
         <!-- Sidebar Container -->
         <div id="sidebar-container"></div>
@@ -140,12 +191,38 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
       </div>
     </div>
   </div>
+            
+  <!-- Comentários -->
+  <div class="comentarios-section">
+    <h3>Comentários</h3>
+    <form action="" method="POST">
+      <div class="form-group">
+        <textarea name="comentario" class="form-control" rows="4" placeholder="Escreva um comentário..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+    </form>
 
-  
+    <!-- Exibir os comentários -->
+    <div class="comentarios-list">
+      <?php foreach ($comentarios as $comentario): ?>
+        <div class="comentario" style="background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
+          <div style="display: flex; align-items: center; margin-bottom: 10px;">
+            <a href="#">
+              <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
+            </a>
+            <h1 style="color: black; font-size: 14px;"><?= $_SESSION['name']; ?></h1>
+          </div>
+          <p style="font-size: 16px; color: #333;"><?= htmlspecialchars($comentario['comentario']) ?></p>
+          <small style="display: block; font-size: 12px; color: #777; margin-top: 10px;">Publicado em: <?= $comentario['data'] ?></small>
+          <hr style="border: 0; border-top: 1px solid #ddd; margin-top: 15px; margin-bottom: 10px;">
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
 
   <!-- Footer Section -->
-  <footer class="footer-section aulas"> <!-- Added 'aulas' class here -->
-    <div class="container relative aulas"> <!-- Added 'aulas' class here -->
+  <footer class="footer-section aulas">
+    <div class="container relative aulas">
       <div class="row g-5 mb-5">
         <div class="col-lg-4">
           <div class="mb-4 aulas-footer-logo-wrap"><a href="#" class="aulas-footer-logo">Kiocode</a></div>
@@ -163,54 +240,23 @@ if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['histo
           </div>
         </div>
       </div>
-  
+
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
           <div class="col-lg-6">
             <p class="mb-2 text-center text-lg-start aulas-copyright-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
           </div>
-  
+
           <div class="col-lg-6 text-center text-lg-end">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
               <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
               <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
-            </ul>	
+            </ul>  
           </div>
         </div>
       </div>
     </div>
-</footer>
-
-  <script>
-    // Load the sidebar dynamically
-    document.addEventListener("DOMContentLoaded", function() {
-      fetch('sidebar.php')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('sidebar-container').innerHTML = data;
-
-          // Re-attach event listeners for submenu toggles after loading the sidebar
-          document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
-            toggleButton.addEventListener('click', function () {
-              const submenu = toggleButton.nextElementSibling;  // The next sibling is the submenu
-              submenu.classList.toggle('show');  // Toggle the visibility by adding/removing the 'show' class
-              toggleButton.classList.toggle('open');  // Optionally change the icon of the button
-            });
-          });
-
-          // Attach the sidebar toggle button event listener after loading the sidebar
-          const toggleBtn = document.querySelector('.sidebar-toggle-btn');
-          const sidebar = document.querySelector('.aula-sidebar');
-
-          if (toggleBtn) {
-            toggleBtn.addEventListener('click', function() {
-              sidebar.classList.toggle('show'); // Toggle the 'show' class to slide the sidebar in/out
-            });
-          }
-        })
-        .catch(error => console.error('Error fetching sidebar:', error));
-    });
-  </script>
+  </footer>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>

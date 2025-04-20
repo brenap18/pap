@@ -40,23 +40,20 @@ $historico = array_reverse($_SESSION['historico_aulas']);
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil - Kiocode</title>
   <link rel="shortcut icon" href="favicon.png">
-  <meta name="description" content="Site dedicado ao ensino de C++">
-  <meta name="keywords" content="bootstrap, bootstrap4, C++, programação">
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/perfil.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <title>Perfil - Kiocode</title>
 </head>
 
 <body>
   <!-- Início da Navegação -->
-  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container">
+  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
+  <div class="container">
       <a href="index.php" class="navbar-brand">
         <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
       </a>
@@ -64,7 +61,7 @@ $historico = array_reverse($_SESSION['historico_aulas']);
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarsFurni">
-        <ul class="navbar-nav ms-auto">
+      <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
           <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre nós</a></li>
           <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
@@ -87,72 +84,71 @@ $historico = array_reverse($_SESSION['historico_aulas']);
     <h1>Olá, <?php echo $_SESSION['name']; ?></h1>
     <p>Esta é a sua página de utilizador.</p>
 
-    <!-- User Profile Section -->
-    <div class="row">
+    <div class="row profile-container">
       <div class="profile-nav col-md-3">
         <div class="panel">
-          <div class="user-heading round">
-            <a href="#">
-              <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+        <div class="user-heading round">
+            <a>
+                <!-- Verifica se existe uma foto de perfil atualizada -->
+                <img src="<?php echo isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : 'https://bootdey.com/img/Content/avatar/avatar3.png'; ?>" 
+                     alt="Foto de Perfil" class="rounded-circle" width="120" height="120" style="object-fit: cover;">
             </a>
-            <h1 style="color: black;"><?php echo $_SESSION['name']; ?></h1>
-          </div>
-          <ul class="nav nav-pills nav-stacked">
-            <li><a href="#"> <i class="fa fa-edit"></i> Editar perfil</a></li>
-          </ul>
+            <h1><?php echo $_SESSION['name']; ?></h1>
         </div>
+        <ul class="nav nav-pills nav-stacked" style="width: 550px;">
+  <li><a href="editar.php" style="display: block; width: 100%; padding: 12px 75.7px;"><i class="fa fa-edit"></i> Editar perfil</a></li>
+</ul>
+
+    </div>
       </div>
+
       <div class="profile-info col-md-9">
         <div class="panel">
           <div class="bio-graph-heading">
             <h5><i class="fa fa-history"></i> Histórico das Aulas:</h5>
-            <ul class="list-group">
-                <?php
-                if (!empty($_SESSION['historico_aulas'])) {
-                    foreach (array_reverse($_SESSION['historico_aulas']) as $page) {
-                        $pageName = $pageNames[$page] ?? ucfirst(str_replace('.php', '', $page));
-                        echo "<li class='list-group-item'><a href='$page' class='text-decoration-none'>$pageName</a></li>";
-                    }
-                } else {
-                    echo "<li class='list-group-item'>Nenhuma aula visitada ainda.</li>";
-                }
-                ?>
-            </ul>
 
-            <!-- Barra de Progresso -->
-            <div class="progress mt-3">
-                <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $progresso; ?>%;" aria-valuenow="<?php echo $progresso; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="row g-3">
+              <?php
+              if (!empty($_SESSION['historico_aulas'])) {
+                  foreach ($historico as $page) {
+                      $pageName = $pageNames[$page] ?? ucfirst(str_replace('.php', '', $page));
+                      echo "
+                      <div class='col-md-6'>
+                        <div class='card aula-card shadow-sm h-100'>
+                          <div class='card-body d-flex align-items-center'>
+                            <div class='me-3' style='font-size: 1.5rem;'>📘</div>
+                            <div>
+                              <h5 class='card-title mb-1'>
+                                <a href='$page' class='text-decoration-none text-dark'>$pageName</a>
+                              </h5>
+                              <p class='card-text'><small class='text-muted'>Aula visitada recentemente</small></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>";
+                  }
+              } else {
+                  echo "<p class='text-muted'>Nenhuma aula visitada ainda.</p>";
+              }
+              ?>
+            </div>
+
+            <div class="progress mt-4">
+              <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $progresso; ?>%;" aria-valuenow="<?php echo $progresso; ?>" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small><?php echo round($progresso, 2); ?>% do total de aulas concluídas.</small>
           </div>
 
-          <!-- Gráfico de Progresso -->
-          <div class="progress-container mt-4">
-            <canvas id="progressChart"></canvas>
-          </div>
-
-          <form action="logout.php" method="post">
-              <button type="submit" class="btn btn-danger">Logout</button>
+          <form action="logout.php" method="post" class="mt-3">
+            <button type="submit" class="btn btn-danger">Logout</button>
           </form>
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-    const progresso = <?php echo $progresso; ?>;
-    const ctx = document.getElementById('progressChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Concluído', 'Restante'],
-        datasets: [{
-          data: [progresso, 100 - progresso],
-          backgroundColor: ['#28a745', '#e0e0e0']
-        }]
-      },
-      options: { responsive: true, maintainAspectRatio: false }
-    });
-  </script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/tiny-slider.js"></script>
+  <script src="js/custom.js"></script>
 </body>
 </html>

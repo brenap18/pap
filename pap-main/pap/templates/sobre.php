@@ -91,8 +91,8 @@ if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php'
 						<div class="col-lg-5">
 							<div class="intro-excerpt">
 								<h1>Sobre nós</h1>
-								<p class="mb-4" style="font-size: 17px;">Sou a Brena Picado, estudante da Escola Profissional Bento de Jesus Caraça, no curso de Gestão e Programação de Sistemas Informáticos, e desenvolvi este projeto como parte da minha PAP (Prova de Aptidão Profissional). 
-    Aqui, apresento as competências que aprendi e aplico-as neste projeto.</p>
+								<p class="mb-4" style="font-size: 20px;">Sou a Brena Picado, estudante do curso de Gestão e Programação de Sistemas Informáticos na Escola Profissional Bento de Jesus Caraça. Este projeto é parte da minha PAP (Prova de Aptidão Profissional) e, ~
+									aqui, mostro as competências que desenvolvi e apliquei ao longo do curso.</p>
 							</div>
 						</div>
 						<div class="col-lg-7">
@@ -105,46 +105,6 @@ if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php'
 			</div>
 		<!-- End Hero Section -->
 
-		
-
-		<!-- Start Why Choose Us Section -->
-		<div class="why-choose-section">
-			<div class="container">
-				<div class="row justify-content-between align-items-center">
-					<div class="col-lg-6">
-						<h2 class="section-title">A Estrutura do Projeto</h2>
-						<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
-
-						<div class="row my-5">
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<h3>Objetivo do Projeto</h3>
-									<p>"Este projeto tem como objetivo 
-										facilitar a aprendizagem de programação em C++. Com esta iniciativa, pretendo demonstrar as minhas competências técnicas e o meu crescimento enquanto estudante e futuro profissional da área.""</p>
-								</div>
-							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<h3>Competências Técnicas</h3>
-									<p>Programação em C++ e Python
-										Design Responsivo
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-5">
-						<div class="img-wrap">
-							<img src="http://localhost/pap-main/pap/static/images//1687438913_en-idei-club-p-aesthetic-programmer-dizain-pinterest-1.jpg" alt="Image" class="img-fluid">
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<!-- End Why Choose Us Section -->
 
 		<!-- Início da Seção do Footer -->
 		<footer class="footer-section">

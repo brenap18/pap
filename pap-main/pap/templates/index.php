@@ -172,7 +172,6 @@ if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php'
             <li>Acede às aulas e escolhe o tópico que desejas aprender</li>
             <li>Comunique com outros utilizadores se tiver dúvidas ou precisar de ajuda</li>
           </ul>
-          <p><a href="sobre.php" class="btn btn-primary">Saiba mais</a></p>
         </div>
       </div>
     </div>

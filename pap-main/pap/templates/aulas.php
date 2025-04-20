@@ -3,76 +3,46 @@ session_start();
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
-} 
-
-// Lista de aulas para referência no progresso
-$aulas = [
-    'aula1.php', 'aula2.php', 'aula3.php', 'aula4.php', 'aula5.php', 
-    'aula6.php', 'aula7.php', 'aula8.php', 'aula9.php', 'aula10.php', 
-    'aula11.php', 'aula12.php', 'aula13.php', 'aula14.php'
-];
-
-if (!isset($_SESSION['historico_aulas'])) {
-    $_SESSION['historico_aulas'] = [];
 }
 
-// Registrar a aula visitada
-$pagina_atual = basename($_SERVER['PHP_SELF']);
-if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['historico_aulas'])) {
-    $_SESSION['historico_aulas'][] = $pagina_atual;
-}
-
+$usuario_id = $_SESSION['id'];
+$usuario_nome = $_SESSION['name']; // Para exibir o nome do usuário atual, se necessário
+$aula_id = 0; // ID específico para aula3.php
 
 // Conexão com o banco de dados
 $servername = "localhost";
-$username = "root"; // Substitua com seu nome de usuário
-$password = ""; // Substitua com sua senha
-$dbname = "test_db"; // Substitua com o nome do seu banco de dados
+$username = "root";
+$password = "";
+$dbname = "test_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Função para obter os comentários
+// Inserir comentário
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentario'])) {
+    $comentario = $_POST['comentario'];
+    $sql = "INSERT INTO comentarios (usuario_id, comentario, data, aula_id) VALUES (?, ?, NOW(), ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("isi", $usuario_id, $comentario, $aula_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Obter comentários somente da aula atual
 function getComentarios($conn, $aula_id) {
-    $sql = "SELECT comentario, data, usuario_id FROM comentarios WHERE aula_id = ? ORDER BY data DESC";
+    $sql = "SELECT c.comentario, c.data, u.name FROM comentarios c JOIN users u ON c.usuario_id = u.id WHERE c.aula_id = ? ORDER BY c.data DESC";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $aula_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $comentarios = [];
-    
-    while ($row = $result->fetch_assoc()) {
-        $comentarios[] = $row;
-    }
-    
+    $comentarios = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
     return $comentarios;
 }
 
-// Processar o envio de um novo comentário
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comentario'])) {
-    $comentario = $_POST['comentario'];
-    $aula_id = 1; // Defina o ID da aula (pode ser dinâmico, dependendo da página)
-    $usuario_id = $_SESSION['id']; // ID do usuário logado
-    
-    // Insere o comentário no banco de dados
-    $sql = "INSERT INTO comentarios (comentario, aula_id, usuario_id, data) VALUES (?, ?, ?, NOW())";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sii", $comentario, $aula_id, $usuario_id);
-    $stmt->execute();
-    $stmt->close();
-    
-    // Redireciona para a página atual para exibir o comentário recém-adicionado
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
-
-// Obtém os comentários para a aula atual
-$comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
-?>
+$comentarios = getComentarios($conn, $aula_id);
 ?>
 
 <!doctype html>
@@ -181,7 +151,7 @@ $comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
   </div>
   
 
-  <!-- Footer -->
+  <!-- Footer Section -->
   <footer class="footer-section aulas">
     <div class="container relative aulas">
       <div class="row g-5 mb-5">
@@ -191,7 +161,7 @@ $comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
             <div class="col-lg-8">
               <div class="aulas-subscription-form">
                 <h3 class="d-flex align-items-center">
-                  <span class="me-1"><img src="http://localhost/pap-main/pap/static/images/envelope-outline.svg" alt="Email" class="img-fluid"></span>
+                  <span class="me-1"><img src="http://localhost/pap-main/pap/static/images//envelope-outline.svg" alt="Image" class="img-fluid"></span>
                   <span>Contacte-nos</span>
                 </h3>
                 <p class="aulas-footer-email">kiocodecplusplus@gmail.com</p>
@@ -201,17 +171,16 @@ $comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
           </div>
         </div>
       </div>
-
+  
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
           <div class="col-lg-6">
-            <p class="mb-2 text-center text-lg-start">Copyright &copy;
-              <script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
-            </p>
+            <p class="mb-2 text-center text-lg-start aulas-copyright-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
           </div>
+  
           <div class="col-lg-6 text-center text-lg-end">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
-              <li class="me-4"><a href="#" class="aulas-terms-link">Terms & Conditions</a></li>
+              <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
               <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
             </ul>	
           </div>

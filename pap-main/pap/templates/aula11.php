@@ -10,7 +10,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario_id = $_SESSION['id'];
 $usuario_nome = $_SESSION['name'];
-$aula_id = 3;
+$aula_id = 12;
 
 // Conexão com o banco
 $servername = "localhost";
@@ -49,6 +49,7 @@ $comentarios = getComentarios($conn, $aula_id);
 ?>
 
 
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -72,7 +73,7 @@ $comentarios = getComentarios($conn, $aula_id);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
 
-  <title>Aula 4 - Kiocode</title>
+  <title>Aula 12 - Kiocode</title>
 </head>
 
 <body>
@@ -85,25 +86,38 @@ $comentarios = getComentarios($conn, $aula_id);
           <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
         </a>
       </div>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarsFurni">
         <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre nós</a></li>
-          <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.php">Contactos</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sobre.php">Sobre nós</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aulas.php">Aulas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.php">Contactos</a>
+          </li>
         </ul>
+
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-          <?php
-          if (isset($_SESSION['id'])) {
-              echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-          } else {
-              echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-          }
-          ?>
-        </ul>
+    		<?php
+    		if (isset($_SESSION['id'])) {
+        		// User is logged in -> Direct to user page
+        		echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		} else {
+        		// User is NOT logged in -> Direct to login/register page
+        		echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		}
+    		?>
+		</ul>
       </div>
     </div>
   </nav>
@@ -122,141 +136,90 @@ $comentarios = getComentarios($conn, $aula_id);
 
         <!-- Main Content -->
         <div class="aulas-main-content">
-          <h2 class="aulas-section-title">Sintaxe Básica</h2>
-          <p>
-            A sintaxe básica de C++ refere-se ao conjunto de regras e estruturas que definem como o código deve ser escrito para ser entendido corretamente pelo compilador.
-          </p>
-          <hr>
+            <h2 class="aulas-section-title">Arrays em C++</h2>
+            <h3 class="aulas-section-h3">- O que são Arrays?</h3>
+            <p>
+                Um <strong>array</strong> é uma coleção de elementos do mesmo tipo, armazenados em locais de memória contíguos. 
+                Eles permitem armazenar múltiplos valores em uma única variável, facilitando a manipulação de conjuntos de dados relacionados.
+            </p>
+            <hr>
+        
+            <h2 class="aulas-section-title">Caracteristicas de Arrays</h2>
+            <ul>
+                <li><strong>Tipo Fixo:</strong> Todos os elementos devem ser do mesmo tipo.</li>
+                <li><strong>Tamanho Fixo:</strong> O tamanho do array é definido no momento da declaração e não pode ser alterado.</li>
+                <li><strong>Acesso por Índice:</strong> Os elementos são acessados por índices, que começam em 0.</li>
+            </ul>
+            
 
-          <!-- Content Row -->
-          <div class="aulas-row my-5">
-            <div class="aulas-col-6 aulas-col-md-6">
-              <div class="aulas-feature">
-                <h2 class="aulas-section-title">Estrutura de um Programa C++</h2>
-                <p>
-                  Todos os programas em C++ têm uma estrutura base composta por algumas partes principais:
-                </p>
-                <ul>
-                  <li><b>Inclusão de Bibliotecas:</b> Normalmente, começa-se o código incluindo bibliotecas que fornecem funcionalidades adicionais que a linguagem não oferece por padrão. A inclusão é feita com o comando #include.</li>
-                  <li><b>Função main():</b> Todo programa em C++ começa a execução a partir da função main(), que é o ponto de entrada do programa. Esta função pode devolver um valor inteiro (normalmente 0), que indica que o programa terminou com sucesso.</li>
-                  <li><b>Código dentro da função main():</b> O código que será executado pelo programa é escrito dentro das chaves { } da função main().</li>
-                </ul>
+            <h4 class="aulas-section-h4">Declaração e inicialização</h4>
+            
+                <p>No código seguinte (linha 1), declara um array chamado numeros que pode armazenar 5 elementos do tipo int (inteiro).
+                Neste ponto, o array é criado, mas os valores dos elementos não são inicializados, ou seja, eles contêm valores indeterminados.</p>
+                <p>Os valores são atribuídos aos elementos do array em ordem (linha 2), onde numeros[0] será 1, numeros[1] será 2, e assim por diante até numeros[4], que será 5.</p>
+           
+            <div class="code-section">
+                <h3>Declaração e inicialização</h3>
+                <pre><code class="language-c++">
+int numeros[5]; // Declara um array de inteiros com 5 elementos
+int numeros[5] = {1, 2, 3, 4, 5}; // Declara e inicializa um array de inteiros
+                </code></pre>
+            </div>
+        
 
-                <h4 class="aulas-section-h4">Exemplo do código "Hello World"</h4>
-                <div class="code-section">
-                  <h3>Hello World:</h3>
-                  <pre><code class="language-c++">
-  #include &lt;iostream&gt;
-  
-  int main() {
-      std::cout << "Hello, World!" << std::endl;
-      return 0;
-  }
-                  </code></pre>
-                </div>
 
-                <ul>
-                  <li><b>#include &lt;iostream&gt;:</b> Inclui a biblioteca de entrada e saída padrão do C++ para permitir o uso de std::cout, que é usado para imprimir na tela.</li>
-                  <li><b>int main():</b> Define a função principal que será executada quando o programa iniciar.</li>
-                  <li><b>std::cout << "Hello, World!" << std::endl;:</b> Imprime a string "Olá, Mundo!" seguida por uma nova linha (std::endl).</li>
-                  <li><b>return 0;:</b> Finaliza a execução da função main() e retorna 0, indicando sucesso.</li>
-                </ul>
+            <h4 class="aulas-section-h4">Acesso e Modificação</h4>
+                <p>Esta linha modifica o terceiro elemento do array numeros (que é numeros[2]) e atribui a ele o valor 10. Após essa operação, 
+                    o valor do terceiro elemento do array, que originalmente era 3, agora será 10.</p>
 
-                <hr>
+            <div class="code-section">
+            <h3>Acesso e Modificação</h3>
+            <pre><code class="language-c++">
+int primeiroNumero = numeros[0]; // Acessa o primeiro elemento
+numeros[2] = 10; // Modifica o terceiro elemento
+            </code></pre>
+        </div>
 
-                <h4 class="aulas-section-h4">Instruções e Ponto e Vírgula</h4>
-                <p>
-                  Em C++, cada comando ou instrução deve terminar com um ponto e vírgula (;). Isso é necessário para indicar ao compilador que a instrução terminou, mesmo que o comando seja simples ou complexo.
-                </p>
-                <div class="code-section">
-                  <h3>Uso de ponto e vírgula</h3>
-                  <pre><code class="language-c++">
-  int a = 5;  // Declara e inicializa a variável a com valor 5 
-  a = a + 2;   // Atribui o valor de a + 2 à variável a
-  std::cout << "Valor de a: " << a << std::endl;  // Imprime o valor de a na tela
-                  </code></pre>
-                </div>
+        <hr>
+        
+            <h4 class="aulas-section-h4">Exemplo Completo</h4>
+            <div class="code-section">
+    <pre><code class="language-c++">#include &lt;iostream&gt;
 
-                <p>Aqui, cada linha termina com um ponto e vírgula para indicar que a instrução foi concluída.</p>
+int main() {
+    int numeros[5] = {1, 2, 3, 4, 5}; // Declara e inicializa um array
 
-                <hr>
-                <h4 class="aulas-section-h4">Blocos de código</h4>
-                <p>Blocos de código em C++ são usados para agrupar instruções, especialmente em estruturas de controle como loops e condicionais. 
-                Eles são delimitados por chaves { }.</p>
-                <ul>
-                    <li><b>Condicionais:</b> Utilizadas para executar trechos de código com base em uma condição</li>
-                    <li><b>Loops:</b> Usados para repetir um bloco de código várias vezes</li>
-                </ul>
+    // Exibindo os elementos do array
+    for (int i = 0; i &lt; 5; i++) {
+        std::cout &lt;&lt; "numeros[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; numeros[i] &lt;&lt; std::endl;
+    }
 
-                <div class="code-section">
-                    <h3>Bloco de código com <u>if</u></h3>
-                    <pre><code class="language-c++">
-int x = 10;
+    // Modificando um elemento
+    numeros[2] = 10; // Modifica o terceiro elemento
 
-if (x > 0) {
-    std::cout << "X é positivo!" << std::endl;  // será executado se x for maior que 0
-} else {
-    std::cout << "X não é positivo!" << std::endl;  // se não, este código é executado
+    // Exibindo os elementos após a modificação
+    std::cout &lt;&lt; "\nApós modificação:" &lt;&lt; std::endl;
+    for (int i = 0; i &lt; 5; i++) {
+        std::cout &lt;&lt; "numeros[" &lt;&lt; i &lt;&lt; "] = " &lt;&lt; numeros[i] &lt;&lt; std::endl;
+    }
+
+    return 0;
 }
-                    </code></pre>
-                </div>
-                <ul>
-                  <li><b>if (x > 0):</b> Verifica se o valor de x é maior que zero.</li>
-                  <li><b>else:</b> Caso a condição do if não seja satisfeita, o código dentro do bloco else será executado.</li>
-                </ul>
+            </code></pre>
+        </div>
 
-                <div class="code-section">
-                  <h3>Bloco de código com <u>for</u></h3>
-                  <pre><code class="language-c++">
-for (int i = 0; i < 5; i++) {
-    std::cout << "Valor de i: " << i << std::endl;  // Imprime os valores de i de 0 a 4
-}
-                  </code></pre>
-                </div>
-                <p>O laço <u>'for'</u> vai executar o código dentro das chaves { } 5 vezes, começando com <u>i</u> igual a 0, até <u>i</u> ser igual a 4. 
-                A cada ciclo, o valor de i é incrementado em 1.</p>
-
-                <hr>
-                <h4 class="aulas-section-h4">Comentários</h4>
-                <p>Comentários são usados para explicar o código e não afetam a execução do programa. 
-                    Eles são importantes para tornar o código mais legível e fácil de entender. Existem dois tipos principais de comentários:</p>
-                <ul>
-                    <li><b>Comentário de linha única:</b> Usa // para comentar uma linha inteira. Tudo o que vem depois de // na mesma linha será ignorado pelo compilador.</li>
-                    <li><b>Comentário de várias linhas:</b> Usa /* para iniciar e */ para terminar o comentário, permitindo que o comentário ocupe várias linhas.</li>
-                </ul>
-
-                <div class="code-section">
-                    <h3>Comentário com <u>//</u></h3>
-                    <pre><code class="language-c++">
-// Este é um comentário de linha única
-int x = 10;  // A variável x recebe o valor 10
-                    </code></pre>
-                </div>
-
-                <div class="code-section">
-                    <h3>Comentário com <u>/* */</u></h3>
-                    <pre><code class="language-c++">
-/*
-Este é um comentário
-de várias linhas.
-Ele pode ocupar várias linhas sem afetar o código.
-*/
-int y = 20;
-                    </code></pre>
-                </div>
-                <div class="aulas-buttons-container">
-                  <div class="container text-center">
-                    <a class="btn btn-secondary me-3" href="aula2.php">Anterior</a>
-                    <a class="btn btn-secondary" href="aula4.php">Próximo</a>
-                  </div>
-                </div>
+        <!-- Botões "Próximo" e "Anterior" -->
+        <div class="aulas-buttons-container">
+            <div class="container text-center">
+              <a class="btn btn-secondary me-3" href="aula10.php">Anterior</a>
+              <a class="btn btn-secondary" href="aula12.php">Próximo</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  
+            
   <!-- Comentários -->
   <div class="comentarios-section">
     <h3>Comentários</h3>
@@ -286,7 +249,6 @@ int y = 20;
     </div>
 </div>
 
-  
 
   <!-- Footer Section -->
   <footer class="footer-section aulas">
@@ -325,7 +287,6 @@ int y = 20;
       </div>
     </div>
   </footer>
-
   <script>
     // Load the sidebar dynamically
     document.addEventListener("DOMContentLoaded", function() {
@@ -360,6 +321,5 @@ int y = 20;
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>
   <script src="js/custom.js"></script>
-
 </body>
 </html>

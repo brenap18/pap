@@ -1,79 +1,53 @@
 <?php
 session_start();
+
+include 'track_progress.php'; // <- Esse é o que tava a faltar!
+
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
-} 
-
-// Lista de aulas para referência no progresso
-$aulas = [
-    'aula1.php', 'aula2.php', 'aula3.php', 'aula4.php', 'aula5.php', 
-    'aula6.php', 'aula7.php', 'aula8.php', 'aula9.php', 'aula10.php', 
-    'aula11.php', 'aula12.php', 'aula13.php', 'aula14.php'
-];
-
-if (!isset($_SESSION['historico_aulas'])) {
-    $_SESSION['historico_aulas'] = [];
 }
 
-// Registrar a aula visitada
-$pagina_atual = basename($_SERVER['PHP_SELF']);
-if (in_array($pagina_atual, $aulas) && !in_array($pagina_atual, $_SESSION['historico_aulas'])) {
-    $_SESSION['historico_aulas'][] = $pagina_atual;
-}
+$usuario_id = $_SESSION['id'];
+$usuario_nome = $_SESSION['name'];
+$aula_id = 2;
 
-
-// Conexão com o banco de dados
+// Conexão com o banco
 $servername = "localhost";
-$username = "root"; // Substitua com seu nome de usuário
-$password = ""; // Substitua com sua senha
-$dbname = "test_db"; // Substitua com o nome do seu banco de dados
+$username = "root";
+$password = "";
+$dbname = "test_db";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Função para obter os comentários
+// Inserir comentário
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentario'])) {
+    $comentario = $_POST['comentario'];
+    $sql = "INSERT INTO comentarios (usuario_id, comentario, data, aula_id) VALUES (?, ?, NOW(), ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("isi", $usuario_id, $comentario, $aula_id);
+    $stmt->execute();
+    $stmt->close();
+}
+
+// Obter comentários da aula
 function getComentarios($conn, $aula_id) {
-    $sql = "SELECT comentario, data, usuario_id FROM comentarios WHERE aula_id = ? ORDER BY data DESC";
+    $sql = "SELECT c.comentario, c.data, u.name FROM comentarios c JOIN users u ON c.usuario_id = u.id WHERE c.aula_id = ? ORDER BY c.data DESC";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $aula_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $comentarios = [];
-    
-    while ($row = $result->fetch_assoc()) {
-        $comentarios[] = $row;
-    }
-    
+    $comentarios = $result->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
     return $comentarios;
 }
 
-// Processar o envio de um novo comentário
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['comentario'])) {
-    $comentario = $_POST['comentario'];
-    $aula_id = 1; // Defina o ID da aula (pode ser dinâmico, dependendo da página)
-    $usuario_id = $_SESSION['id']; // ID do usuário logado
-    
-    // Insere o comentário no banco de dados
-    $sql = "INSERT INTO comentarios (comentario, aula_id, usuario_id, data) VALUES (?, ?, ?, NOW())";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("sii", $comentario, $aula_id, $usuario_id);
-    $stmt->execute();
-    $stmt->close();
-    
-    // Redireciona para a página atual para exibir o comentário recém-adicionado
-    header("Location: " . $_SERVER['PHP_SELF']);
-    exit();
-}
+$comentarios = getComentarios($conn, $aula_id);
+?>
 
-// Obtém os comentários para a aula atual
-$comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
-?>
-?>
 
 <!doctype html>
 <html lang="pt-BR">
@@ -103,41 +77,28 @@ $comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
     <div class="container">
       <div class="navbar-brand">
         <a href="index.php">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
+          <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
         </a>
       </div>
-
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <div class="collapse navbar-collapse" id="navbarsFurni">
         <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link" href="index.php">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sobre.php">Sobre nós</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="aulas.php">Aulas</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.php">Contactos</a>
-          </li>
+          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre nós</a></li>
+          <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.php">Contactos</a></li>
         </ul>
-
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-    		<?php
-    		if (isset($_SESSION['id'])) {
-        		// User is logged in -> Direct to user page
-        		echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-    		} else {
-        		// User is NOT logged in -> Direct to login/register page
-        		echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-    		}
-    		?>
-		</ul>
+          <?php
+          if (isset($_SESSION['id'])) {
+              echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+          } else {
+              echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+          }
+          ?>
+        </ul>
       </div>
     </div>
   </nav>
@@ -147,6 +108,7 @@ $comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
   <div class="aula-content-section">
     <div class="aula-container" style="margin-left: -40px;">
       <div class="aula-content-wrapper">
+
         <!-- Sidebar Container -->
         <div id="sidebar-container"></div>
 
@@ -196,29 +158,31 @@ $comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
   <div class="comentarios-section">
     <h3>Comentários</h3>
     <form action="" method="POST">
-      <div class="form-group">
-        <textarea name="comentario" class="form-control" rows="4" placeholder="Escreva um comentário..." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+        <div class="form-group">
+            <textarea name="comentario" class="form-control" rows="4" placeholder="Escreva um comentário..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Enviar</button>
     </form>
 
     <!-- Exibir os comentários -->
     <div class="comentarios-list">
-      <?php foreach ($comentarios as $comentario): ?>
-        <div class="comentario" style="background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
-          <div style="display: flex; align-items: center; margin-bottom: 10px;">
-            <a href="#">
-              <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
-            </a>
-            <h1 style="color: black; font-size: 14px;"><?= $_SESSION['name']; ?></h1>
-          </div>
-          <p style="font-size: 16px; color: #333;"><?= htmlspecialchars($comentario['comentario']) ?></p>
-          <small style="display: block; font-size: 12px; color: #777; margin-top: 10px;">Publicado em: <?= $comentario['data'] ?></small>
-          <hr style="border: 0; border-top: 1px solid #ddd; margin-top: 15px; margin-bottom: 10px;">
-        </div>
-      <?php endforeach; ?>
+        <?php foreach ($comentarios as $comentario): ?>
+            <div class="comentario" style="background-color: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                    <a href="#">
+                        <!-- Verifica se o usuário tem uma foto de perfil atualizada -->
+                        <img src="<?php echo isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : 'https://bootdey.com/img/Content/avatar/avatar3.png'; ?>" 
+                             alt="Foto de Perfil" style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; margin-right: 10px;">
+                    </a>
+                    <h1 style="color: black; font-size: 14px;"><?= $_SESSION['name']; ?></h1>
+                </div>
+                <p style="font-size: 16px; color: #333;"><?= htmlspecialchars($comentario['comentario']) ?></p>
+                <small style="display: block; font-size: 12px; color: #777; margin-top: 10px;">Publicado em: <?= $comentario['data'] ?></small>
+            </div>
+        <?php endforeach; ?>
     </div>
-  </div>
+</div>
+
 
   <!-- Footer Section -->
   <footer class="footer-section aulas">
@@ -240,23 +204,53 @@ $comentarios = getComentarios($conn, 1); // 1 representa o ID da aula
           </div>
         </div>
       </div>
-
+  
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
-          <div class="col-lg-6">
-            <p class="mb-2 text-center text-lg-start aulas-copyright-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
+          <div class="col-lg-6" style="text-align: left; padding-left: 60px; padding-top: 30px;">
+            <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto;">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
           </div>
-
-          <div class="col-lg-6 text-center text-lg-end">
+  
+          <div class="col-lg-6 text-center text-lg-end" style="text-align: right; padding-right: 30px;">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
               <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
               <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
-            </ul>  
+            </ul>	
           </div>
         </div>
       </div>
     </div>
   </footer>
+  <script>
+    // Load the sidebar dynamically
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch('sidebar.php')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('sidebar-container').innerHTML = data;
+  
+          // Re-attach event listeners for submenu toggles after loading the sidebar
+          document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
+            toggleButton.addEventListener('click', function () {
+              const submenu = toggleButton.nextElementSibling;  // The next sibling is the submenu
+              submenu.classList.toggle('show');  // Toggle the visibility by adding/removing the 'show' class
+              toggleButton.classList.toggle('open');  // Optionally change the icon of the button
+            });
+          });
+  
+          // Attach the sidebar toggle button event listener after loading the sidebar
+          const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+          const sidebar = document.querySelector('.aula-sidebar');
+  
+          if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('show'); // Toggle the 'show' class to slide the sidebar in/out
+            });
+          }
+        })
+        .catch(error => console.error('Error fetching sidebar:', error));
+    });
+  </script>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>

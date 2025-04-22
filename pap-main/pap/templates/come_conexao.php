@@ -1,14 +1,14 @@
 <?php
-// Definir as configurações de conexão
+// dados da base de dados
 $host = "localhost";
 $user = "root";
 $password = "";
 $db_name = "test_db";
 
-// Criar a conexão
+// liga à base de dados
 $conn = new mysqli($host, $user, $password, $db_name);
 
-// Verificar se a conexão foi bem-sucedida
+// verifica se deu erro
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }

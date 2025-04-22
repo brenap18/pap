@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Redireciona se o usuário não estiver logado
+// Redireciona se o utilizador não estiver logado
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
@@ -10,6 +10,7 @@ if (!isset($_SESSION['id'])) {
 
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,6 +35,7 @@ if (!isset($_SESSION['id'])) {
       transition: opacity 0.3s;
       font-size: 14px;
     }
+
     .user-heading:hover .overlay {
       opacity: 1;
     }
@@ -41,7 +43,7 @@ if (!isset($_SESSION['id'])) {
 </head>
 
 <body>
-  <!-- Navbar mantida -->
+  <!-- Navbar -->
   <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
     <div class="container">
       <a href="index.php" class="navbar-brand">
@@ -70,13 +72,21 @@ if (!isset($_SESSION['id'])) {
     </div>
   </nav>
 
-  <!-- Conteúdo da Página -->
+  <!-- Conteúdo da página -->
   <div class="container mt-5">
+    <!-- Verifica se existe mensagem na sessão -->
     <?php if (isset($_SESSION['msg'])): ?>
-      <div class="alert alert-info mt-2"><?php echo $_SESSION['msg']; unset($_SESSION['msg']); ?></div>
+      <!-- Exibe a mensagem e limpa da sessão -->
+      <div class="alert alert-info mt-2">
+        <?php 
+          echo $_SESSION['msg']; 
+          unset($_SESSION['msg']);
+        ?>
+      </div>
     <?php endif; ?>
 
     <div class="row profile-container">
+      <!-- Menu lateral do perfil -->
       <div class="profile-nav col-md-3">
         <div class="panel">
           <div class="user-heading round position-relative text-center">
@@ -84,11 +94,9 @@ if (!isset($_SESSION['id'])) {
               <label for="foto-perfil" class="d-block position-relative" style="cursor:pointer;">
                 <img src="<?php echo $_SESSION['foto_perfil'] ?? 'https://bootdey.com/img/Content/avatar/avatar3.png'; ?>" 
                      alt="Foto de Perfil" class="rounded-circle" width="120" height="120" style="object-fit:cover;">
-
                 <div class="overlay text-white fw-bold d-flex justify-content-center align-items-center">
                   Mudar Foto
                 </div>
-
                 <input type="file" name="foto" id="foto-perfil" accept="image/*" style="display:none" onchange="document.getElementById('form-foto').submit();">
               </label>
             </form>
@@ -100,47 +108,47 @@ if (!isset($_SESSION['id'])) {
         </div>
       </div>
 
+      <!-- Formulário de edição de perfil -->
       <div class="profile-info col-md-9">
-      <div class="profile-info col-md-9">
-  <div class="panel">
-    <div class="bio-graph-heading">
-      <h5><i class="fa fa-pencil"></i> Edição de Perfil</h5>
+        <div class="panel">
+          <div class="bio-graph-heading">
+            <h5><i class="fa fa-pencil"></i> Edição de Perfil</h5>
 
-      <!-- MENSAGEM -->
-      <?php if (isset($_SESSION['msg'])): ?>
-        <div class="alert alert-<?php echo isset($_SESSION['msg_type']) ? $_SESSION['msg_type'] : 'info'; ?> mt-3">
-          <?php 
-            echo $_SESSION['msg']; 
-            unset($_SESSION['msg'], $_SESSION['msg_type']);
-          ?>
+            <!-- Exibe a mensagem se existir -->
+            <?php if (isset($_SESSION['msg'])): ?>
+              <div class="alert alert-<?php echo isset($_SESSION['msg_type']) ? $_SESSION['msg_type'] : 'info'; ?> mt-3">
+                <?php 
+                  // Exibe a mensagem e limpa da sessão
+                  echo $_SESSION['msg']; 
+                  unset($_SESSION['msg'], $_SESSION['msg_type']);
+                ?>
+              </div>
+            <?php endif; ?>
+
+            <!-- Formulário de atualização -->
+            <form action="atualizar_perfil.php" method="post" class="mt-4">
+              <div class="mb-3">
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($_SESSION['name']); ?>" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="password" class="form-label">Nova Senha:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Deixe em branco para manter a atual">
+              </div>
+
+              <div class="mb-3">
+                <label for="confirm_password" class="form-label">Confirmar Nova Senha:</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+              </div>
+
+              <button type="submit" class="btn btn-primary w-50">Salvar Alterações</button>
+            </form>
+
+          </div>
         </div>
-      <?php endif; ?>
-      <!-- FIM MENSAGEM -->
-
-      <form action="atualizar_perfil.php" method="post" class="mt-4">
-        <div class="mb-3">
-          <label for="name" class="form-label">Nome:</label>
-          <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($_SESSION['name']); ?>" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Nova Senha:</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Deixe em branco para manter a atual">
-        </div>
-
-        <div class="mb-3">
-          <label for="confirm_password" class="form-label">Confirmar Nova Senha:</label>
-          <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-        </div>
-
-        <button type="submit" class="btn btn-primary w-50">Salvar Alterações</button>
-      </form>
-
-    </div>
-  </div>
-</div>
-
       </div>
+
     </div>
   </div>
 
@@ -148,4 +156,5 @@ if (!isset($_SESSION['id'])) {
   <script src="js/tiny-slider.js"></script>
   <script src="js/custom.js"></script>
 </body>
+
 </html>

@@ -1,22 +1,22 @@
 <?php
-session_start(); // Start the session
+session_start(); 
 
-// Unset all of the session variables
+// desativa todas as variáveis da sessão
 $_SESSION = array();
 
-// If it's desired to kill the session, also delete the session cookie.
+// se for necessário destruir a sessão, exclui o cookie da sessão
 if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
+    $params = session_get_cookie_params(); // obtém os parâmetros do cookie
     setcookie(session_name(), '', time() - 42000,
         $params["path"], $params["domain"],
         $params["secure"], $params["httponly"]
-    );
+    ); 
 }
 
-// Finally, destroy the session.
+// acaba a sessão
 session_destroy();
 
-// Redirect to the login page
+// redireciona para a página de login
 header("Location: login.php");
 exit();
 ?>

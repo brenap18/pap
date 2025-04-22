@@ -189,32 +189,38 @@ $comentarios = getComentarios($conn, $aula_id);
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script>
+    // espera o conteúdo carregar
     document.addEventListener("DOMContentLoaded", function() {
+    
+      // carrega o sidebar dinamicamente
       fetch('sidebar.php')
         .then(response => response.text())
         .then(data => {
           document.getElementById('sidebar-container').innerHTML = data;
-
+        
+          // ativa os botões de submenu depois do sidebar ser carregado
           document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
             toggleButton.addEventListener('click', function () {
-              const submenu = toggleButton.nextElementSibling;  // The next sibling is the submenu
-              submenu.classList.toggle('show');  // Toggle the visibility by adding/removing the 'show' class
-              toggleButton.classList.toggle('open');  // Optionally change the icon of the button
+              const submenu = toggleButton.nextElementSibling;
+              submenu.classList.toggle('show'); // mostra/esconde submenu
+              toggleButton.classList.toggle('open'); // muda o ícone do botão
             });
           });
-        });
-
-      // Toggle lateral sidebar
-      const toggleBtn = document.querySelector(".sidebar-toggle-btn");
-      const sidebar = document.querySelector("#sidebar-container");
-
-      toggleBtn.addEventListener("click", function() {
-        sidebar.classList.toggle("sidebar-hidden");
-        toggleBtn.textContent = sidebar.classList.contains("sidebar-hidden") ? ">" : "<";
-      });
+        
+          // ativa o botão para mostrar/esconder o sidebar
+          const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+          const sidebar = document.querySelector('.aula-sidebar');
+        
+          if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+            });
+          }
+        })
+        .catch(error => console.error('Erro ao carregar o sidebar:', error));
     });
+
   </script>
 
   <script src="../static/js/bootstrap.bundle.min.js"></script>

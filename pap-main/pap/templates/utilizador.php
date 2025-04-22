@@ -1,18 +1,18 @@
 <?php
-session_start();
+session_start(); // inicia a sessão
 
-// Redireciona se o usuário não estiver logado
+// redireciona se o usuário não estiver logado
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
 }
 
-// Inicializa o histórico de navegação se ainda não existir
+// inicializa o histórico de navegação se ainda não existir
 if (!isset($_SESSION['historico_aulas'])) {
     $_SESSION['historico_aulas'] = [];
 }
 
-// Lista completa de aulas com nomes legíveis
+// lista completa de aulas com nomes legíveis
 $pageNames = [
     'aula1.php' => '📘 Instalações',
     'aula2.php' => '👨‍💻 Primeiro Programa',
@@ -30,9 +30,12 @@ $pageNames = [
     'aula14.php' => '🔧 Estruturas (struct)',
 ];
 
+// cálculo do progresso baseado no histórico de aulas
 $total_aulas = count($pageNames);
 $aulas_visitadas = count(array_unique($_SESSION['historico_aulas']));
 $progresso = ($aulas_visitadas / $total_aulas) * 100;
+
+// obtém o histórico de aulas em ordem inversa
 $historico = array_reverse($_SESSION['historico_aulas']);
 ?>
 
@@ -51,9 +54,9 @@ $historico = array_reverse($_SESSION['historico_aulas']);
 </head>
 
 <body>
-  <!-- Início da Navegação -->
+  <!-- início da navegação -->
   <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
-  <div class="container">
+    <div class="container">
       <a href="index.php" class="navbar-brand">
         <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
       </a>
@@ -61,7 +64,7 @@ $historico = array_reverse($_SESSION['historico_aulas']);
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarsFurni">
-      <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+        <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
           <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre nós</a></li>
           <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
@@ -70,8 +73,10 @@ $historico = array_reverse($_SESSION['historico_aulas']);
         <ul class="navbar-nav ms-5">
           <?php
           if (isset($_SESSION['id'])) {
+              // mostra o ícone do usuário logado
               echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
           } else {
+              // mostra o ícone de login para quem não está logado
               echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
           }
           ?>
@@ -81,37 +86,37 @@ $historico = array_reverse($_SESSION['historico_aulas']);
   </nav>
 
   <div class="container mt-5">
-    <h1>Olá, <?php echo $_SESSION['name']; ?></h1>
+    <h1>Olá, <?php echo $_SESSION['name']; ?></h1> <!-- exibe o nome do usuário -->
     <p>Esta é a sua página de utilizador.</p>
 
     <div class="row profile-container">
       <div class="profile-nav col-md-3">
         <div class="panel">
-        <div class="user-heading round">
+          <div class="user-heading round">
             <a>
-                <!-- Verifica se existe uma foto de perfil atualizada -->
+                <!-- verifica se existe uma foto de perfil atualizada -->
                 <img src="<?php echo isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : 'https://bootdey.com/img/Content/avatar/avatar3.png'; ?>" 
                      alt="Foto de Perfil" class="rounded-circle" width="120" height="120" style="object-fit: cover;">
             </a>
-            <h1><?php echo $_SESSION['name']; ?></h1>
+            <h1><?php echo $_SESSION['name']; ?></h1> <!-- exibe o nome novamente -->
+          </div>
+          <ul class="nav nav-pills nav-stacked" style="width: 550px;">
+            <li><a href="editar.php" style="display: block; width: 100%; padding: 12px 75.7px;"><i class="fa fa-edit"></i> Editar perfil</a></li>
+          </ul>
         </div>
-        <ul class="nav nav-pills nav-stacked" style="width: 550px;">
-  <li><a href="editar.php" style="display: block; width: 100%; padding: 12px 75.7px;"><i class="fa fa-edit"></i> Editar perfil</a></li>
-</ul>
-
-    </div>
       </div>
 
       <div class="profile-info col-md-9">
         <div class="panel">
           <div class="bio-graph-heading">
-            <h5><i class="fa fa-history"></i> Histórico das Aulas:</h5>
+            <h5><i class="fa fa-history"></i> Histórico das Aulas:</h5> <!-- título do histórico -->
 
             <div class="row g-3">
               <?php
               if (!empty($_SESSION['historico_aulas'])) {
+                  // se o histórico de aulas não estiver vazio, exibe as aulas visitadas
                   foreach ($historico as $page) {
-                      $pageName = $pageNames[$page] ?? ucfirst(str_replace('.php', '', $page));
+                      $pageName = $pageNames[$page] ?? ucfirst(str_replace('.php', '', $page)); // obtém o nome legível da aula
                       echo "
                       <div class='col-md-6'>
                         <div class='card aula-card shadow-sm h-100'>
@@ -128,17 +133,20 @@ $historico = array_reverse($_SESSION['historico_aulas']);
                       </div>";
                   }
               } else {
+                  // se o histórico estiver vazio, exibe uma mensagem
                   echo "<p class='text-muted'>Nenhuma aula visitada ainda.</p>";
               }
               ?>
             </div>
 
             <div class="progress mt-4">
+              <!-- barra de progresso -->
               <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $progresso; ?>%;" aria-valuenow="<?php echo $progresso; ?>" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small><?php echo round($progresso, 2); ?>% do total de aulas concluídas.</small>
           </div>
 
+          <!-- botão de logout -->
           <form action="logout.php" method="post" class="mt-3">
             <button type="submit" class="btn btn-danger">Logout</button>
           </form>

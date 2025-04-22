@@ -1,8 +1,9 @@
 <?php
 session_start();
 
-include 'track_progress.php'; // <- Esse é o que tava a faltar!
+include 'track_progress.php'; // controla o progresso do utilizador
 
+// redireciona se não estiver logado
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
@@ -10,9 +11,9 @@ if (!isset($_SESSION['id'])) {
 
 $usuario_id = $_SESSION['id'];
 $usuario_nome = $_SESSION['name'];
-$aula_id = 13;
+$aula_id = 12;
 
-// Conexão com o banco
+// ligação à base de dados
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -23,7 +24,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Inserir comentário
+// inserir novo comentário
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentario'])) {
     $comentario = $_POST['comentario'];
     $sql = "INSERT INTO comentarios (usuario_id, comentario, data, aula_id) VALUES (?, ?, NOW(), ?)";
@@ -33,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['comentario'])) {
     $stmt->close();
 }
 
-// Obter comentários da aula
+// buscar comentários desta aula
 function getComentarios($conn, $aula_id) {
     $sql = "SELECT c.comentario, c.data, u.name FROM comentarios c JOIN users u ON c.usuario_id = u.id WHERE c.aula_id = ? ORDER BY c.data DESC";
     $stmt = $conn->prepare($sql);
@@ -47,6 +48,8 @@ function getComentarios($conn, $aula_id) {
 
 $comentarios = getComentarios($conn, $aula_id);
 ?>
+
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -230,34 +233,37 @@ meuCarro.ano = 2020;</code></pre>
     </div>
   </footer>
   <script>
-    // Load the sidebar dynamically
+    // espera o conteúdo carregar
     document.addEventListener("DOMContentLoaded", function() {
+    
+      // carrega o sidebar dinamicamente
       fetch('sidebar.php')
         .then(response => response.text())
         .then(data => {
           document.getElementById('sidebar-container').innerHTML = data;
-  
-          // Re-attach event listeners for submenu toggles after loading the sidebar
+        
+          // ativa os botões de submenu depois do sidebar ser carregado
           document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
             toggleButton.addEventListener('click', function () {
-              const submenu = toggleButton.nextElementSibling;  // The next sibling is the submenu
-              submenu.classList.toggle('show');  // Toggle the visibility by adding/removing the 'show' class
-              toggleButton.classList.toggle('open');  // Optionally change the icon of the button
+              const submenu = toggleButton.nextElementSibling;
+              submenu.classList.toggle('show'); // mostra/esconde submenu
+              toggleButton.classList.toggle('open'); // muda o ícone do botão
             });
           });
-  
-          // Attach the sidebar toggle button event listener after loading the sidebar
+        
+          // ativa o botão para mostrar/esconder o sidebar
           const toggleBtn = document.querySelector('.sidebar-toggle-btn');
           const sidebar = document.querySelector('.aula-sidebar');
-  
+        
           if (toggleBtn) {
             toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('show'); // Toggle the 'show' class to slide the sidebar in/out
+                sidebar.classList.toggle('show');
             });
           }
         })
-        .catch(error => console.error('Error fetching sidebar:', error));
+        .catch(error => console.error('Erro ao carregar o sidebar:', error));
     });
+
   </script>
 
   <script src="js/bootstrap.bundle.min.js"></script>

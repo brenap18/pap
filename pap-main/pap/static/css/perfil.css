@@ -1,297 +1,325 @@
 body {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 14px;
-    color: #5a5a5a;
-    background: #f4f5f7;
-    margin: 0;
-    padding: 0;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-  }
-  
-  h1 {
-    font-size: 55px;
-    color: #fbfbfb;
-    font-weight: 700;
-    margin-bottom: 15px;
-  }
-  
-  p {
-    font-size: 1.1rem;
-    color: #fbfbfb;
-    margin-bottom: 25px;
-  }
-  
-  .btn {
-    padding: 12px 24px;
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .btn-danger {
-    margin-left: 52px;
-    background-color: #dc3545;
-    color: white;
-  }
-  
-  .btn-danger:hover {
-    background-color: #c82333;
-  }
-  
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* fonte do corpo */
+  font-size: 14px; /* tamanho da fonte */
+  color: #5a5a5a; /* cor do texto */
+  background: #f4f5f7; /* fundo da página */
+  margin: 0; /* remove margens padrão */
+  padding: 0; /* remove padding padrão */
+  text-rendering: optimizeLegibility; /* otimiza a legibilidade do texto */
+  -webkit-font-smoothing: antialiased; /* suaviza fontes no WebKit */
+  -moz-font-smoothing: antialiased; /* suaviza fontes no Firefox */
+}
+
+h1 {
+  font-size: 55px; /* tamanho da fonte do título */
+  color: #fbfbfb; /* cor do texto do título */
+  font-weight: 700; /* peso da fonte */
+  margin-bottom: 15px; /* espaço abaixo do título */
+}
+
+p {
+  font-size: 1.1rem; /* tamanho da fonte do parágrafo */
+  color: #fbfbfb; /* cor do texto do parágrafo */
+  margin-bottom: 25px; /* espaço abaixo do parágrafo */
+}
+
+.btn {
+  padding: 12px 24px; /* espaço interno do botão */
+  font-size: 14px; /* tamanho da fonte do botão */
+  font-weight: 600; /* peso da fonte do botão */
+  text-transform: uppercase; /* transforma texto em maiúsculas */
+  border: none; /* sem borda */
+  border-radius: 6px; /* bordas arredondadas */
+  cursor: pointer; /* cursor de ponteiro */
+  transition: all 0.3s ease-in-out; /* transição suave para o botão */
+}
+
+.btn-danger {
+  margin-left: 52px; /* espaço à esquerda do botão */
+  background-color: #dc3545; /* cor de fundo do botão de perigo */
+  color: white; /* cor do texto do botão */
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* cor de fundo ao passar o mouse */
+}
+
+.profile-container {
+  margin-top: 40px; /* espaço acima do container do perfil */
+  display: flex; /* usa flexbox para layout */
+  flex-wrap: nowrap; /* não permite quebra de linha */
+  gap: 20px; /* espaço entre os elementos */
+}
+
+.profile-nav {
+  flex: 1; /* ocupa espaço flexível */
+  max-width: 300px; /* largura máxima da navegação do perfil */
+}
+
+.profile-nav .user-heading {
+  background: #faf9f7; /* fundo do cabeçalho do usuário */
+  border-radius: 8px 8px 0 0; /* bordas arredondadas no topo */
+  padding: 35px; /* espaço interno do cabeçalho */
+  text-align: center; /* centraliza o texto */
+}
+
+.profile-nav .user-heading a img {
+  width: 120px; /* largura da imagem do usuário */
+  height: 120px; /* altura da imagem do usuário */
+  border-radius: 50%; /* bordas arredondadas para formato circular */
+  border: 4px solid #4a4b8b; /* borda da imagem */
+  transition: transform 0.3s ease-in-out; /* transição suave para transformação */
+}
+
+.profile-nav .user-heading a img:hover {
+  transform: scale(1.05); /* aumenta a imagem ao passar o mouse */
+}
+
+.profile-nav .user-heading h1 {
+  font-size: 24px; /* tamanho da fonte do nome */
+  font-weight: 400; /* peso da fonte do nome */
+  margin-bottom: 8px; /* espaço abaixo do nome */
+  color: black; /* cor do texto do nome */
+}
+
+.profile-nav ul {
+  list-style: none; /* remove marcadores da lista */
+  padding: 0; /* remove padding da lista */
+}
+
+.profile-nav ul > li > a {
+  display: block; /* exibe como bloco */
+  width: 100%; /* largura total */
+  text-align: center; /* centraliza o texto */
+  font-size: 18px; /* tamanho da fonte do link */
+  background: #faf9f7; /* fundo do link */
+  color: #040404; /* cor do texto do link */
+  padding: 12px 50px; /* espaço interno do link */
+  text-decoration: none; /* remove sublinhado */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* sombra suave */
+  transition: all 0.3s ease-in-out; /* transição suave para o link */
+}
+
+.profile-nav ul > li > a:hover {
+  background: #4a4b8b; /* cor de fundo ao passar o mouse */
+  color: #faf9f7; /* cor do texto ao passar o mouse */
+}
+
+.profile-info {
+  flex: 2; /* ocupa mais espaço que a navegação */
+  max-width: calc(100% - 320px); /* largura máxima do info do perfil */
+  display: flex; /* usa flexbox para layout */
+  flex-direction: column; /* organiza em coluna */
+  align-items: flex-start; /* alinha à esquerda */
+  gap: 30px; /* espaço entre os elementos */
+  padding-right: 20px; /* espaço à direita */
+}
+
+/* === BIOGRAPH HEADING / EDIÇÃO DE PERFIL === */
+.bio-graph-heading {
+  background: #ffffff; /* fundo branco */
+  border: 1px solid #ddd; /* borda cinza clara */
+  padding: 30px; /* espaço interno */
+  border-radius: 12px; /* bordas arredondadas */
+  text-align: left; /* alinha texto à esquerda */
+  font-style: normal; /* estilo normal */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* sombra suave */
+  width: 800px; /* largura da seção */
+}
+
+.bio-graph-heading h5 {
+  font-size: 24px; /* tamanho da fonte do cabeçalho */
+  font-weight: 600; /* peso da fonte */
+  margin-bottom: 25px; /* espaço abaixo do cabeçalho */
+  color: #333; /* cor do texto do cabeçalho */
+  display: flex; /* usa flexbox para layout */
+  align-items: center; /* alinha verticalmente */
+  gap: 10px; /* espaço entre os elementos */
+}
+
+.bio-graph-heading form {
+  display: flex; /* usa flexbox para layout */
+  flex-direction: column; /* organiza em coluna */
+  gap: 15px; /* espaço entre os elementos */
+  text-align: left; /* alinha texto à esquerda */
+}
+
+.bio-graph-heading label {
+  font-weight: 600; /* peso da fonte do rótulo */
+  font-size: 15px; /* tamanho da fonte do rótulo */
+  margin-bottom: 6px; /* espaço abaixo do rótulo */
+  color: #333; /* cor do texto do rótulo */
+}
+
+.bio-graph-heading input[type="text"],
+.bio-graph-heading input[type="password"] {
+  width: 100%; /* largura total */
+  padding: 10px 14px; /* espaço interno */
+  border: 1px solid #ccc; /* borda cinza clara */
+  border-radius: 6px; /* bordas arredondadas */
+  font-size: 15px; /* tamanho da fonte */
+  background-color: #c5c5c5; /* fundo cinza claro */
+}
+
+.bio-graph-heading button[type="submit"] {
+  margin-top: 10px; /* espaço acima do botão */
+  width: 100%; /* largura total */
+  background-color: #4a4b8b; /* cor de fundo do botão */
+  color: white; /* cor do texto do botão */
+  border: none; /* sem borda */
+  padding: 12px; /* espaço interno do botão */
+  font-weight: bold; /* peso da fonte do botão */
+  border-radius: 6px; /* bordas arredondadas */
+  transition: background-color 0.3s ease-in-out; /* transição suave para o botão */
+}
+
+.bio-graph-heading button[type="submit"]:hover {
+  background-color: #383969; /* cor de fundo ao passar o mouse */
+}
+
+/* ========== MOBILE RESPONSIVE ========== */
+@media screen and (max-width: 768px) {
   .profile-container {
-    margin-top: 40px;
-    display: flex;
-    flex-wrap: nowrap;
-    gap: 20px;
+    flex-direction: column; /* organiza em coluna */
+    align-items: center; /* centraliza os itens */
+    padding: 0 15px; /* espaço lateral */
   }
-  
+
   .profile-nav {
-    flex: 1;
-    max-width: 300px;
+    max-width: 100%; /* largura máxima da navegação */
+    width: 100%; /* largura total */
   }
-  
-  .profile-nav .user-heading {
-    background: #faf9f7;
-    border-radius: 8px 8px 0 0;
-    padding: 35px;
-    text-align: center;
-  }
-  
-  .profile-nav .user-heading a img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid #4a4b8b;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .profile-nav .user-heading a img:hover {
-    transform: scale(1.05);
-  }
-  
-  .profile-nav .user-heading h1 {
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 8px;
-    color: black;
-  }
-  
-  .profile-nav ul {
-    list-style: none;
-    padding: 0;
-  }
-  
+
   .profile-nav ul > li > a {
-    display: block;
-    width: 100%;
-    text-align: center;
-    font-size: 18px;
-    background: #faf9f7;
-    color: #040404;
-    padding: 12px 50px;
-    text-decoration: none;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+    padding: 12px 0; /* espaço interno do link */
+    width: 100%; /* largura total */
+    box-sizing: border-box; /* inclui padding e borda no cálculo da largura */
   }
-  
-  .profile-nav ul > li > a:hover {
-    background: #4a4b8b;
-    color: #faf9f7;
-  }
-  
+
   .profile-info {
-    flex: 2;
-    max-width: calc(100% - 320px);
-    display: flex;
-    flex-direction: column;
+    max-width: 100%; /* largura máxima do info do perfil */
+    padding-right: 0; /* remove espaço à direita */
+    align-items: center; /* centraliza os itens */
   }
-  
-  /* === BIOGRAPH HEADING / EDIÇÃO DE PERFIL === */
+
   .bio-graph-heading {
-    background: #ffffff;
-    border: 1px solid #ddd;
-    margin-left: 50px;
-    padding: 40px;
-    border-radius: 12px;
-    text-align: left;
-    font-style: normal;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    max-width: 700px; /* Limita o tamanho do conteúdo */
+    width: 100%; /* largura total */
+    max-width: 100%; /* largura máxima */
+    padding: 20px; /* espaço interno reduzido */
   }
-  
-  .bio-graph-heading h5 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 25px;
-    color: #333;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  .bio-graph-heading form {
-    display: flex;
-    flex-direction: column; /* Alinha os campos na vertical */
-    gap: 15px; /* Espaçamento entre os campos */
-    text-align: left;
-  }
-  
-  .bio-graph-heading .mb-3 {
-    margin-bottom: 20px;
-  }
-  
-  .bio-graph-heading label {
-    display: block;
-    font-weight: 600;
-    font-size: 15px;
-    margin-bottom: 6px;
-    color: #333;
-  }
-  
-  .bio-graph-heading input[type="text"],
-  .bio-graph-heading input[type="password"] {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 15px;
-    background-color: #c5c5c5; /* Adiciona um fundo leve aos inputs */
-  }
-  
-  .bio-graph-heading input[type="text"]:focus,
-  .bio-graph-heading input[type="password"]:focus {
-    border-color: #4a4b8b;
-    outline: none;
-    box-shadow: 0 0 5px rgba(74, 75, 139, 0.15);
-  }
-  
+
   .bio-graph-heading button[type="submit"] {
-    margin-top: 10px;
-    width: 25%; /* Faz o botão ocupar toda a largura */
-    background-color: #4a4b8b;
-    color: white;
-    border: none;
-    padding: 12px;
-    font-weight: bold;
-    border-radius: 6px;
-    transition: background-color 0.3s ease-in-out;
+    width: 100%; /* largura total do botão */
   }
-  
-  .bio-graph-heading button[type="submit"]:hover {
-    background-color: #383969;
-  }
-  
-  
-  /* ========== HISTÓRICO DE AULAS COMO CARDS ========== */
-  .aula-card {
-    border-radius: 12px;
-    transition: all 0.3s ease-in-out;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-  }
-  
-  .aula-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  .aula-card .card-title a {
-    color: #2c2c2c;
-    font-weight: 600;
-  }
-  
-  .aula-card .card-title a:hover {
-    text-decoration: underline;
-  }
-  
-  /* ========== BARRA DE PROGRESSO ========== */
-  .progresso-usuario {
-    margin: 30px 0;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .progresso-usuario h4 {
-    margin-bottom: 15px;
-    font-size: 20px;
-    color: #333333;
-  }
-  
-  .progress {
-    height: 22px;
-    background-color: #e0e0e0;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  
-  .progress-bar {
-    height: 100%;
-    background-color: #4a4b8b;
-    line-height: 22px;
-    color: white;
-    text-align: center;
-    font-weight: 600;
-    transition: width 0.4s ease-in-out;
-  }
-  
-  /* ========== HISTÓRICO DE NAVEGAÇÃO ========== */
-  .navegacao-historico {
-    margin-top: 30px;
-    padding: 25px;
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .navegacao-historico h4 {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #333333;
-  }
-  
-  .navegacao-historico ul {
-    list-style-type: none;
-    padding-left: 0;
-  }
-  
-  .navegacao-historico ul li {
-    padding: 8px 0;
-    border-bottom: 1px solid #eaeaea;
-    font-size: 16px;
-    color: #555;
-  }
-  
-  .navegacao-historico ul li:last-child {
-    border-bottom: none;
-  }
-  
-  /* ========== NAVEGAÇÃO EXTRA (nav-pills) ========== */
-  .nav.nav-pills.nav-stacked li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 18px;
-    background: #faf9f7;
-    color: #040404;
-    padding: 12px 64.2px;
-    border-left: 4px solid transparent;
-    text-decoration: none;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
-    width: 100%;
-  }
-  
-  .nav.nav-pills.nav-stacked li a:hover {
-    background: #4a4b8b;
-    color: #faf9f7;
-  }
-  
+}
+
+.bio-graph-heading input[type="text"]:focus,
+.bio-graph-heading input[type="password"]:focus {
+  border-color: #4a4b8b; /* cor da borda ao focar */
+  outline: none; /* remove contorno padrão */
+  box-shadow: 0 0 5px rgba(74, 75, 139, 0.15); /* sombra ao focar */
+}
+
+.aula-card {
+  border-radius: 12px; /* bordas arredondadas */
+  transition: all 0.3s ease-in-out; /* transição suave */
+  background-color: #ffffff; /* fundo branco */
+  border: 1px solid #e0e0e0; /* borda cinza clara */
+}
+
+.aula-card:hover {
+  transform: translateY(-4px); /* eleva o card ao passar o mouse */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* sombra ao passar o mouse */
+}
+
+.aula-card .card-title a {
+  color: #2c2c2c; /* cor do texto do título */
+  font-weight: 600; /* peso da fonte do título */
+}
+
+.aula-card .card-title a:hover {
+  text-decoration: underline; /* sublinha ao passar o mouse */
+}
+
+.progresso-usuario {
+  margin: 0; /* remove margens */
+  padding: 25px; /* espaço interno */
+  background-color: #ffffff; /* fundo branco */
+  border-radius: 12px; /* bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* sombra suave */
+  max-width: 700px; /* largura máxima */
+  margin-right: auto; /* centraliza à esquerda */
+}
+
+.progresso-usuario h4 {
+  margin-bottom: 15px; /* espaço abaixo do título */
+  font-size: 20px; /* tamanho da fonte do título */
+  color: #333333; /* cor do texto do título */
+}
+
+.progress {
+  height: 22px; /* altura da barra de progresso */
+  background-color: #e0e0e0; /* fundo da barra de progresso */
+  border-radius: 12px; /* bordas arredondadas */
+  overflow: hidden; /* oculta o excesso */
+}
+
+.progress-bar {
+  height: 100%; /* altura total da barra de progresso */
+  background-color: #4a4b8b; /* cor da barra de progresso */
+  line-height: 22px; /* alinha texto verticalmente */
+  color: white; /* cor do texto na barra */
+  text-align: center; /* centraliza texto */
+  font-weight: 600; /* peso da fonte */
+  transition: width 0.4s ease-in-out; /* transição suave para a largura */
+}
+
+.navegacao-historico {
+  padding: 25px; /* espaço interno */
+  background-color: #ffffff; /* fundo branco */
+  border-radius: 12px; /* bordas arredondadas */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* sombra suave */
+  max-width: 700px; /* largura máxima */
+  margin-right: auto; /* centraliza à esquerda */
+}
+
+.navegacao-historico h4 {
+  font-size: 20px; /* tamanho da fonte do título */
+  margin-bottom: 15px; /* espaço abaixo do título */
+  color: #333333; /* cor do texto do título */
+}
+
+.navegacao-historico ul {
+  list-style-type: none; /* remove marcadores da lista */
+  padding-left: 0; /* remove padding da lista */
+}
+
+.navegacao-historico ul li {
+  padding: 8px 0; /* espaço interno do item da lista */
+  border-bottom: 1px solid #eaeaea; /* borda abaixo do item */
+  font-size: 16px; /* tamanho da fonte do item */
+  color: #555; /* cor do texto do item */
+}
+
+.navegacao-historico ul li:last-child {
+  border-bottom: none; /* remove borda do último item */
+}
+
+.nav.nav-pills.nav-stacked li a {
+  display: flex; /* usa flexbox para layout */
+  align-items: center; /* alinha verticalmente */
+  justify-content: center; /* centraliza horizontalmente */
+  gap: 8px; /* espaço entre os elementos */
+  font-size: 18px; /* tamanho da fonte do link background: #faf9f7; /* fundo do link */
+  color: #040404; /* cor do texto do link */
+  padding: 12px 64.2px; /* espaço interno do link */
+  border-left: 4px solid transparent; /* borda esquerda transparente */
+  text-decoration: none; /* remove sublinhado */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* sombra suave */
+  transition: all 0.3s ease-in-out; /* transição suave para o link */
+}
+
+.nav.nav-pills.nav-stacked li a:hover {
+  background: #4a4b8b; /* cor de fundo ao passar o mouse */
+  color: #faf9f7; /* cor do texto ao passar o mouse */
+}

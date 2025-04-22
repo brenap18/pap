@@ -2,31 +2,34 @@
 session_start();
 include 'db_conn.php';
 
+// se não estiver logado, redireciona
 if (!isset($_SESSION['id'])) {
     header("Location: login.php");
     exit();
 }
 
+//envia o formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_SESSION['id'];
     $name = trim($_POST['name']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
+    // se a senha foi escrita mas não coincide com a confirmação
     if (!empty($password) && $password !== $confirm_password) {
         $_SESSION['msg'] = "As senhas não coincidem.";
         $_SESSION['msg_type'] = "danger";
-        header("Location: editar.php"); // Nome correto do arquivo de edição
+        header("Location: editar.php");
         exit();
     }
 
-    // Atualiza nome
+    // atualiza o nome
     $sql = "UPDATE users SET name = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("si", $name, $id);
     $stmt->execute();
 
-    // Atualiza senha se fornecida
+    // atualiza a senha se for fornecida
     if (!empty($password)) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
         $sql = "UPDATE users SET password = ? WHERE id = ?";
@@ -35,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
     }
 
-    // Destroi sessão atual e força novo login
+    // termina a sessão e pede novo login
     session_unset();
     session_destroy();
 

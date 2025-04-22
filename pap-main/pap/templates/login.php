@@ -1,8 +1,5 @@
 <?php
 session_start();
-
-// Redireciona se o usuário já estiver logado
-// Redirect only if the user is logged in AND NOT trying to go to register.php
 if (isset($_SESSION['id'])) {
   header("Location: utilizador.php");
   exit();
@@ -27,7 +24,7 @@ if (isset($_SESSION['id'])) {
 </head>
 
 <body>
-  <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
+<nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
     <div class="container">
       <div class="navbar-brand">
         <a href="index.php">
@@ -44,6 +41,17 @@ if (isset($_SESSION['id'])) {
           <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.php">Contactos</a></li>
         </ul>
+        <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+    		<?php
+    		if (isset($_SESSION['id'])) {
+        		// User is logged in -> Direct to user page
+        		echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		} else {
+        		// User is NOT logged in -> Direct to login/register page
+        		echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		}
+    		?>
+		</ul>
       </div>
     </div>
   </nav>

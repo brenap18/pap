@@ -1,18 +1,18 @@
 <?php
-// Credenciais do banco de dados
-$host = 'localhost'; // Endereço do servidor
-$user = 'root'; // Usuário do banco de dados
-$password = ''; // Senha do banco de dados
-$dbname = 'test_db'; // Nome do banco de dados
+// dados da base de dados
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$dbname = 'test_db';
 
-// Cria a conexão com o banco de dados
+// liga à base de dados
 $conn = new mysqli($host, $user, $password, $dbname);
 
-// Verifica se houve erro na conexão
+// verifica se falhou
 if ($conn->connect_error) {
-    die("Erro ao conectar ao banco de dados: " . $conn->connect_error);
+    die("Erro na conexão: " . $conn->connect_error);
 }
 
-// Configura o charset para UTF-8 para garantir a correta leitura de caracteres especiais
+// define charset para aceitar acentos, etc.
 $conn->set_charset("utf8");
 ?>

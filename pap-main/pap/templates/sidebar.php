@@ -1,7 +1,7 @@
 <?php
-session_start();
+session_start(); // inicia a sessão
 
-// Subcategorias com aulas agrupadas
+// subcategorias com aulas agrupadas
 $aulas_categorias = [
     'Introdução' => [
         'aulas.php' => 'Aulas',
@@ -31,12 +31,14 @@ $aulas_categorias = [
     ],
 ];
 
-// Página atual
-$current_page = basename($_SERVER['PHP_SELF']);
+// página atual (nome do arquivo da página)
+$current_page = basename($_SERVER['PHP_SELF']); // obtém o nome da página atual
 
-// Progresso
-$total_aulas = 14;
+// progresso do curso
+$total_aulas = 14; // número total de aulas
+// conta quantas aulas o usuário já visitou, se o histórico de aulas está salvo na sessão
 $aulas_visitadas = isset($_SESSION['historico_aulas']) ? count(array_unique($_SESSION['historico_aulas'])) : 0;
+// calcula o progresso em percentual
 $progresso = ($aulas_visitadas / $total_aulas) * 100;
 ?>
 
@@ -45,25 +47,28 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar</title>
+    <title>Sidebar de Aulas - Kiocode</title>
 </head>
 <body>
 
 <div class="aula-sidebar">
     <ul class="aula-sidebar-menu">
         <li class="aula-sidebar-progress">
-            <div class="progress mt-3" style="height: 10px;">
-                <div class="progress-bar bg-success" role="progressbar" style="width: <?= $progresso ?>%;" aria-valuenow="<?= $progresso ?>" aria-valuemin="0" aria-valuemax="100"></div>
+            <!-- barra de progresso -->
+            <div class="progress mt-3">
+                <div class="progress-bar" role="progressbar" style="width: <?= $progresso ?>%;" aria-valuenow="<?= $progresso ?>" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <small><?= round($progresso, 1) ?>% concluído</small>
         </li>
 
         <?php foreach ($aulas_categorias as $categoria => $aulas): ?>
+            <!-- lista as categorias de aulas -->
             <li class="submenu-toggle">
-                <span class="toggle-icon"></span> <?= $categoria ?>
+                <?= $categoria ?>
             </li>
             <ul class="submenu">
                 <?php foreach ($aulas as $file => $title): ?>
+                    <!-- lista as aulas dentro de cada categoria -->
                     <li class="aula-sidebar-item <?= $current_page === $file ? 'active' : '' ?>">
                         <a href="<?= $file ?>"><?= $title ?></a>
                     </li>
@@ -73,16 +78,17 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
     </ul>
 </div>
 
-<!-- JavaScript for Submenu Toggle -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    // adiciona funcionalidade de click
     document.querySelectorAll(".submenu-toggle").forEach(toggle => {
         toggle.addEventListener("click", function () {
             let submenu = this.nextElementSibling;
 
+            // alterna a visibilidade do submenu
             if (submenu && submenu.classList.contains("submenu")) {
-                submenu.classList.toggle("show"); // Toggle visibility class
-                this.classList.toggle("open"); // Toggle the icon change
+                submenu.classList.toggle("show");
+                this.classList.toggle("open");
             }
         });
     });

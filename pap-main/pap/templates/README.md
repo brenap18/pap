@@ -14,29 +14,36 @@ O **Kiocode** é uma plataforma educacional desenvolvida em PHP que permite aos 
 pap-main/
 ├── pap/
 │   ├── static/
-│   │   ├── images/    # Imagens do site
-│   │   ├── css/       # Ficheiros CSS
-│   │   ├── js/        # Scripts JavaScript
-│   │   ├── db/        # Base de dados
-│   │   ├── scss/      # Ficheiros SCSS para estilos
-│   ├── templates/     # Ficheiros HTML/PHP reutilizáveis
-│   ├── aula1.php      # Aula 1
-│   ├── aula2.php      # Aula 2
-│   ├── aula3.php      # Aula 3
-│   ├── ...            # Outras aulas
-│   ├── aulas.php      # Listagem de todas as aulas
-│   ├── contact.php    # Página de contacto
-│   ├── contalog.php   # Processa login
-│   ├── contareg.php   # Processa registo
-│   ├── db_conn.php    # Conexão com a base de dados
-│   ├── index.php      # Página inicial
-│   ├── login.php      # Formulário de login
-│   ├── logout.php     # Terminar sessão
-│   ├── register.php   # Formulário de registo
-│   ├── sidebar.php    # Barra lateral
-│   ├── sobre.php      # Página "Sobre"
-│   ├── track_progress.php # Cálculo da barra de progresso
-│   ├── utilizador.php # Perfil do utilizador
+│   │   ├── images/          # Imagens do site
+│   │   ├── css/             # Ficheiros CSS
+│   │   ├── js/              # Scripts JavaScript
+│   │   ├── db/              # Base de dados
+│   │   ├── scss/            # Ficheiros SCSS para estilos
+│   ├── templates/           # Ficheiros HTML/PHP reutilizáveis
+│   ├── atualizar_perfil.php # Atualiza dados do utilizador
+│   ├── aula1.php            # Aula 1
+│   ├── aula2.php            # Aula 2
+│   ├── aula3.php            # Aula 3
+│   ├── ...                  # Outras aulas
+│   ├── aulas.php            # Breve explicação do C++
+│   ├── come_conexao.php     # Dados
+│   ├── comentario.php       # Processa comentários
+│   ├── conexao_foto.php     # Processa fotos de perfil
+│   ├── confirmar_login.php  # Processa o re-login caso os dados da conta mude
+│   ├── contact.php          # Página de contacto
+│   ├── contalog.php         # Processa login
+│   ├── contareg.php         # Processa registo
+│   ├── db_conn.php          # Conexão com a base de dados
+│   ├── editar.php           # Edição de Perfil
+│   ├── foto_perfil.php      # Altera a foto através dos ficheiros do computador
+│   ├── index.php            # Página inicial
+│   ├── login.php            # Formulário de login
+│   ├── logout.php           # Terminar sessão
+│   ├── register.php         # Formulário de registo
+│   ├── sidebar.php          # Barra lateral
+│   ├── sobre.php            # Página "Sobre"
+│   ├── track_progress.php   # Cálculo da barra de progresso
+│   ├── utilizador.php       # Perfil do utilizador
 ```
 
 ## Instalação e Execução

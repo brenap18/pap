@@ -1,111 +1,107 @@
 .comentarios-section {
-    background-color: #f5f5f5;
-    margin: 50px 20% 50px 250px;  /* Isso move a seção para a direita */
-    border-radius: 12px;
-    padding: 30px;
-    width: 85%;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5; /* fundo da seção de comentários */
+    margin: 50px 20% 50px 250px; /* move a seção para a direita */
+    border-radius: 12px; /* bordas arredondadas */
+    padding: 30px; /* espaço interno */
+    width: 85%; /* largura da seção */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* sombra suave */
 }
 
-
-/* Título */
+/* título da seção de comentários */
 .comentarios-section h3 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
+    font-size: 24px; /* tamanho da fonte do título */
+    margin-bottom: 20px; /* espaço abaixo do título */
+    text-align: center; /* centraliza o título */
+    color: #333; /* cor do texto do título */
 }
 
-/* Formulário */
+/* estilo do formulário de comentários */
 .comentarios-section textarea {
-    width: 100%;
-    padding: 15px;
-    font-size: 15px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    resize: vertical;
-    background-color: #fff;
-    transition: border-color 0.3s ease;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 100%; /* largura total */
+    padding: 15px; /* espaço interno */
+    font-size: 15px; /* tamanho da fonte */
+    border: 1px solid #ccc; /* borda cinza clara */
+    border-radius: 10px; /* bordas arredondadas */
+    resize: vertical; /* permite redimensionar verticalmente */
+    background-color: #fff; /* fundo branco */
+    transition: border-color 0.3s ease; /* transição suave para a cor da borda */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* fonte do texto */
 }
 
 .comentarios-section textarea:focus {
-    border-color: #6c63ff;
-    outline: none;
+    border-color: #6c63ff; /* cor da borda ao focar */
+    outline: none; /* remove contorno padrão */
 }
 
 .comentarios-section button {
-    margin-top: 15px;
-    padding: 12px 25px;
-    background-color: #4a4b8b;
-    color: white;
-    font-size: 15px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    margin-top: 15px; /* espaço acima do botão */
+    padding: 12px 25px; /* espaço interno do botão */
+    background-color: #4a4b8b; /* cor de fundo do botão */
+    color: white; /* cor do texto do botão */
+    font-size: 15px; /* tamanho da fonte do botão */
+    border: none; /* sem borda */
+    border-radius: 10px; /* bordas arredondadas */
+    cursor: pointer; /* cursor de ponteiro */
+    transition: all 0.3s ease; /* transição suave para o botão */
 }
 
 .comentarios-section button:hover {
-    background-color: #fff;
-    color: black;
-
+    background-color: #fff; /* cor de fundo ao passar o mouse */
+    color: black; /* cor do texto ao passar o mouse */
 }
 
-/* Lista de Comentários */
+/* lista de comentários */
 .comentarios-list {
-    margin-top: 30px;
+    margin-top: 30px; /* espaço acima da lista de comentários */
 }
 
-/* Comentário individual */
+/* estilo de um comentário individual */
 .comentarios-list .comentario {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column; /* Organiza o conteúdo em colunas */
+    background-color: #fff; /* fundo branco para o comentário */
+    padding: 20px; /* espaço interno do comentário */
+    border-radius: 12px; /* bordas arredondadas */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* sombra suave */
+    margin-bottom: 20px; /* espaço abaixo do comentário */
+    display: flex; /* usa flexbox para organizar o conteúdo */
+    flex-direction: column; /* organiza o conteúdo em colunas */
 }
 
-/* Linha de cabeçalho (foto, nome, data) */
+/* linha de cabeçalho (foto, nome, data) */
 .comentarios-list .comentario .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    display: flex; /* usa flexbox para alinhar */
+    align-items: center; /* alinha verticalmente */
+    margin-bottom: 10px; /* espaço abaixo do cabeçalho */
 }
 
-/* Foto do usuário */
+/* foto do usuário */
 .comentarios-list .comentario .header img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
+    width: 50px; /* largura da foto */
+    height: 50px; /* altura da foto */
+    border-radius: 50%; /* bordas arredondadas para formato circular */
+    object-fit: cover; /* cobre o espaço da imagem */
+    margin-right: 10px; /* espaço à direita da foto */
 }
 
-/* Nome e Data */
+/* nome e data do usuário */
 .comentarios-list .comentario .header .user-info {
-    display: flex;
-    flex-direction: column;
+    display: flex; /* usa flexbox para alinhar */
+    flex-direction: column; /* organiza em colunas */
 }
 
 .comentarios-list .comentario .header .user-info h1 {
-    font-size: 14px;
-    color: #333;
-    margin: 0;
+    font-size: 14px; /* tamanho da fonte do nome */
+    color: #333; /* cor do texto do nome */
+    margin: 0; /* remove margem padrão */
 }
 
 .comentarios-list .comentario .header .user-info small {
-    font-size: 12px;
-    color: #777;
+    font-size: 12px; /* tamanho da fonte da data */
+    color: #777; /* cor do texto da data */
 }
 
-/* Comentário */
+/* conteúdo do comentário */
 .comentarios-list .comentario .conteudo {
-    font-size: 16px;
-    color: #444;
-    margin-top: 10px;
+    font-size: 16px; /* tamanho da fonte do conteúdo */
+    color: #444; /* cor do texto do conteúdo */
+    margin-top: 10px; /* espaço acima do conteúdo */
 }
-
-

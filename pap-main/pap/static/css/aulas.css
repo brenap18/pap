@@ -1,564 +1,603 @@
-/* Sidebar Styling */
+/* estilo da barra lateral */
 .aula-sidebar {
-    position: fixed; /* Fixed position to keep it on screen */
-    top: 0; /* Ensure it sticks to the top */
-    left: 0; /* Align to the left */
-    height: 100%; /* Sidebar should take full height */
-    width: 250px; /* Sidebar width */
-    background-color: #1a1a1a; /* Darker background */
-    font-size: 13px; /* Larger font size for readability */
-    color: #ccc; /* Text color */
-    overflow-y: auto; /* Enable vertical scrolling */
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4); /* Soft shadow effect */
-    z-index: 999; /* Ensure sidebar stays above content */
-    padding-right: 10px; /* Optional: prevent scrollbars from overlapping content */
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: fixed; /* posição fixa para manter na tela */
+    top: 0; /* cola ao topo */
+    left: 0; /* alinha à esquerda */
+    height: 100%; /* altura total da barra lateral */
+    width: 250px; /* largura da barra lateral */
+    background-color: #1a1a1a; /* fundo escuro */
+    font-size: 13px; /* tamanho da fonte para melhor leitura */
+    color: #ccc; /* cor do texto */
+    overflow-y: auto; /* permite rolagem vertical */
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4); /* sombra suave */
+    z-index: 999; /* garante que a barra lateral fique acima do conteúdo */
+    padding-right: 10px; /* evita que as barras de rolagem sobreponham o conteúdo */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* transição suave */
 }
 
-
-/* Custom scrollbar */
+/* estilo do scrollbar personalizado */
 .aula-sidebar::-webkit-scrollbar {
-    width: 8px; /* Slightly wider scrollbar */
-    background-color: #333; /* Dark background for the scrollbar track */
+    width: 8px; /* scrollbar um pouco mais larga */
+    background-color: #333; /* fundo escuro para a trilha do scrollbar */
 }
 
 .aula-sidebar::-webkit-scrollbar-thumb {
-    background-color: #4a4a4a; /* Dark gray color */
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
+    background-color: #4a4a4a; /* cor cinza escuro */
+    border-radius: 10px; /* bordas arredondadas */
+    transition: background-color 0.3s ease; /* transição suave */
 }
 
 .aula-sidebar::-webkit-scrollbar-thumb:hover {
-    background-color: #999; /* Lighter gray when hovering */
+    background-color: #999; /* cor mais clara ao passar o mouse */
 }
 
 .aula-sidebar::-webkit-scrollbar-track {
-    background-color: #2a2a2a; /* Darker background for the track */
+    background-color: #2a2a2a; /* fundo mais escuro para a trilha */
 }
 
-/* Sidebar Menu Styling */
+/* estilo do menu da barra lateral */
 .aula-sidebar a {
-    display: block;
-    padding: 15px 20px; /* Increased padding for larger click area */
-    color: #ccc;
-    text-decoration: none;
-    font-size: 1.2em; /* Larger font size */
-    transition: background-color 0.3s ease, color 0.3s ease;
-    text-align: left; /* Align text to the left in each link */
+    display: block; /* exibe como bloco */
+    padding: 15px 20px; /* aumento do padding para área de clique maior */
+    color: #ccc; /* cor do texto */
+    text-decoration: none; /* remove sublinhado */
+    font-size: 1.2em; /* tamanho da fonte maior */
+    transition: background-color 0.3s ease, color 0.3s ease; /* transição suave */
+    text-align: left; /* alinha o texto à esquerda */
 }
 
 .aula-sidebar a:hover {
-    background-color: #333;
-    color: #fff;
-    border-radius: 5px;
+    background-color: #333; /* fundo escuro ao passar o mouse */
+    color: #fff; /* cor do texto ao passar o mouse */
+    border-radius: 5px; /* bordas arredondadas */
 }
 
 .aula-sidebar a.active {
-    background-color: #2a2a2a;
-    color: #fff;
+    background-color: #2a2a2a; /* fundo ativo */
+    color: #fff; /* cor do texto ativo */
 }
 
-/* Submenu Styles */
+/* estilos do submenu */
 .submenu {
-    display: none;
-    background-color: #444;
-    padding-left: 20px;
-    border-left: 4px solid #666; /* Stylish left border */
-    margin-top: 5px;
+    display: none; /* oculta por padrão */
+    background-color: #444; /* fundo do submenu */
+    padding-left: 20px; /* espaço à esquerda */
+    border-left: 4px solid #666; /* borda esquerda estilosa */
+    margin-top: 5px; /* espaço acima do submenu */
 }
 
 .submenu a {
-    padding: 15px 20px; /* Increased padding for submenu items */
-    color: #bbb;
-    font-size: 1.2em;
-    transition: color 0.3s ease;
+    padding: 15px 20px; /* aumento do padding para itens do submenu */
+    color: #bbb; /* cor do texto do submenu */
+    font-size: 1.2em; /* tamanho da fonte do submenu */
+    transition: color 0.3s ease; /* transição suave */
 }
 
 .submenu a:hover {
-    color: #fff;
+    color: #fff; /* cor do texto ao passar o mouse */
 }
 
 .submenu.show {
-    display: block;
+    display: block; /* exibe o submenu quando ativo */
 }
 
-/* Submenu toggle button */
+/* botão de alternância do submenu */
 .submenu-toggle {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    color: #ccc;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 1.2em;
+    display: flex; /* usa flexbox para alinhar */
+    align-items: center; /* alinha verticalmente */
+    padding: 15px 20px; /* padding do botão */
+    color: #ccc; /* cor do texto */
+    cursor: pointer; /* cursor de ponteiro */
+    transition: background-color 0.3s ease; /* transição suave */
+    font-size: 1.2em; /* tamanho da fonte */
 }
 
 .submenu-toggle:hover {
-    background-color: #333;
-    color: #fff;
-    border-radius: 5px;
+    background-color: #333; /* fundo escuro ao passar o mouse */
+    color: #fff; /* cor do texto ao passar o mouse */
+    border-radius: 5px; /* bordas arredondadas */
 }
 
 .submenu-toggle::before {
-    content: '▶';
-    margin-right: 10px;
-    font-size: 1.4em;
+    content: '▶'; /* ícone de seta para a direita */
+    margin-right: 10px; /* espaço à direita do ícone */
+    font-size: 1.4em; /* tamanho do ícone */
 }
 
 .submenu-toggle.open::before {
-    content: '▼';
+    content: '▼'; /* ícone de seta para baixo quando aberto */
 }
 
-/* Adjustments for mobile */
+/* ajustes para dispositivos móveis */
 @media (max-width: 768px) {
-    /* Mobile View - Sidebar off-screen */
+    /* visualização móvel - barra lateral fora da tela */
     .aula-sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease-in-out, background-color 0.3s ease;
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 250px;
-        z-index: 999;
+        transform: translateX(-100%); /* move a barra lateral para fora da tela */
+        transition: transform 0.3s ease-in-out, background-color 0.3s ease; /* transição suave */
+        position: fixed; /* mantém a posição fixa */
+        top: 0; /* cola ao topo */
+        left: 0; /* alinha à esquerda */
+        height: 100%; /* altura total */
+        width: 250px; /* largura da barra lateral */
+        z-index: 999; /* garante que fique acima do conteúdo */
     }
 
     .sidebar-toggle-btn {
-        display: block;
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 9999;
-        background-color: #333;
-        color: white;
-        padding: 10px;
-        border: none;
-        cursor: pointer;
-        font-size: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        transition: background-color 0.3s ease;
+        display: block; /* exibe o botão de alternância */
+        position: absolute; /* posição absoluta */
+        top: 20px; /* distância do topo */
+        left: 20px; /* distância da esquerda */
+        z-index: 9999; /* acima de outros elementos */
+        background-color: #333; /* fundo escuro */
+        color: white; /* cor do texto */
+        padding: 10px; /* padding do botão */
+        border: none; /* sem borda */
+        cursor: pointer; /* cursor de ponteiro */
+        font-size: 20px; /* tamanho da fonte */
+        border-radius: 5px; /* bordas arredondadas */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* sombra suave */
+        transition: background-color 0.3s ease; /* transição suave */
     }
 
     .sidebar-toggle-btn:hover {
-        background-color: #444;
+        background-color: #444; /* fundo mais claro ao passar o mouse */
     }
 
-    /* Sidebar when it's open */
+    /* barra lateral quando está aberta */
     .aula-sidebar.show {
-        transform: translateX(0);
+        transform: translateX(0); /* traz a barra lateral para a tela */
     }
 
     .main-content {
-        transition: margin-left 0.3s ease-in-out;
+        transition: margin-left 0.3s ease-in-out; /* transição suave para o conteúdo principal */
     }
 
     .aula-sidebar.show + .main-content {
-        margin-left: 250px;
+        margin-left: 250px; /* espaço para a barra lateral */
     }
 }
 
-/* Footer Styling */
+/* estilo do rodapé */
 footer {
-    background-color: #222;
-    color: #ccc;
-    padding: 20px;
-    text-align: center;
-    font-size: 1.2em;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    background-color: #222; /* fundo do rodapé */
+    color: #ccc; /* cor do texto */
+    padding: 20px; /* padding do rodapé */
+    text-align: center; /* centraliza o texto */
+    font-size: 1.2em; /* tamanho da fonte */
+    position: relative; /* posição relativa */
+    bottom: 0; /* cola ao fundo */
+    width: 100%; /* largura total */
 }
 
-/* Main Content Styling */
+/* estilo do conteúdo principal */
 .main-content {
-    margin-left: 250px; /* Space for the sidebar */
-    padding: 20px;
+    margin-left: 250px; /* espaço para a barra lateral */
+    padding: 20px; /* padding do conteúdo */
 }
 
-/* Make the sidebar adjust dynamically based on footer position */
+/* ajuste dinâmico da altura da barra lateral */
 .aula-sidebar {
-    position: fixed; /* Keep it fixed */
-    top: 0;
-    left: 0;
-    width: 250px;
-    background-color: #1a1a1a;
-    font-size: 13px;
-    color: #ccc;
-    z-index: 9999;
-    overflow-y: auto;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s ease, background-color 0.3s ease;
-    padding-right: 10px;
+    max-height: 100vh; /* altura máxima */
 }
 
-/* Add dynamic height adjustment for sidebar */
-.aula-sidebar {
-    max-height: 100vh; /* Default height */
-}
-
-/* Sidebar Adjustments based on Footer */
+/* ajustes da barra lateral com base na posição do rodapé */
 .aula-sidebar.fixed {
-    position: sticky;
-    top: 0;
-    bottom: 0;
-    overflow-y: auto;
-    height: 100vh;
-    max-height: calc(100vh - 60px); /* Adjust based on footer height */
+    position: sticky; /* posição fixa ao rolar */
+    top: 0; /* cola ao topo */
+    bottom: 0; /* cola ao fundo */
+    overflow-y: auto; /* permite rolagem vertical */
+    height: 100vh; /* altura total */
+    max-height: calc(100vh - 60px); /* ajusta com base na altura do rodapé */
 }
 
-
-
-
-.aulas-section-h3{
-
-    margin-top: 50px;
+/* estilo das seções de aulas */
+.aulas-section-h3 {
+    margin-top: 50px; /* espaço acima do título */
 }
 
-.aulas-section-h4{
-
-    margin-top: 30px;
-    margin-bottom: 20px;
-    position: relative; /* Position relative to allow absolute positioning of the pseudo-element */
+.aulas-section-h4 {
+    margin-top: 30px; /* espaço acima do subtítulo */
+    margin-bottom: 20px; /* espaço abaixo do subtítulo */
+    position: relative; /* permite posicionamento absoluto do pseudo-elemento */
 }
+
 .aulas-section-h4::before {
-    content: ""; /* Required for pseudo-elements */
-    position: absolute; /* Position it absolutely */
-    left: -20px; /* Adjust this value to position the line */
-    top: 50%; /* Center the line vertically */
-    transform: translateY(-50%); /* Adjust for vertical centering */
-    width: 5px; /* Width of the line */
-    height: 100%; /* Height of the line */
-    background-color: #4b4a8b; /* Color of the line */
+    content: ""; /* necessário para pseudo-elementos */
+    position: absolute; /* posiciona absolutamente */
+    left: -20px; /* ajusta a posição à esquerda */
+    top: 50%; /* centraliza verticalmente */
+    transform: translateY(-50%); /* ajusta para centralização vertical */
+    width: 5px; /* largura da linha */
+    height: 100%; /* altura da linha */
+    background-color: #4b4a8b; /* cor da linha */
 }
 
 .aulas-main-content {
-    margin-left: 15%;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 2px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    flex: 1 1 70%; /* Makes the content take up 70% of the available width */
-  }
+    margin-left: 15%; /* espaço à esquerda */
+    padding: 30px; /* padding do conteúdo */
+    background-color: #fff; /* fundo branco */
+    border-radius: 2px; /* bordas arredondadas */
+    box-shadow : 0 4px 10px rgba(0,0,0,0.1); /* sombra suave */
+    flex: 1 1 70%; /* faz o conteúdo ocupar 70% da largura disponível */
+}
 
-  @media (max-width: 767px) {
-    /* Para dispositivos móveis, faz o conteúdo ocupar 100% da largura */
+/* ajustes para dispositivos móveis */
+@media (max-width: 767px) {
+    /* para dispositivos móveis, faz o conteúdo ocupar 100% da largura */
     .aulas-main-content {
-        flex: 1 1 100%; /* O conteúdo ocupa 100% da largura */
-        padding: 20px; /* Diminui o padding */
-        margin: 0; /* Remove margem para garantir que o conteúdo ocupe toda a tela */
+        flex: 1 1 100%; /* conteúdo ocupa 100% da largura */
+        padding: 20px; /* diminui o padding */
+        margin: 0; /* remove margem para garantir que o conteúdo ocupe toda a tela */
     }
 }
 
-
 .code-section {
-    background-color: #1e1e1e;    /* Dark background for the box */
-    color: #dcdcdc;                /* Light text color for readability */
-    border-radius: 8px;            /* Rounded corners */
-    padding: 15px;                 /* Padding inside the box */
-    overflow: auto;                /* Makes the box scrollable if content overflows */
-    max-width: 60%;                /* Max width of the box */
-    margin-top: 50px;              /* Space above the box */
-    margin-right: 15px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  /* Subtle shadow */
-    text-align: left;             /* Ensure text is aligned left */
-    display: block;              /* Ensures block-level behavior */
+    background-color: #1e1e1e; /* fundo escuro para a caixa */
+    color: #dcdcdc; /* cor do texto clara para legibilidade */
+    border-radius: 8px; /* bordas arredondadas */
+    padding: 15px; /* padding dentro da caixa */
+    overflow: auto; /* torna a caixa rolável se o conteúdo transbordar */
+    max-width: 60%; /* largura máxima da caixa */
+    margin-top: 50px; /* espaço acima da caixa */
+    margin-right: 15px; /* espaço à direita */
+    margin-bottom: 30px; /* espaço abaixo da caixa */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* sombra suave */
+    text-align: left; /* garante que o texto esteja alinhado à esquerda */
+    display: block; /* garante comportamento de bloco */
 }
 
-/* Ensure the code itself looks good */
+/* estilo do código dentro da seção de código */
 .code-section code {
-    font-family: 'Courier New', Courier, monospace;  /* Monospace font for code */
-    font-size: 14px;                                /* Slightly smaller font size */
-    white-space: pre-wrap;                          /* Preserve whitespace and wrap lines */
-    word-wrap: break-word;                          /* Break long words to avoid horizontal scroll */
-    display: block;                                 /* Ensures code block takes up full width */
+    font-family: 'Courier New', Courier, monospace; /* fonte monoespaçada para código */
+    font-size: 14px; /* tamanho da fonte ligeiramente menor */
+    white-space: pre-wrap; /* preserva espaços em branco e quebra linhas */
+    word-wrap: break-word; /* quebra palavras longas para evitar rolagem horizontal */
+    display: block; /* garante que o bloco de código ocupe toda a largura */
 }
 
-/* Add scroll when code content overflows */
+/* adiciona rolagem quando o conteúdo do código transborda */
 .code-section pre {
-    max-height: 200px;  /* Set a max height */
-    overflow-y: auto;   /* Enable vertical scrolling */
-    margin: 0;          /* Remove any margin */
-    text-align: left;   /* Ensure text inside pre is aligned left */
+    max-height: 200px; /* define uma altura máxima */
+    overflow-y: auto; /* habilita rolagem vertical */
+    margin: 0; /* remove qualquer margem */
+    text-align: left; /* garante que o texto dentro do pre esteja alinhado à esquerda */
 }
-
-
 
 hr {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,.3);
-    border-bottom: 1px solid rgba(0,0,0,.08);
-    margin: 2.5em 0;
-    position: relative;
-  }
+    border: none; /* remove bordas padrão */
+    border-top: 1px solid rgba(255,255,255,.3); /* borda superior */
+    border-bottom: 1px solid rgba(0,0,0,.08); /* borda inferior */
+    margin: 2.5em 0; /* espaço acima e abaixo */
+    position: relative; /* posição relativa */
+}
 
-/* CSS Styles */
+/* estilos gerais */
 p {
-    font-size: 15px; /* Set the font size for paragraphs */
-    margin-top: 2%;
-    line-height: 1.5; /* Optional: Adjust line height for better readability */
+    font-size: 15px; /* define o tamanho da fonte para parágrafos */
+    margin-top: 2%; /* espaço acima do parágrafo */
+    line-height: 1.5; /* ajusta a altura da linha para melhor legibilidade */
 }
 
 ul li {
-    margin-top: 40px;
-    font-size: 16px; /* Set the font size for list items, slightly larger than paragraphs */
-    line-height: 1.5; /* Optional: Adjust line height for better readability */
+    margin-top: 40px; /* espaço acima dos itens da lista */
+    font-size: 16px; /* define o tamanho da fonte para itens da lista */
+    line-height: 1.5; /* ajusta a altura da linha para melhor legibilidade */
 }
 
-/* Estilo para o container dos botões de navegação */
+/* estilo para o container dos botões de navegação */
 .aulas-buttons-container {
-    margin-bottom: 25px; /* Distância do conteúdo até o rodapé */
+    margin-bottom: 25px; /* distância do conteúdo até o rodapé */
 }
 
-/* Alinhar os botões ao centro */
+/* alinha os botões ao centro */
 .aulas-buttons-container .container {
-    display: flex;
-    justify-content: center;
-    gap: 85.5%; /* Espaço entre os botões */
-    padding-top: 20px; /* Adiciona um pequeno padding no topo */
+    display: flex; /* usa flexbox para alinhar */
+    justify-content: center; /* centraliza os botões */
+    gap: 85.5%; /* espaço entre os botões */
+    padding-top: 20px; /* adiciona um pequeno padding no topo */
 }
 
-/* Estilo dos botões */
+/* estilo dos botões */
 .aulas-buttons-container a {
-    width: 60%; /* Largura padrão para desktop */
-    height: 40px;
-    background: #4b4a8b; /* Cor de fundo padrão */
-    border: 1px solid #232240; /* Borda */
-    margin-left: 1%; /* Ajuste conforme necessário */
-    margin-top: 20px; /* Ajuste para um espaço acima do botão */
-    font-size: 120.5%;
-    border-radius: 6.25%;
-    cursor: pointer;
-    text-decoration: none; /* Remove o sublinhado padrão */
-    color: white; /* Define a cor do texto */
-    display: inline-block; /* Para que o padding e a largura funcionem corretamente */
-    transition: background-color 0.4s ease, color 0.4s ease; /* Transição suave */
+    width: 60%; /* largura padrão para desktop */
+    height: 40px; /* altura do botão */
+    background: #4b4a8b; /* cor de fundo padrão */
+    border: 1px solid #232240; /* borda */
+    margin-left: 1%; /* ajuste conforme necessário */
+    margin-top: 20px; /* espaço acima do botão */
+    font-size: 120.5%; /* tamanho da fonte */
+    border-radius: 6.25%; /* bordas arredondadas */
+    cursor: pointer; /* cursor de ponteiro */
+    text-decoration: none; /* remove sublinhado padrão */
+    color: white; /* define a cor do texto */
+    display: inline-block; /* para que o padding e a largura funcionem corretamente */
+ transition: background-color 0.4s ease, color 0.4s ease; /* transição suave */
 }
 
-/* Efeito de hover */
+/* efeito de hover */
 .aulas-buttons-container a:hover {
-    background-color: #ffffff; /* Cor de fundo ao passar o mouse */
-    color: rgb(0, 0, 0); /* Cor do texto ao passar o mouse */
+    background-color: #ffffff; /* cor de fundo ao passar o mouse */
+    color: rgb(0, 0, 0); /* cor do texto ao passar o mouse */
 }
 
-/* Efeito de active (quando clicado) */
+/* efeito de active (quando clicado) */
 .aulas-buttons-container a:active {
-    background-color: #4b4a8b; /* Mantém a cor de fundo ao clicar */
-    color: white; /* Mantém a cor do texto ao clicar */
+    background-color: #4b4a8b; /* mantém a cor de fundo ao clicar */
+    color: white; /* mantém a cor do texto ao clicar */
 }
 
-/* Efeito de visited (após clicar) */
+/* efeito de visited (após clicar) */
 .aulas-buttons-container a:visited {
-    background-color: #4b4a8b; /* Mantém a cor de fundo após visitar */
-    color: white; /* Mantém a cor do texto após visitar */
+    background-color: #4b4a8b; /* mantém a cor de fundo após visitar */
+    color: white; /* mantém a cor do texto após visitar */
 }
 
-/* Efeito de foco (opcional) */
+/* efeito de foco (opcional) */
 .aulas-buttons-container a:focus {
-    outline: none; /* Remove o contorno padrão */
-    box-shadow: 0 0 0 2px rgba(75, 74, 139, 0.5); /* Adiciona um efeito de foco */
+    outline: none; /* remove o contorno padrão */
+    box-shadow: 0 0 0 2px rgba(75, 74, 139, 0.5); /* adiciona um efeito de foco */
 }
 
-
-
-
-
-
-
-  .aulas.footer-section {
-    padding: 45px 0;
-    background: #1f1f1f; 
+/* estilo da seção de rodapé */
+.aulas.footer-section {
+    padding: 45px 0; /* padding do rodapé */
+    background: #1f1f1f; /* fundo do rodapé */
 }
 
 .aulas.footer-section .relative {
-    position: relative; 
+    position: relative; /* posição relativa */
 }
 
 .aulas.footer-section a { 
-    text-decoration: none;
-    color: #e1e1e1;
-    -webkit-transition: .3s all ease;
-    -o-transition: .3s all ease;
-    transition: .3s all ease; 
+    text-decoration: none; /* remove sublinhado */
+    color: #e1e1e1; /* cor do texto */
+    transition: .3s all ease; /* transição suave */
 }
 
 .aulas.footer-section a:hover {
-    color: rgb(109, 109, 109); 
+    color: rgb(109, 109, 109); /* cor ao passar o mouse */
 }
 
 .aulas.footer-section .aulas-footer-logo-wrap .aulas-footer-logo {
-    margin-left: 25%;
-    font-size: 50px;
-    font-weight: 500;
-    text-decoration: none;
-    color: #4b4a8b; 
-    margin-bottom: 40px; /* Increased space below the logo */
+    margin-left: 25%; /* espaço à esquerda do logo */
+    font-size: 50px; /* tamanho do logo */
+    font-weight: 500; /* peso da fonte */
+    text-decoration: none; /* remove sublinhado */
+    color: #4b4a8b; /* cor do logo */
+    margin-bottom: 40px; /* espaço abaixo do logo */
 }
 
 .aulas.footer-section .aulas-subscription-form h3 {
-    margin-left: 160px; /* Remove left margin */
-    text-align: left;
-    margin-bottom: 20px; /* Spacing below the title */
-    font-size: 30px;
-    font-weight: 500;
-    color: #4b4a8b; 
-    margin-top: 25px; /* Spacing above the "Contacte-nos" title */
-    white-space: nowrap; /* Prevent wrapping */
+    margin-left: 160px; /* remove margem à esquerda */
+    text-align: left; /* alinha o texto à esquerda */
+    margin-bottom: 20px; /* espaço abaixo do título */
+    font-size: 30px; /* tamanho da fonte */
+    font-weight: 500; /* peso da fonte */
+    color: #4b4a8b; /* cor do título */
+    margin-top: 25px; /* espaço acima do título */
+    white-space: nowrap; /* evita quebra de linha */
 }
 
 .aulas.footer-section .aulas-footer-email {
-    margin-left: 166px; /* Remove left margin */
-    color: #e1e1e1; /* Text color */
-    font-size: 18px; /* Font size */
-    margin-top: 10px;
-    margin-bottom: 4px; /* Spacing above and below the email */
+    margin-left: 166px; /* remove margem à esquerda */
+    color: #e1e1e1; /* cor do texto */
+    font-size: 18px; /* tamanho da fonte */
+    margin-top: 10px; /* espaço acima do email */
+    margin-bottom: 4px; /* espaço abaixo do email */
 }
 
 .aulas.footer-section .btn.btn-primary.aulas-btn {  
-    
-    width: 60%; /* Default width for desktop */
-    height: 40px;
-    background: #4b4a8b;
-    border-color: #232240;
-    margin-left: 165px; /* Remove left margin */
-    margin-top: 20px; /* Adjust for space above the button */
-    font-size: 120.5%;
-    border-radius: 6.25%;
-    cursor: pointer;
-    transition: 0.4s ease;
-    /* Center the text vertically */
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 60%; /* largura padrão para desktop */
+    height: 40px; /* altura do botão */
+    background: #4b4a8b; /* cor de fundo */
+    border-color: #232240; /* cor da borda */
+    margin-left: 165px; /* remove margem à esquerda */
+    margin-top: 20px; /* espaço acima do botão */
+    font-size: 120.5%; /* tamanho da fonte */
+    border-radius: 6.25%; /* bordas arredondadas */
+    cursor: pointer; /* cursor de ponteiro */
+    transition: 0.4s ease; /* transição suave */
+    display: flex; /* usa flexbox para centralizar o texto */
+    align-items: center; /* alinha verticalmente */
+    justify-content: center; /* centraliza horizontalmente */
 }
 
 .aulas.footer-section .btn.btn-primary.aulas-btn:hover {
-    background: #ffffff;
-    color: #000000;
+    background: #ffffff; /* cor de fundo ao passar o mouse */
+    color: #000000; /* cor do texto ao passar o mouse */
 }
 
 .aulas.footer-section .aulas-subscription-form {
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 2;
-    margin-top: 100px; 
+    margin-bottom: 40px; /* espaço abaixo do formulário */
+    position: relative; /* posição relativa */
+    z-index: 2; /* acima de outros elementos */
+    margin-top: 100px; /* espaço acima do formulário */
 }
 
 @media (min-width: 992px) {
     .aulas.footer-section .aulas-subscription-form {
-        margin-top: 0px;
-        margin-bottom: 80px; 
+        margin-top: 0px ; /* remove espaço acima do formulário */
+        margin-bottom: 80px; /* espaço abaixo do formulário */
     } 
 }
 
 .aulas.footer-section .aulas-subscription-form .form-control {
-    height: 50px;
-    border-radius: 10px;
-    font-family: "Inter", sans-serif; 
+    height: 50px; /* altura do campo de entrada */
+    border-radius: 10px; /* bordas arredondadas */
+    font-family: "Inter", sans-serif; /* fonte do campo de entrada */
 }
 
 .aulas.footer-section .aulas-subscription-form .form-control:active, 
 .aulas.footer-section .aulas-subscription-form .form-control:focus {
-    outline: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-color: #4b4a8b;
-    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2); 
+    outline: none; /* remove contorno padrão */
+    box-shadow: none; /* remove sombra padrão */
+    border-color: #4b4a8b; /* cor da borda ao focar */
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2); /* sombra ao focar */
 }
 
 .aulas.footer-section .aulas-subscription-form .form-control::-webkit-input-placeholder {
-    font-size: 14px; 
+    font-size: 14px; /* tamanho do texto do placeholder */
 }
 
 .aulas.footer-section .aulas-subscription-form .form-control::-moz-placeholder {
-    font-size: 14px; 
+    font-size: 14px; /* tamanho do texto do placeholder */
 }
 
 .aulas.footer-section .aulas-subscription-form .form-control:-ms-input-placeholder {
-    font-size: 14px; 
+    font-size: 14px; /* tamanho do texto do placeholder */
 }
 
 .aulas.footer-section .aulas-subscription-form .form-control:-moz-placeholder {
-    font-size: 14px; 
+    font-size: 14px; /* tamanho do texto do placeholder */
 }
 
 .aulas.footer-section .aulas-subscription-form .btn {
-    border-radius: 10px !important; 
+    border-radius: 10px !important; /* bordas arredondadas */
 }
 
 .aulas.footer-section .sofa-img {
-    position: absolute;
-    top: -200px;
-    z-index: 1;
-    right: 0; 
+    position: absolute; /* posição absoluta */
+    top: -200px; /* distância do topo */
+    z-index: 1; /* acima de outros elementos */
+    right: 0; /* alinha à direita */
 }
 
 .aulas.footer-section .sofa-img img {
-    max-width: 380px; 
+    max-width: 380px; /* largura máxima da imagem */
 }
 
 .aulas.footer-section .aulas-links-wrap {
-    padding-bottom: -1000px;
-    padding-top: 10px;
-    padding-left: 30px;
-    display: flex; /* Aligns links horizontally */
-    justify-content: left; /* Centers links */
+    padding-bottom: -1000px; /* ajuste de padding */
+    padding-top: 10px; /* espaço acima */
+    padding-left: 30px; /* espaço à esquerda */
+    display: flex; /* alinha links horizontalmente */
+    justify-content: left; /* alinha à esquerda */
 }
 
 .aulas.footer-section .aulas-links-wrap .aulas-list {
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
+    margin: 0; /* remove margem padrão */
+    padding: 0; /* remove padding padrão */
 }
 
 .aulas.footer-section .aulas-links-wrap .aulas-list li {
-    margin-bottom: 100px; /* Space between list items */
-    margin-left: 166px; /* Remove left margin */
+    margin-bottom: 100px; /* espaço entre itens da lista */
+    margin-left: 166px; /* remove margem à esquerda */
 }
 
 .aulas.footer-section .aulas-links-wrap .aulas-list li a {
-
-    color: #e1e1e1; /* Link color */
-    font-size: 16px; /* Font size for links */
+    color: #e1e1e1; /* cor dos links */
+    font-size: 16px; /* tamanho da fonte dos links */
 }
 
 .aulas.footer-section .aulas-links-wrap .aulas-list li a:hover {
-    color: #4b4a8b; /* Hover color for links */
+    color: #4b4a8b; /* cor ao passar o mouse */
 }
 
 .aulas.footer-section .aulas-copyright {
-    padding: 20px 0; /* Padding for copyright section */
-    color: #e1e1e1; /* Copyright text color */
+    padding: 20px 0; /* padding para a seção de copyright */
+    color: #e1e1e1; /* cor do texto de copyright */
 }
 
 .aulas.footer-section .aulas-copyright-text {
-    font-size: 14px; /* Font size for copyright text */
+    font-size: 14px; /* tamanho da fonte de copyright */
 }
 
 .aulas.footer-section .aulas-terms {
-    margin: 0; /* Removes default margin */
-    padding: 0; /* Removes default padding */
+    margin: 0; /* remove margem padrão */
+    padding: 0; /* remove padding padrão */
 }
 
 .aulas.footer-section .aulas-terms li {
-    display: inline; /* Displays terms as inline */
-    margin-right: 20px; /* Space between terms */
+    display: inline; /* exibe termos em linha */
+    margin-right: 20px; /* espaço entre termos */
 }
 
 .aulas.footer-section .aulas-terms li a {
-    color: #e1e1e1; /* Link color for terms */
+    color: #e1e1e1; /* cor dos links de termos */
 }
 
 .aulas.footer-section .aulas-terms li a:hover {
-    color: #4b4a8b; /* Hover color for terms links */
+    color: #4b4a8b; /* cor ao passar o mouse nos links de termos */
 }
 
-  
+/* responsividade - barra lateral para telas pequenas */
+@media (max-width: 768px) {
+    /* barra lateral oculta por padrão e ativada ao clicar no botão */
+    .aula-sidebar {
+        transform: translateX(-100%); /* move a barra lateral para fora da tela */
+    }
+    .aula-sidebar.show {
+        transform: translateX(0); /* traz a barra lateral para a tela */
+    }
 
+    /* ajusta o conteúdo principal quando a barra lateral está visível */
+    .main-content {
+        margin-left: 0; /* remove margem do conteúdo */
+        transition: margin-left  0.3s ease-in-out; /* transição suave */
+    }
 
-  
+    .aula-sidebar.show + .main-content {
+        margin-left: 250px; /* espaço para a barra lateral */
+    }
+}
 
+/* para tablets e dispositivos de tamanhos intermediários */
+@media (max-width: 1024px) {
+    .aula-sidebar {
+        width: 220px; /* barra lateral um pouco mais estreita */
+    }
 
+    .aula-sidebar a {
+        font-size: 1em; /* tamanho da fonte menor para melhor legibilidade */
+    }
 
+    .submenu-toggle {
+        font-size: 1.1em; /* ajusta o tamanho do texto do botão de submenu */
+    }
 
+    .code-section {
+        max-width: 90%; /* limita o tamanho máximo da seção de código */
+    }
+}
+
+/* responsividade - ajustes gerais */
+@media (max-width: 480px) {
+    /* ajuste de fontes para dispositivos muito pequenos */
+    p {
+        font-size: 13px; /* tamanho da fonte para parágrafos */
+    }
+
+    ul li {
+        font-size: 14px; /* tamanho da fonte para itens da lista */
+    }
+
+    .aula-sidebar {
+        width: 200px; /* barra lateral mais estreita */
+    }
+
+    .aula-sidebar a {
+        font-size: 1em; /* texto menor para melhor leitura */
+    }
+
+    .code-section {
+        max-width: 100%; /* expande o código até a largura total */
+    }
+
+    .aulas-buttons-container .container {
+        gap: 5%; /* mais espaço entre os botões */
+    }
+
+    .aulas-buttons-container a {
+        width: 100%; /* botões ocupam 100% da tela */
+        font-size: 16px; /* tamanho da fonte dos botões */
+    }
+
+    footer {
+        font-size: 12px; /* tamanho da fonte ajustado para o rodapé */
+    }
+
+    /* ajustes no logo do rodapé */
+    .aulas.footer-section .aulas-footer-logo {
+        font-size: 24px; /* tamanho do logo no rodapé */
+    }
+}

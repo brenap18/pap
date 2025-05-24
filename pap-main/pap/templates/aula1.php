@@ -92,9 +92,9 @@ $comentarios = getComentarios($conn, $aula_id);
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
           <?php
           if (isset($_SESSION['id'])) {
-              echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+              echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
           } else {
-              echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+              echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
           }
           ?>
         </ul>
@@ -112,36 +112,39 @@ $comentarios = getComentarios($conn, $aula_id);
         <div id="sidebar-container"></div>
 
         <!-- Sidebar Toggle Button -->
-        <button class="sidebar-toggle-btn">></button>
 
         <!-- Main Content -->
         <div class="aulas-main-content">
-          <h2 class="aulas-section-title">Instalar um compilador</h2>
+          <!-- Table of Contents (TOC) -->
+            <div class="toc-container">
+              <ul style="list-style: none; padding: 0; font-size: 14px;">
+                <li style="margin-bottom: 8px; margin-top: 2px"><a href="#compilador">Instalar um compilador</a></li>
+                <li style="margin-bottom: 8px;"><a href="#escolha">Escolher um compilador</a></li>
+              </ul>
+            </div>
+          <h2 id=compilador class="aulas-section-title">Instalar um compilador</h2>
           <h3 class="aulas-section-h3">- O que é um compilador?</h3>
-          <p>
+          <p style="max-width: 80%;">
             Um compilador é um programa que traduz o código-fonte escrito em uma linguagem de programação (como C++) para código de máquina que o computador pode executar. 
             Sem um compilador, não é possível executar programas escritos em C++.
           </p>
           <hr>
+          
 
           <!-- Content Row -->
           <div class="aulas-row my-5">
               <div class="aulas-col-6 aulas-col-md-6">
                   <div class="aulas-feature">
-                    <h2 class="aulas-section-title">Escolher um compilador</h2>
-                    <p>
+                    <h2 id=escolha class="aulas-section-title">Escolher um compilador</h2>
+                    <p style="max-width: 80%;">
                       Existem várias opções de compiladores disponíveis. Mas as mais comuns são:
                     </p>
                     <ul>
-                      <li>GCC (GNU Compiler Collection): Um compilador amplamente utilizado em sistemas Linux e disponível para Windows através do MinGW.</li>
-                      <li>Clang: Um compilador moderno que faz parte do projeto LLVM, disponível em várias plataformas, incluindo Windows, Linux e macOS.</li>
-                      <li>MSVC (Microsoft Visual C++): O compilador da Microsoft, que vem integrado no Visual Studio.</li>
+                      <li style="max-width: 80%;">GCC (GNU Compiler Collection): Um compilador amplamente utilizado em sistemas Linux e disponível para Windows através do MinGW.</li>
+                      <li style="max-width: 80%;">Clang: Um compilador moderno que faz parte do projeto LLVM, disponível em várias plataformas, incluindo Windows, Linux e macOS.</li>
+                      <li style="max-width: 80%;">MSVC (Microsoft Visual C++): O compilador da Microsoft, que vem integrado no Visual Studio.</li>
                     </ul>
-                    <p>Neste caso, iremos usar o GCC</p>
-                    <h4 class="aulas-section-h4">• Instalação do MinGW &#40;Uma distribuição do GCC para Windows&#41;</h4>
-                    <ul>
-                      <!-- Lista de instruções da instalação do MinGW aqui... -->
-                    </ul>
+                    <p style="max-width: 80%;">Neste caso, iremos usar o GCC</p>
                     <div class="aulas-buttons-container">
                       <div class="container text-center">
                         <a class="btn btn-secondary me-3" href="aulas.php">Anterior</a>
@@ -189,10 +192,9 @@ $comentarios = getComentarios($conn, $aula_id);
     <div class="container relative aulas">
       <div class="row g-5 mb-5">
         <div class="col-lg-4">
-          <div class="mb-4 aulas-footer-logo-wrap"><a href="#" class="aulas-footer-logo">Kiocode</a></div>
           <div class="row">
             <div class="col-lg-8">
-              <div class="aulas-subscription-form">
+              <div class="aulas-subscription-form" style="margin-left: -110px;">
                 <h3 class="d-flex align-items-center">
                   <span class="me-1"><img src="http://localhost/pap-main/pap/static/images//envelope-outline.svg" alt="Image" class="img-fluid"></span>
                   <span>Contacte-nos</span>
@@ -208,13 +210,16 @@ $comentarios = getComentarios($conn, $aula_id);
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
           <div class="col-lg-6" style="text-align: left; padding-left: 60px; padding-top: 30px;">
-            <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto;">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
-          </div>
+    <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto; color: white !important;">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
+    </p>
+</div>
+
   
           <div class="col-lg-6 text-center text-lg-end" style="text-align: right; padding-right: 30px;">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
               <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
-              <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
+              <li style="max-width: 80%;"><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
             </ul>	
           </div>
         </div>
@@ -224,38 +229,49 @@ $comentarios = getComentarios($conn, $aula_id);
 
 
   <script>
-    // espera o conteúdo carregar
-    document.addEventListener("DOMContentLoaded", function() {
-    
-      // carrega o sidebar dinamicamente
-      fetch('sidebar.php')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('sidebar-container').innerHTML = data;
-        
-          // ativa os botões de submenu depois do sidebar ser carregado
-          document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
-            toggleButton.addEventListener('click', function () {
-              const submenu = toggleButton.nextElementSibling;
-              submenu.classList.toggle('show'); // mostra/esconde submenu
-              toggleButton.classList.toggle('open'); // muda o ícone do botão
-            });
+  // Espera o conteúdo carregar
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Carrega o sidebar dinamicamente
+    fetch('sidebar.php')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+
+        // Ativa os botões de submenu depois do sidebar ser carregado
+        document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
+          toggleButton.addEventListener('click', function () {
+            const submenu = toggleButton.nextElementSibling;
+            submenu.classList.toggle('show'); // mostra/esconde submenu
+            toggleButton.classList.toggle('open'); // muda o ícone do botão
           });
-        
-          // ativa o botão para mostrar/esconder o sidebar
-          const toggleBtn = document.querySelector('.sidebar-toggle-btn');
-          const sidebar = document.querySelector('.aula-sidebar');
-        
-          if (toggleBtn) {
-            toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('show');
-            });
-          }
-        })
-        .catch(error => console.error('Erro ao carregar o sidebar:', error));
+        });
+
+        // Ativa o botão para mostrar/esconder o sidebar
+        const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+        const sidebar = document.querySelector('.aula-sidebar');
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('show');
+          });
+        }
+      })
+      .catch(error => console.error('Erro ao carregar o sidebar:', error));
+
+    // Scroll suave para os links da Tabela de Conteúdo
+    document.querySelectorAll('.toc-container a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
 
-  </script>
+  });
+</script>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>

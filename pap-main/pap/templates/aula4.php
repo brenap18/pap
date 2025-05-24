@@ -76,7 +76,7 @@ $comentarios = getComentarios($conn, $aula_id);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 
 
-  <title>Aula 5 - Kiocode</title>
+  <title>Aula 4 - Kiocode</title>
 </head>
 
 <body>
@@ -113,10 +113,10 @@ $comentarios = getComentarios($conn, $aula_id);
     		<?php
     		if (isset($_SESSION['id'])) {
         		// User is logged in -> Direct to user page
-        		echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
     		} else {
         		// User is NOT logged in -> Direct to login/register page
-        		echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
     		}
     		?>
 		</ul>
@@ -133,14 +133,20 @@ $comentarios = getComentarios($conn, $aula_id);
             <!-- Sidebar Container -->
             <div id="sidebar-container"></div>
 
-            <!-- Sidebar Toggle Button -->
-            <button class="sidebar-toggle-btn">></button>
 
             <!-- Main Content -->
             <div class="aulas-main-content">
+              <!-- Table of Contents (TOC) -->
+              <div class="toc-container">
+                <ul style="list-style: none; padding: 0; font-size: 14px;">
+                  <li style="margin-bottom: 8px; margin-top: 2px"><a href="#dados">O que são tipos de dados?</a></li>
+                  <li style="margin-bottom: 8px;"><a href="#primitivos">Dados Primitivos</a></li>
+                  <li style="margin-bottom: 8px;"><a href="#compostos">Dados Compostos</a></li>
+                </ul>
+              </div>
                 <h2 class="aulas-section-title">Tipos de dados</h2>
-                <h3 class="aulas-section-h3">- O que são tipos de dados?</h3>
-                <p>
+                <h3 id=dados class="aulas-section-h3">- O que são tipos de dados?</h3>
+                <p style="max-width: 80%;">
                     Os tipos de dados em C++ definem a natureza dos dados que podem ser armazenados em variáveis. 
                     Eles determinam o tamanho, o intervalo e as operações que podem ser realizadas sobre esses dados.
                 </p>
@@ -150,14 +156,14 @@ $comentarios = getComentarios($conn, $aula_id);
                 <div class="aulas-row my-5">
                     <div class="aulas-col-6 aulas-col-md-6">
                         <div class="aulas-feature">
-                            <h4 class="aulas-section-h4">Dados Primitivos</h4>
-                            <p>Os dados primitivos em C++ são tipos de dados básicos e pré-definidos pela linguagem, que representam valores simples. Estes tipos não são compostos e têm uma representação direta na memória.</p>
+                            <h4 id=primitivos class="aulas-section-h4">Dados Primitivos</h4>
+                            <p style="max-width: 80%;">Os dados primitivos em C++ são tipos de dados básicos e pré-definidos pela linguagem, que representam valores simples. Estes tipos não são compostos e têm uma representação direta na memória.</p>
                             <ul>
-                                <li><strong>int:</strong> Utilizado para armazenar números inteiros.</li>
-                                <li><strong>float:</strong> Usado para números de ponto flutuante com precisão simples.</li>
-                                <li><strong>double:</strong> Para números de ponto flutuante com precisão dupla.</li>
-                                <li><strong>char:</strong> Representa um único caractere.</li>
-                                <li><strong>bool:</strong> Armazena valores booleanos, verdadeiro ou falso.</li>
+                                <li style="max-width: 80%;"><strong>int:</strong> Utilizado para armazenar números inteiros.</li>
+                                <li style="max-width: 80%;"><strong>float:</strong> Usado para números de ponto flutuante com precisão simples.</li>
+                                <li style="max-width: 80%;"><strong>double:</strong> Para números de ponto flutuante com precisão dupla.</li>
+                                <li style="max-width: 80%;"><strong>char:</strong> Representa um único caractere.</li>
+                                <li style="max-width: 80%;"><strong>bool:</strong> Armazena valores booleanos, verdadeiro ou falso.</li>
                             </ul>
                         </div>
                     </div>
@@ -178,14 +184,14 @@ bool estudante = true; // Armazena um valor booleano (verdadeiro ou falso)
                 <div class="aulas-row my-5">
                     <div class="aulas-col-6 aulas-col-md-6">
                         <div class="aulas-feature">
-                            <h4 class="aulas-section-h4">Dados Compostos</h4>
-                            <p>Os dados compostos em C++ são formados pela combinação de tipos primitivos e podem armazenar múltiplos valores. Eles permitem a criação de tipos de dados personalizados, facilitando a organização e manipulação de informações.</p>
+                            <h4 id=compostos class="aulas-section-h4">Dados Compostos</h4>
+                            <p style="max-width: 80%;">Os dados compostos em C++ são formados pela combinação de tipos primitivos e podem armazenar múltiplos valores. Eles permitem a criação de tipos de dados personalizados, facilitando a organização e manipulação de informações.</p>
                             <ul>
-                                <li><strong>Arrays:</strong> Uma coleção de elementos do mesmo tipo.</li>
-                                <li><strong>Structs:</strong> Agrupam diferentes tipos de dados sob um mesmo nome.</li>
-                                <li><strong>Classes:</strong> Semelhantes às structs, mas com encapsulamento e herança.</li>
-                                <li><strong>Unions:</strong> Permitem armazenar diferentes tipos de dados na mesma posição de memória.</li>
-                                <li><strong>Enumerations (enum):</strong> Conjunto de constantes nomeadas.</li>
+                                <li style="max-width: 80%;"><strong>Arrays:</strong> Uma coleção de elementos do mesmo tipo.</li>
+                                <li style="max-width: 80%;"><strong>Structs:</strong> Agrupam diferentes tipos de dados sob um mesmo nome.</li>
+                                <li style="max-width: 80%;"><strong>Classes:</strong> Semelhantes às structs, mas com encapsulamento e herança.</li>
+                                <li style="max-width: 80%;"><strong>Unions:</strong> Permitem armazenar diferentes tipos de dados na mesma posição de memória.</li>
+                                <li style="max-width: 80%;"><strong>Enumerations (enum):</strong> Conjunto de constantes nomeadas.</li>
                             </ul>
                         </div>
                     </div>
@@ -260,10 +266,10 @@ enum DiaDaSemana {Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado};
     <div class="container relative aulas">
       <div class="row g-5 mb-5">
         <div class="col-lg-4">
-          <div class="mb-4 aulas-footer-logo-wrap"><a href="#" class="aulas-footer-logo">Kiocode</a></div>
           <div class="row">
             <div class="col-lg-8">
-              <div class="aulas-subscription-form">
+                                            <div class="aulas-subscription-form" style="margin-left: -110px;">
+
                 <h3 class="d-flex align-items-center">
                   <span class="me-1"><img src="http://localhost/pap-main/pap/static/images//envelope-outline.svg" alt="Image" class="img-fluid"></span>
                   <span>Contacte-nos</span>
@@ -279,13 +285,15 @@ enum DiaDaSemana {Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado};
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
           <div class="col-lg-6" style="text-align: left; padding-left: 60px; padding-top: 30px;">
-            <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto;">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
-          </div>
+    <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto; color: white !important;">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
+    </p>
+</div>
   
           <div class="col-lg-6 text-center text-lg-end" style="text-align: right; padding-right: 30px;">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
               <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
-              <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
+              <li style="max-width: 80%;"><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
             </ul>	
           </div>
         </div>
@@ -295,38 +303,49 @@ enum DiaDaSemana {Domingo, Segunda, Terça, Quarta, Quinta, Sexta, Sábado};
 
 
   <script>
-    // espera o conteúdo carregar
-    document.addEventListener("DOMContentLoaded", function() {
-    
-      // carrega o sidebar dinamicamente
-      fetch('sidebar.php')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('sidebar-container').innerHTML = data;
-        
-          // ativa os botões de submenu depois do sidebar ser carregado
-          document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
-            toggleButton.addEventListener('click', function () {
-              const submenu = toggleButton.nextElementSibling;
-              submenu.classList.toggle('show'); // mostra/esconde submenu
-              toggleButton.classList.toggle('open'); // muda o ícone do botão
-            });
+  // Espera o conteúdo carregar
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Carrega o sidebar dinamicamente
+    fetch('sidebar.php')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+
+        // Ativa os botões de submenu depois do sidebar ser carregado
+        document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
+          toggleButton.addEventListener('click', function () {
+            const submenu = toggleButton.nextElementSibling;
+            submenu.classList.toggle('show'); // mostra/esconde submenu
+            toggleButton.classList.toggle('open'); // muda o ícone do botão
           });
-        
-          // ativa o botão para mostrar/esconder o sidebar
-          const toggleBtn = document.querySelector('.sidebar-toggle-btn');
-          const sidebar = document.querySelector('.aula-sidebar');
-        
-          if (toggleBtn) {
-            toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('show');
-            });
-          }
-        })
-        .catch(error => console.error('Erro ao carregar o sidebar:', error));
+        });
+
+        // Ativa o botão para mostrar/esconder o sidebar
+        const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+        const sidebar = document.querySelector('.aula-sidebar');
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('show');
+          });
+        }
+      })
+      .catch(error => console.error('Erro ao carregar o sidebar:', error));
+
+    // Scroll suave para os links da Tabela de Conteúdo
+    document.querySelectorAll('.toc-container a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
-    
-  </script>
+
+  });
+</script>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>

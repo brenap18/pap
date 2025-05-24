@@ -27,7 +27,6 @@ $pageNames = [
     'aula11.php' => '🔁 Funções Recursivas',
     'aula12.php' => '📊 Arrays',
     'aula13.php' => '📚 Classes',
-    'aula14.php' => '🔧 Estruturas (struct)',
 ];
 
 // cálculo do progresso baseado no histórico de aulas
@@ -86,74 +85,151 @@ $historico = array_reverse($_SESSION['historico_aulas']);
   </nav>
 
   <div class="container mt-5">
-    <h1>Olá, <?php echo $_SESSION['name']; ?></h1> <!-- exibe o nome do usuário -->
+    <h1>Olá, <?php echo $_SESSION['name']; ?></h1>
     <p>Esta é a sua página de utilizador.</p>
 
-    <div class="row profile-container">
-      <div class="profile-nav col-md-3">
-        <div class="panel">
-          <div class="user-heading round">
-            <a>
-                <!-- verifica se existe uma foto de perfil atualizada -->
-                <img src="<?php echo isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : 'https://bootdey.com/img/Content/avatar/avatar3.png'; ?>" 
-                     alt="Foto de Perfil" class="rounded-circle" width="120" height="120" style="object-fit: cover;">
-            </a>
-            <h1><?php echo $_SESSION['name']; ?></h1> <!-- exibe o nome novamente -->
-          </div>
-          <ul class="nav nav-pills nav-stacked" style="width: 550px;">
-            <li><a href="editar.php" style="display: block; width: 100%; padding: 12px 75.7px;"><i class="fa fa-edit"></i> Editar perfil</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="profile-info col-md-9">
-        <div class="panel">
-          <div class="bio-graph-heading">
-            <h5><i class="fa fa-history"></i> Histórico das Aulas:</h5> <!-- título do histórico -->
-
-            <div class="row g-3">
-              <?php
-              if (!empty($_SESSION['historico_aulas'])) {
-                  // se o histórico de aulas não estiver vazio, exibe as aulas visitadas
-                  foreach ($historico as $page) {
-                      $pageName = $pageNames[$page] ?? ucfirst(str_replace('.php', '', $page)); // obtém o nome legível da aula
-                      echo "
-                      <div class='col-md-6'>
-                        <div class='card aula-card shadow-sm h-100'>
-                          <div class='card-body d-flex align-items-center'>
-                            <div class='me-3' style='font-size: 1.5rem;'>📘</div>
-                            <div>
-                              <h5 class='card-title mb-1'>
-                                <a href='$page' class='text-decoration-none text-dark'>$pageName</a>
-                              </h5>
-                              <p class='card-text'><small class='text-muted'>Aula visitada recentemente</small></p>
-                            </div>
-                          </div>
+    <div class="row gutters-sm">
+        <!-- Left Column (Profile Card) -->
+        <div class="col-md-4 mb-3">
+            <div class="card profile-card-custom">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="<?php echo isset($_SESSION['foto_perfil']) ? $_SESSION['foto_perfil'] : 'https://bootdey.com/img/Content/avatar/avatar3.png'; ?>" 
+                             alt="Foto de Perfil" class="rounded-circle" width="150" height="150" style="object-fit: cover; border: 4px solid #4a4b8b;">
+                        <div class="mt-3">
+                            <h4><?php echo $_SESSION['name']; ?></h4>
+                            <a href="editar.php" class="btn btn-primary">Editar Perfil</a>
                         </div>
-                      </div>";
-                  }
-              } else {
-                  // se o histórico estiver vazio, exibe uma mensagem
-                  echo "<p class='text-muted'>Nenhuma aula visitada ainda.</p>";
-              }
-              ?>
+                    </div>
+                </div>
             </div>
-
-            <div class="progress mt-4">
-              <!-- barra de progresso -->
-              <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $progresso; ?>%;" aria-valuenow="<?php echo $progresso; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+            
+            <!-- Progress Card -->
+            <div class="card mb-3 profile-card-custom">
+                <div class="card-body">
+                    <h5 class="d-flex align-items-center mb-3">
+                        <i class="fa fa-tasks mr-2"></i>Progresso das Aulas
+                    </h5>
+                    <div class="progress mb-3" style="height: 10px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: <?php echo $progresso; ?>%;" 
+                             aria-valuenow="<?php echo $progresso; ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small><?php echo round($progresso, 2); ?>% do total de aulas concluídas.</small>
+                </div>
             </div>
-            <small><?php echo round($progresso, 2); ?>% do total de aulas concluídas.</small>
-          </div>
+                        <!-- Logout Button -->
+<div class="text-left mt-4">
+    <form action="logout.php" method="POST">
+        <button type="submit" class="btn btn-danger w-auto ms-3">Sair</button>
+    </form>
+</div>
 
-          <!-- botão de logout -->
-          <form action="logout.php" method="post" class="mt-3">
-            <button type="submit" class="btn btn-danger">Logout</button>
-          </form>
         </div>
-      </div>
+        
+        
+        <!-- Right Column (Your Content) -->
+        <div class="col-md-8">
+            <!-- User Details Card -->
+            <div class="card mb-3 profile-card-custom">
+                <div class="card-body">
+                    <h5 class="d-flex align-items-center mb-4">
+                        <i class="fa fa-user-circle mr-2"></i> Informações Pessoais
+                    </h5>
+              
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6 class="mb-0">Nome Completo</h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            <?php echo $_SESSION['name']; ?>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6 class="mb-0">Username</h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            <?php echo $_SESSION['user_name']; ?>
+                        </div>
+                    </div>
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <h6 class="mb-0">Palavra-passe</h6>
+                        </div>
+                        <div class="col-sm-8 text-secondary">
+                            <?php
+                            // Ensure the password exists in the session before displaying asterisks
+                            if (isset($_SESSION['password'])) {
+                                // Display asterisks matching the length of the password
+                                echo str_repeat('*', strlen($_SESSION['password']));
+                            } else {
+                                echo '*******'; // Handle if password is not set
+                            }
+                            ?>
+                        </div>
+                    </div>
+             
+                    
+                    <hr>
+                </div>
+            </div>
+
+            
+            
+            <!-- Your History Section -->
+            <?php
+$pageNames = [
+    'aula1.php' => '📘 Instalações',
+    'aula2.php' => '👨‍💻 Primeiro Programa',
+    'aula3.php' => '📝 Sintaxe Básica',
+    'aula4.php' => '🔢 Tipos de Dados',
+    'aula5.php' => '🔧 Variáveis e Constantes',
+    'aula6.php' => '➗ Operadores',
+    'aula7.php' => '📝 Estruturas Condicionais',
+    'aula8.php' => '🔄 Laços de Repetição',
+    'aula9.php' => '🔁 Funções Definidas',
+    'aula10.php' => '↩️ Parâmetros de Funções',
+    'aula11.php' => '🔁 Funções Recursivas',
+    'aula12.php' => '📊 Arrays',
+    'aula13.php' => '📚 Classes',
+    'aula14.php' => '🔧 Estruturas (struct)',
+];
+?>
+
+<div class="card mb-3 profile-card-custom">
+    <div class="card-body">
+        <h5 class="d-flex align-items-center mb-3">
+            <i class="fa fa-history mr-2"></i> Histórico das Aulas
+        </h5>
+        
+        <div class="row g-3">
+            <?php if (!empty($_SESSION['historico_aulas'])): ?>
+                <?php foreach ($_SESSION['historico_aulas'] as $page): ?>
+                    <?php $pageName = $pageNames[$page] ?? ucfirst(str_replace('.php', '', $page)); ?>
+                    <div class='col-md-6'>
+                        <div class='card aula-card shadow-sm h-100'>
+                            <div class='card-body d-flex align-items-center'>
+                                <div class='me-3' style='font-size: 1.5rem;'>📘</div>
+                                <div>
+                                    <h5 class='card-title mb-1'>
+                                        <a href="<?php echo $page; ?>" class='text-decoration-none text-dark'><?php echo $pageName; ?></a>
+                                    </h5>
+                                    <p class='card-text'><small class='text-muted'>Aula visitada recentemente</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p class='text-muted'>Nenhuma aula visitada ainda.</p>
+            <?php endif; ?>
+        </div>
     </div>
-  </div>
+</div>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>

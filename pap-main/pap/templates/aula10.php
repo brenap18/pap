@@ -11,7 +11,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario_id = $_SESSION['id'];
 $usuario_nome = $_SESSION['name'];
-$aula_id = 12;
+$aula_id = 9;
 
 // ligação à base de dados
 $servername = "localhost";
@@ -50,37 +50,41 @@ $comentarios = getComentarios($conn, $aula_id);
 ?>
 
 
+
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="favicon.png">
+
   <meta name="description" content="Site dedicado ao ensino de C++" />
   <meta name="keywords" content="bootstrap, bootstrap4, C++, programação" />
 
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../static/css/comentario.css" rel="stylesheet">
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
   <link href="../static/css/aulas.css" rel="stylesheet">
+  <link href="../static/css/comentario.css" rel="stylesheet">
+
 
   <!-- Link to Prism.js for syntax highlighting -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
 
-  <title>Aula 12 - Kiocode</title>
+
+  <title>Aula 10 - Kiocode</title>
 </head>
+
 <body>
 
   <!-- Início da Navegação -->
   <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
     <div class="container">
-      <div class="navbar-brand">
+    <div class="navbar-brand">
         <a href="index.php">
           <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
         </a>
@@ -88,92 +92,129 @@ $comentarios = getComentarios($conn, $aula_id);
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarsFurni">
         <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre nós</a></li>
-          <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.php">Contactos</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sobre.php">Sobre nós</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aulas.php">Aulas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.php">Contactos</a>
+          </li>
         </ul>
+
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-          <?php
-          if (isset($_SESSION['id'])) {
-              echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-          } else {
-              echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-          }
-          ?>
-        </ul>
+    		<?php
+    		if (isset($_SESSION['id'])) {
+        		// User is logged in -> Direct to user page
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		} else {
+        		// User is NOT logged in -> Direct to login/register page
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		}
+    		?>
+		</ul>
       </div>
     </div>
   </nav>
   <!-- Fim da Navegação -->
 
   <!-- Main Content Section -->
-  <div class="aula-content-section">
-    <div class="aula-container" style="margin-left: -40px;">
-      <div class="aula-content-wrapper">
-        <!-- Sidebar Container -->
-        <div id="sidebar-container"></div>
+<div class="aula-content-section">
+  <div class="aula-container" style="margin-left: -40px;">
+    <div class="aula-content-wrapper">
 
-        <!-- Main Content -->
-        <div class="aulas-main-content">
-          <!-- Table of Contents (TOC) -->
-    <div class="toc-container">
-      <ul style="list-style: none; padding: 0; font-size: 14px;">
-        <li style="margin-bottom: 8px; margin-top: 2px"><a href="#classe">O que são classes?</a></li>
-        <li style="margin-bottom: 8px;"><a href="#declaracao">Declarar uma classe</a></li>
-        <li style="margin-bottom: 8px;"><a href="#criar">Criar objetos</a></li>
-        <li style="margin-bottom: 8px;"><a href="#acesso">Acesso e Modificação de Atributos</a></li>
-      </ul>
-    </div>
-          <h2 id=classe class="aulas-section-title">Classes em C++</h2>
-          <h3 class="aulas-section-h3">- O que são Classes?</h3>
-          <p style="max-width: 80%;">Uma <strong>classe</strong> em C++ é um modelo que define atributos e comportamentos para criar objetos...</p>
-          <hr>
+      <div id="sidebar-container"></div>
 
-          <h4 id=declaracao class="aulas-section-h4">Declarar uma classe</h4>
-          <p style="max-width: 80%;">Para declarar uma classe, usamos a palavra-chave `class`...</p>
-          <div class="code-section">
-            <h3>Declarar classe</h3>
-            <pre><code class="language-c++">class Carro {
-    public:
-        std::string modelo;
-        int ano;
-        Carro(std::string m, int a) : modelo(m), ano(a) {}
-    };
-            </code></pre>
-          </div>
+      <div class="aulas-main-content">
 
-          <h4 id=criar class="aulas-section-h4">Criar objetos</h4>
-          <p style="max-width: 80%;">Uma vez definida a classe, é possível criar objetos a partir dela...</p>
-          <div class="code-section">
-            <h3>Objetos</h3>
-            <pre><code class="language-c++">Carro meuCarro("Fusca", 1970);</code></pre>
-          </div>
+        <!-- Table of Contents (TOC) -->
+        <div class="toc-container" style="margin-top: 40px;">
+          <ul style="list-style: none; padding: 0; font-size: 14px;">
+            <li style="margin-bottom: 8px; margin-top: 2px;"><a href="#parametros">O que são Parâmetros de Funções?</a></li>
+            <li style="margin-bottom: 8px;"><a href="#caracteristicas-param">Características dos Parâmetros</a></li>
+            <li style="margin-bottom: 8px;"><a href="#ex-param">Exemplo de Parâmetros</a></li>
+            <li style="margin-bottom: 8px;"><a href="#retorno">Retorno de Valores em Funções</a></li>
+            <li style="margin-bottom: 8px;"><a href="#ex-retorno">Exemplo Completo com Retorno</a></li>
+          </ul>
+        </div>
 
-          <h4 id=acesso class="aulas-section-h4">Acesso e Modificação de Atributos</h4>
-          <p style="max-width: 80%;">Os atributos de um objeto podem ser acedidos e modificados diretamente...</p>
-          <div class="code-section">
-            <h3>aaaa</h3>
-            <pre><code class="language-c++">std::cout << "Modelo: " << meuCarro.modelo << ", Ano: " << meuCarro.ano << std::endl;
-meuCarro.ano = 2020;</code></pre>
-          </div>
+        <h2 class="aulas-section-title">Parâmetros e Retorno de Valores em Funções C++</h2>
 
-          <!-- Botões "Próximo" e "Anterior" -->
-          <div class="aulas-buttons-container">
-            <div class="container text-center">
-              <a class="btn btn-secondary me-3" href="aula11.php">Anterior</a>
-              <a class="btn btn-secondary" href="aula13.php">Próximo</a>
-            </div>
+        <h3 id="parametros" class="aulas-section-h3">- O que são Parâmetros de Funções?</h3>
+        <p style="max-width: 80%;">
+          Parâmetros são variáveis que uma função recebe para realizar operações utilizando dados externos. Eles permitem que você envie informações para a função no momento em que ela é chamada, tornando o código mais flexível e reutilizável.
+        </p>
+        <hr>
+
+        <h2 id="caracteristicas-param" class="aulas-section-title">Características dos Parâmetros</h2>
+        <ul>
+          <li style="max-width: 80%;"><strong>Definição na Assinatura:</strong> São definidos entre parênteses na declaração da função.</li>
+          <li style="max-width: 80%;"><strong>Tipo e Nome:</strong> Cada parâmetro precisa de um tipo (ex: int, float) e um nome identificador.</li>
+          <li style="max-width: 80%;"><strong>Passagem de Valores:</strong> Normalmente os valores são passados por cópia (passagem por valor), ou podem ser passados por referência.</li>
+          <li style="max-width: 80%;"><strong>Quantidade Variável:</strong> Funções podem ter vários parâmetros separados por vírgulas, ou nenhum.</li>
+        </ul>
+
+        <h4 id="ex-param" class="aulas-section-h4">Exemplo de Parâmetros em Função</h4>
+        <p style="max-width: 80%;">
+          A função abaixo recebe dois números inteiros como parâmetros e imprime a soma deles na tela:
+        </p>
+        <div class="code-section">
+          <pre><code class="language-c++">
+// Função que recebe dois números e imprime sua soma
+void imprimeSoma(int x, int y) {
+    std::cout << "Soma: " << x + y << std::endl;
+}
+          </code></pre>
+        </div>
+
+        <h3 id="retorno" class="aulas-section-h3">- Retorno de Valores em Funções</h3>
+        <p style="max-width: 80%;">
+          Além de executar um conjunto de instruções, funções podem devolver (retornar) um valor para quem as chamou. Para isso, o tipo do valor retornado deve ser especificado na declaração da função.
+        </p>
+        <hr>
+
+        <h4 id="ex-retorno" class="aulas-section-h4">Exemplo Completo com Retorno</h4>
+        <p style="max-width: 80%;">
+          A função abaixo recebe dois números inteiros, multiplica-os e retorna o resultado para o programa principal:
+        </p>
+        <div class="code-section">
+          <pre><code class="language-c++">
+#include &lt;iostream&gt;
+
+int multiplica(int a, int b) {
+    return a * b; // Retorna o resultado da multiplicação
+}
+
+int main() {
+    int resultado = multiplica(5, 6); // Chama a função e armazena o retorno
+    std::cout << "Resultado da multiplicação: " << resultado << std::endl;
+    return 0;
+}
+          </code></pre>
+        </div>
+
+        <!-- Botões "Próximo" e "Anterior" -->
+        <div class="aulas-buttons-container">
+          <div class="container text-center">
+            <a class="btn btn-secondary me-3" href="aula9.php">Anterior</a>
+            <a class="btn btn-secondary" href="aula11.php">Próximo</a>
           </div>
         </div>
+
       </div>
     </div>
   </div>
-            
-  <!-- Comentários -->
-  <div class="comentarios-section">
+</div>
+
+<!-- Comentários -->
+<div class="comentarios-section">
     <h3>Comentários</h3>
     <form action="" method="POST">
         <div class="form-group">
@@ -200,8 +241,6 @@ meuCarro.ano = 2020;</code></pre>
         <?php endforeach; ?>
     </div>
 </div>
-
-
   <!-- Footer Section -->
   <footer class="footer-section aulas">
     <div class="container relative aulas">
@@ -241,6 +280,8 @@ meuCarro.ano = 2020;</code></pre>
       </div>
     </div>
   </footer>
+
+
   <script>
   // Espera o conteúdo carregar
   document.addEventListener("DOMContentLoaded", function () {
@@ -289,5 +330,8 @@ meuCarro.ano = 2020;</code></pre>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>
   <script src="js/custom.js"></script>
+
 </body>
 </html>
+
+

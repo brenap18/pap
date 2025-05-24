@@ -71,7 +71,7 @@ $comentarios = getComentarios($conn, $aula_id);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
 
-  <title>Aula 3 - Kiocode</title>
+  <title>Aula 2 - Kiocode</title>
 </head>
 <body>
   <!-- Início da Navegação -->
@@ -95,9 +95,9 @@ $comentarios = getComentarios($conn, $aula_id);
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
           <?php
           if (isset($_SESSION['id'])) {
-              echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+              echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
           } else {
-              echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+              echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
           }
           ?>
         </ul>
@@ -114,13 +114,17 @@ $comentarios = getComentarios($conn, $aula_id);
         <!-- Sidebar Container -->
         <div id="sidebar-container"></div>
 
-        <!-- Sidebar Toggle Button -->
-        <button class="sidebar-toggle-btn">></button>
 
         <!-- Main Content -->
         <div class="aulas-main-content">
-          <h2 class="aulas-section-title">Escrever "Hello World"</h2>
-          <p>
+          <!-- Table of Contents (TOC) -->
+            <div class="toc-container">
+              <ul style="list-style: none; padding: 0; font-size: 14px;">
+                <li style="margin-bottom: 8px; margin-top: 2px"><a href="#hello">Escrever "Hello World"</a></li>
+              </ul>
+            </div>
+          <h2 id=hello class="aulas-section-title">Escrever "Hello World"</h2>
+          <p style="max-width: 80%;">
             O "Hello, World!" é um programa simples que exibe "Hello, World!" na tela. Sendo um programa muito simples, é frequentemente utilizado para apresentar uma nova linguagem de programação a iniciantes. Em C++, para escrever "Hello World", usa-se o seguinte código:
           </p>
           <div class="code-section">
@@ -155,6 +159,8 @@ $comentarios = getComentarios($conn, $aula_id);
       </div>
     </div>
   </div>
+  
+  
             
   <!-- Comentários -->
   <div class="comentarios-section">
@@ -191,10 +197,10 @@ $comentarios = getComentarios($conn, $aula_id);
     <div class="container relative aulas">
       <div class="row g-5 mb-5">
         <div class="col-lg-4">
-          <div class="mb-4 aulas-footer-logo-wrap"><a href="#" class="aulas-footer-logo">Kiocode</a></div>
           <div class="row">
             <div class="col-lg-8">
-              <div class="aulas-subscription-form">
+                                            <div class="aulas-subscription-form" style="margin-left: -110px;">
+
                 <h3 class="d-flex align-items-center">
                   <span class="me-1"><img src="http://localhost/pap-main/pap/static/images//envelope-outline.svg" alt="Image" class="img-fluid"></span>
                   <span>Contacte-nos</span>
@@ -210,13 +216,14 @@ $comentarios = getComentarios($conn, $aula_id);
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
           <div class="col-lg-6" style="text-align: left; padding-left: 60px; padding-top: 30px;">
-            <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto;">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
-          </div>
-  
+    <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto; color: white !important;">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
+    </p>
+</div>
           <div class="col-lg-6 text-center text-lg-end" style="text-align: right; padding-right: 30px;">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
               <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
-              <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
+              <li style="max-width: 80%;"><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
             </ul>	
           </div>
         </div>
@@ -224,38 +231,49 @@ $comentarios = getComentarios($conn, $aula_id);
     </div>
   </footer>
   <script>
-    // espera o conteúdo carregar
-    document.addEventListener("DOMContentLoaded", function() {
-    
-      // carrega o sidebar dinamicamente
-      fetch('sidebar.php')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('sidebar-container').innerHTML = data;
-        
-          // ativa os botões de submenu depois do sidebar ser carregado
-          document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
-            toggleButton.addEventListener('click', function () {
-              const submenu = toggleButton.nextElementSibling;
-              submenu.classList.toggle('show'); // mostra/esconde submenu
-              toggleButton.classList.toggle('open'); // muda o ícone do botão
-            });
+  // Espera o conteúdo carregar
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Carrega o sidebar dinamicamente
+    fetch('sidebar.php')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+
+        // Ativa os botões de submenu depois do sidebar ser carregado
+        document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
+          toggleButton.addEventListener('click', function () {
+            const submenu = toggleButton.nextElementSibling;
+            submenu.classList.toggle('show'); // mostra/esconde submenu
+            toggleButton.classList.toggle('open'); // muda o ícone do botão
           });
-        
-          // ativa o botão para mostrar/esconder o sidebar
-          const toggleBtn = document.querySelector('.sidebar-toggle-btn');
-          const sidebar = document.querySelector('.aula-sidebar');
-        
-          if (toggleBtn) {
-            toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('show');
-            });
-          }
-        })
-        .catch(error => console.error('Erro ao carregar o sidebar:', error));
+        });
+
+        // Ativa o botão para mostrar/esconder o sidebar
+        const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+        const sidebar = document.querySelector('.aula-sidebar');
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('show');
+          });
+        }
+      })
+      .catch(error => console.error('Erro ao carregar o sidebar:', error));
+
+    // Scroll suave para os links da Tabela de Conteúdo
+    document.querySelectorAll('.toc-container a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
 
-  </script>
+  });
+</script>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>

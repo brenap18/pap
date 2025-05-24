@@ -75,7 +75,7 @@ $comentarios = getComentarios($conn, $aula_id);
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
 
-  <title>Aula 12 - Kiocode</title>
+  <title>Aula 11 - Kiocode</title>
 </head>
 
 <body>
@@ -113,10 +113,10 @@ $comentarios = getComentarios($conn, $aula_id);
     		<?php
     		if (isset($_SESSION['id'])) {
         		// User is logged in -> Direct to user page
-        		echo '<li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
     		} else {
         		// User is NOT logged in -> Direct to login/register page
-        		echo '<li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
     		}
     		?>
 		</ul>
@@ -133,32 +133,42 @@ $comentarios = getComentarios($conn, $aula_id);
         <!-- Sidebar Container -->
         <div id="sidebar-container"></div>
 
-        <!-- Sidebar Toggle Button -->
-        <button class="sidebar-toggle-btn">></button>
 
         <!-- Main Content -->
         <div class="aulas-main-content">
+          <!-- Table of Contents (TOC) -->
+              <div class="toc-container">
+                <ul style="list-style: none; padding: 0; font-size: 14px;">
+                  <li style="margin-bottom: 8px; margin-top: 2px"><a href="#array">O que são arrays?</a></li>
+                  <li style="margin-bottom: 8px;"><a href="#caracteristicas">Características de Arrays</a></li>
+                  <li style="margin-bottom: 8px;"><a href="#declaracao">Declaração e inicialização</a></li>
+                  <li style="margin-bottom: 8px;"><a href="#acesso">Acesso e Modificação</a></li>
+                  <li style="margin-bottom: 8px;"><a href="#ex">Exemplo Completo</a></li>
+
+
+                </ul>
+              </div>
             <h2 class="aulas-section-title">Arrays em C++</h2>
-            <h3 class="aulas-section-h3">- O que são Arrays?</h3>
-            <p>
+            <h3 id=array class="aulas-section-h3">- O que são Arrays?</h3>
+            <p style="max-width: 80%;">
                 Um <strong>array</strong> é uma coleção de elementos do mesmo tipo, armazenados em locais de memória contíguos. 
                 Eles permitem armazenar múltiplos valores em uma única variável, facilitando a manipulação de conjuntos de dados relacionados.
             </p>
             <hr>
         
-            <h2 class="aulas-section-title">Caracteristicas de Arrays</h2>
+            <h2 id=caracteristicas class="aulas-section-title">Características de Arrays</h2>
             <ul>
-                <li><strong>Tipo Fixo:</strong> Todos os elementos devem ser do mesmo tipo.</li>
-                <li><strong>Tamanho Fixo:</strong> O tamanho do array é definido no momento da declaração e não pode ser alterado.</li>
-                <li><strong>Acesso por Índice:</strong> Os elementos são acessados por índices, que começam em 0.</li>
+                <li style="max-width: 80%;"><strong>Tipo Fixo:</strong> Todos os elementos devem ser do mesmo tipo.</li>
+                <li style="max-width: 80%;"><strong>Tamanho Fixo:</strong> O tamanho do array é definido no momento da declaração e não pode ser alterado.</li>
+                <li style="max-width: 80%;"><strong>Acesso por Índice:</strong> Os elementos são acessados por índices, que começam em 0.</li>
             </ul>
             
 
-            <h4 class="aulas-section-h4">Declaração e inicialização</h4>
+            <h4 id=declaracao class="aulas-section-h4">Declaração e inicialização</h4>
             
-                <p>No código seguinte (linha 1), declara um array chamado numeros que pode armazenar 5 elementos do tipo int (inteiro).
+                <p style="max-width: 80%;">No código seguinte (linha 1), declara um array chamado numeros que pode armazenar 5 elementos do tipo int (inteiro).
                 Neste ponto, o array é criado, mas os valores dos elementos não são inicializados, ou seja, eles contêm valores indeterminados.</p>
-                <p>Os valores são atribuídos aos elementos do array em ordem (linha 2), onde numeros[0] será 1, numeros[1] será 2, e assim por diante até numeros[4], que será 5.</p>
+                <p style="max-width: 80%;">Os valores são atribuídos aos elementos do array em ordem (linha 2), onde numeros[0] será 1, numeros[1] será 2, e assim por diante até numeros[4], que será 5.</p>
            
             <div class="code-section">
                 <h3>Declaração e inicialização</h3>
@@ -170,8 +180,8 @@ int numeros[5] = {1, 2, 3, 4, 5}; // Declara e inicializa um array de inteiros
         
 
 
-            <h4 class="aulas-section-h4">Acesso e Modificação</h4>
-                <p>Esta linha modifica o terceiro elemento do array numeros (que é numeros[2]) e atribui a ele o valor 10. Após essa operação, 
+            <h4 id=acesso class="aulas-section-h4">Acesso e Modificação</h4>
+                <p style="max-width: 80%;">Esta linha modifica o terceiro elemento do array numeros (que é numeros[2]) e atribui a ele o valor 10. Após essa operação, 
                     o valor do terceiro elemento do array, que originalmente era 3, agora será 10.</p>
 
             <div class="code-section">
@@ -184,7 +194,7 @@ numeros[2] = 10; // Modifica o terceiro elemento
 
         <hr>
         
-            <h4 class="aulas-section-h4">Exemplo Completo</h4>
+            <h4 id=ex class="aulas-section-h4">Exemplo Completo</h4>
             <div class="code-section">
     <pre><code class="language-c++">#include &lt;iostream&gt;
 
@@ -257,10 +267,10 @@ int main() {
     <div class="container relative aulas">
       <div class="row g-5 mb-5">
         <div class="col-lg-4">
-          <div class="mb-4 aulas-footer-logo-wrap"><a href="#" class="aulas-footer-logo">Kiocode</a></div>
           <div class="row">
             <div class="col-lg-8">
-              <div class="aulas-subscription-form">
+                                            <div class="aulas-subscription-form" style="margin-left: -110px;">
+
                 <h3 class="d-flex align-items-center">
                   <span class="me-1"><img src="http://localhost/pap-main/pap/static/images//envelope-outline.svg" alt="Image" class="img-fluid"></span>
                   <span>Contacte-nos</span>
@@ -276,13 +286,15 @@ int main() {
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
           <div class="col-lg-6" style="text-align: left; padding-left: 60px; padding-top: 30px;">
-            <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto;">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
-          </div>
+    <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto; color: white !important;">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
+    </p>
+</div>
   
           <div class="col-lg-6 text-center text-lg-end" style="text-align: right; padding-right: 30px;">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
               <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
-              <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
+              <li style="max-width: 80%;"><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
             </ul>	
           </div>
         </div>
@@ -290,38 +302,49 @@ int main() {
     </div>
   </footer>
   <script>
-    // espera o conteúdo carregar
-    document.addEventListener("DOMContentLoaded", function() {
-    
-      // carrega o sidebar dinamicamente
-      fetch('sidebar.php')
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById('sidebar-container').innerHTML = data;
-        
-          // ativa os botões de submenu depois do sidebar ser carregado
-          document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
-            toggleButton.addEventListener('click', function () {
-              const submenu = toggleButton.nextElementSibling;
-              submenu.classList.toggle('show'); // mostra/esconde submenu
-              toggleButton.classList.toggle('open'); // muda o ícone do botão
-            });
+  // Espera o conteúdo carregar
+  document.addEventListener("DOMContentLoaded", function () {
+
+    // Carrega o sidebar dinamicamente
+    fetch('sidebar.php')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
+
+        // Ativa os botões de submenu depois do sidebar ser carregado
+        document.querySelectorAll('.submenu-toggle').forEach(toggleButton => {
+          toggleButton.addEventListener('click', function () {
+            const submenu = toggleButton.nextElementSibling;
+            submenu.classList.toggle('show'); // mostra/esconde submenu
+            toggleButton.classList.toggle('open'); // muda o ícone do botão
           });
-        
-          // ativa o botão para mostrar/esconder o sidebar
-          const toggleBtn = document.querySelector('.sidebar-toggle-btn');
-          const sidebar = document.querySelector('.aula-sidebar');
-        
-          if (toggleBtn) {
-            toggleBtn.addEventListener('click', function() {
-                sidebar.classList.toggle('show');
-            });
-          }
-        })
-        .catch(error => console.error('Erro ao carregar o sidebar:', error));
+        });
+
+        // Ativa o botão para mostrar/esconder o sidebar
+        const toggleBtn = document.querySelector('.sidebar-toggle-btn');
+        const sidebar = document.querySelector('.aula-sidebar');
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function () {
+            sidebar.classList.toggle('show');
+          });
+        }
+      })
+      .catch(error => console.error('Erro ao carregar o sidebar:', error));
+
+    // Scroll suave para os links da Tabela de Conteúdo
+    document.querySelectorAll('.toc-container a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
     });
 
-  </script>
+  });
+</script>
 
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>

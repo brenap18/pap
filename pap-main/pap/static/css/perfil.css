@@ -1,325 +1,219 @@
+/* === BODY - Softer Futuristic Background === */
 body {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* fonte do corpo */
-  font-size: 14px; /* tamanho da fonte */
-  color: #5a5a5a; /* cor do texto */
-  background: #f4f5f7; /* fundo da página */
-  margin: 0; /* remove margens padrão */
-  padding: 0; /* remove padding padrão */
-  text-rendering: optimizeLegibility; /* otimiza a legibilidade do texto */
-  -webkit-font-smoothing: antialiased; /* suaviza fontes no WebKit */
-  -moz-font-smoothing: antialiased; /* suaviza fontes no Firefox */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  color: #d0d0e3;
+  background: linear-gradient(135deg, #1e1e2f, #2a2a3f);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* === HEADERS - Futuristic & Clean === */
 h1 {
-  font-size: 55px; /* tamanho da fonte do título */
-  color: #fbfbfb; /* cor do texto do título */
-  font-weight: 700; /* peso da fonte */
-  margin-bottom: 15px; /* espaço abaixo do título */
+  font-size: 48px;
+  color: #a6aaff;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px #6f6fff;
 }
 
 p {
-  font-size: 1.1rem; /* tamanho da fonte do parágrafo */
-  color: #fbfbfb; /* cor do texto do parágrafo */
-  margin-bottom: 25px; /* espaço abaixo do parágrafo */
+  font-size: 1.15rem;
+  color: #c1c1d6;
+  margin-bottom: 25px;
+  line-height: 1.6;
 }
 
-.btn {
-  padding: 12px 24px; /* espaço interno do botão */
-  font-size: 14px; /* tamanho da fonte do botão */
-  font-weight: 600; /* peso da fonte do botão */
-  text-transform: uppercase; /* transforma texto em maiúsculas */
-  border: none; /* sem borda */
-  border-radius: 6px; /* bordas arredondadas */
-  cursor: pointer; /* cursor de ponteiro */
-  transition: all 0.3s ease-in-out; /* transição suave para o botão */
+/* === CONTAINER - GLASSMORPHIC EFFECT === */
+.bio-graph-heading,
+.comentarios-section,
+.profile-card-custom,
+.progresso-usuario,
+.navegacao-historico {
+  background: rgba(40, 40, 60, 0.5);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 32px rgba(100, 100, 255, 0.15);
+  padding: 30px;
+  color: #e0e0ff;
+  transition: box-shadow 0.4s ease;
 }
 
-.btn-danger {
-  margin-left: 52px; /* espaço à esquerda do botão */
-  background-color: #dc3545; /* cor de fundo do botão de perigo */
-  color: white; /* cor do texto do botão */
-}
-
-.btn-danger:hover {
-  background-color: #c82333; /* cor de fundo ao passar o mouse */
-}
-
-.profile-container {
-  margin-top: 40px; /* espaço acima do container do perfil */
-  display: flex; /* usa flexbox para layout */
-  flex-wrap: nowrap; /* não permite quebra de linha */
-  gap: 20px; /* espaço entre os elementos */
-}
-
-.profile-nav {
-  flex: 1; /* ocupa espaço flexível */
-  max-width: 300px; /* largura máxima da navegação do perfil */
-}
-
-.profile-nav .user-heading {
-  background: #faf9f7; /* fundo do cabeçalho do usuário */
-  border-radius: 8px 8px 0 0; /* bordas arredondadas no topo */
-  padding: 35px; /* espaço interno do cabeçalho */
-  text-align: center; /* centraliza o texto */
-}
-
-.profile-nav .user-heading a img {
-  width: 120px; /* largura da imagem do usuário */
-  height: 120px; /* altura da imagem do usuário */
-  border-radius: 50%; /* bordas arredondadas para formato circular */
-  border: 4px solid #4a4b8b; /* borda da imagem */
-  transition: transform 0.3s ease-in-out; /* transição suave para transformação */
-}
-
-.profile-nav .user-heading a img:hover {
-  transform: scale(1.05); /* aumenta a imagem ao passar o mouse */
-}
-
-.profile-nav .user-heading h1 {
-  font-size: 24px; /* tamanho da fonte do nome */
-  font-weight: 400; /* peso da fonte do nome */
-  margin-bottom: 8px; /* espaço abaixo do nome */
-  color: black; /* cor do texto do nome */
-}
-
-.profile-nav ul {
-  list-style: none; /* remove marcadores da lista */
-  padding: 0; /* remove padding da lista */
-}
-
-.profile-nav ul > li > a {
-  display: block; /* exibe como bloco */
-  width: 100%; /* largura total */
-  text-align: center; /* centraliza o texto */
-  font-size: 18px; /* tamanho da fonte do link */
-  background: #faf9f7; /* fundo do link */
-  color: #040404; /* cor do texto do link */
-  padding: 12px 50px; /* espaço interno do link */
-  text-decoration: none; /* remove sublinhado */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* sombra suave */
-  transition: all 0.3s ease-in-out; /* transição suave para o link */
-}
-
-.profile-nav ul > li > a:hover {
-  background: #4a4b8b; /* cor de fundo ao passar o mouse */
-  color: #faf9f7; /* cor do texto ao passar o mouse */
-}
-
-.profile-info {
-  flex: 2; /* ocupa mais espaço que a navegação */
-  max-width: calc(100% - 320px); /* largura máxima do info do perfil */
-  display: flex; /* usa flexbox para layout */
-  flex-direction: column; /* organiza em coluna */
-  align-items: flex-start; /* alinha à esquerda */
-  gap: 30px; /* espaço entre os elementos */
-  padding-right: 20px; /* espaço à direita */
-}
-
-/* === BIOGRAPH HEADING / EDIÇÃO DE PERFIL === */
-.bio-graph-heading {
-  background: #ffffff; /* fundo branco */
-  border: 1px solid #ddd; /* borda cinza clara */
-  padding: 30px; /* espaço interno */
-  border-radius: 12px; /* bordas arredondadas */
-  text-align: left; /* alinha texto à esquerda */
-  font-style: normal; /* estilo normal */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* sombra suave */
-  width: 800px; /* largura da seção */
-}
-
-.bio-graph-heading h5 {
-  font-size: 24px; /* tamanho da fonte do cabeçalho */
-  font-weight: 600; /* peso da fonte */
-  margin-bottom: 25px; /* espaço abaixo do cabeçalho */
-  color: #333; /* cor do texto do cabeçalho */
-  display: flex; /* usa flexbox para layout */
-  align-items: center; /* alinha verticalmente */
-  gap: 10px; /* espaço entre os elementos */
-}
-
-.bio-graph-heading form {
-  display: flex; /* usa flexbox para layout */
-  flex-direction: column; /* organiza em coluna */
-  gap: 15px; /* espaço entre os elementos */
-  text-align: left; /* alinha texto à esquerda */
-}
-
-.bio-graph-heading label {
-  font-weight: 600; /* peso da fonte do rótulo */
-  font-size: 15px; /* tamanho da fonte do rótulo */
-  margin-bottom: 6px; /* espaço abaixo do rótulo */
-  color: #333; /* cor do texto do rótulo */
-}
-
-.bio-graph-heading input[type="text"],
-.bio-graph-heading input[type="password"] {
-  width: 100%; /* largura total */
-  padding: 10px 14px; /* espaço interno */
-  border: 1px solid #ccc; /* borda cinza clara */
-  border-radius: 6px; /* bordas arredondadas */
-  font-size: 15px; /* tamanho da fonte */
-  background-color: #c5c5c5; /* fundo cinza claro */
-}
-
-.bio-graph-heading button[type="submit"] {
-  margin-top: 10px; /* espaço acima do botão */
-  width: 100%; /* largura total */
-  background-color: #4a4b8b; /* cor de fundo do botão */
-  color: white; /* cor do texto do botão */
-  border: none; /* sem borda */
-  padding: 12px; /* espaço interno do botão */
-  font-weight: bold; /* peso da fonte do botão */
-  border-radius: 6px; /* bordas arredondadas */
-  transition: background-color 0.3s ease-in-out; /* transição suave para o botão */
-}
-
-.bio-graph-heading button[type="submit"]:hover {
-  background-color: #383969; /* cor de fundo ao passar o mouse */
-}
-
-/* ========== MOBILE RESPONSIVE ========== */
-@media screen and (max-width: 768px) {
-  .profile-container {
-    flex-direction: column; /* organiza em coluna */
-    align-items: center; /* centraliza os itens */
-    padding: 0 15px; /* espaço lateral */
-  }
-
-  .profile-nav {
-    max-width: 100%; /* largura máxima da navegação */
-    width: 100%; /* largura total */
-  }
-
-  .profile-nav ul > li > a {
-    padding: 12px 0; /* espaço interno do link */
-    width: 100%; /* largura total */
-    box-sizing: border-box; /* inclui padding e borda no cálculo da largura */
-  }
-
-  .profile-info {
-    max-width: 100%; /* largura máxima do info do perfil */
-    padding-right: 0; /* remove espaço à direita */
-    align-items: center; /* centraliza os itens */
-  }
-
-  .bio-graph-heading {
-    width: 100%; /* largura total */
-    max-width: 100%; /* largura máxima */
-    padding: 20px; /* espaço interno reduzido */
-  }
-
-  .bio-graph-heading button[type="submit"] {
-    width: 100%; /* largura total do botão */
-  }
-}
-
-.bio-graph-heading input[type="text"]:focus,
-.bio-graph-heading input[type="password"]:focus {
-  border-color: #4a4b8b; /* cor da borda ao focar */
-  outline: none; /* remove contorno padrão */
-  box-shadow: 0 0 5px rgba(74, 75, 139, 0.15); /* sombra ao focar */
-}
-
-.aula-card {
-  border-radius: 12px; /* bordas arredondadas */
-  transition: all 0.3s ease-in-out; /* transição suave */
-  background-color: #ffffff; /* fundo branco */
-  border: 1px solid #e0e0e0; /* borda cinza clara */
-}
-
-.aula-card:hover {
-  transform: translateY(-4px); /* eleva o card ao passar o mouse */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* sombra ao passar o mouse */
-}
-
-.aula-card .card-title a {
-  color: #2c2c2c; /* cor do texto do título */
-  font-weight: 600; /* peso da fonte do título */
-}
-
-.aula-card .card-title a:hover {
-  text-decoration: underline; /* sublinha ao passar o mouse */
-}
-
-.progresso-usuario {
-  margin: 0; /* remove margens */
-  padding: 25px; /* espaço interno */
-  background-color: #ffffff; /* fundo branco */
-  border-radius: 12px; /* bordas arredondadas */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* sombra suave */
-  max-width: 700px; /* largura máxima */
-  margin-right: auto; /* centraliza à esquerda */
-}
-
-.progresso-usuario h4 {
-  margin-bottom: 15px; /* espaço abaixo do título */
-  font-size: 20px; /* tamanho da fonte do título */
-  color: #333333; /* cor do texto do título */
-}
-
+/* === PROGRESS BAR === */
 .progress {
-  height: 22px; /* altura da barra de progresso */
-  background-color: #e0e0e0; /* fundo da barra de progresso */
-  border-radius: 12px; /* bordas arredondadas */
-  overflow: hidden; /* oculta o excesso */
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+  overflow: hidden;
+  height: 24px;
 }
 
 .progress-bar {
-  height: 100%; /* altura total da barra de progresso */
-  background-color: #4a4b8b; /* cor da barra de progresso */
-  line-height: 22px; /* alinha texto verticalmente */
-  color: white; /* cor do texto na barra */
-  text-align: center; /* centraliza texto */
-  font-weight: 600; /* peso da fonte */
-  transition: width 0.4s ease-in-out; /* transição suave para a largura */
+  background: linear-gradient(90deg, #6c63ff 0%, #a39fff 100%);
+  box-shadow: 0 0 10px #8a88ff;
+  font-weight: 600;
+  text-align: center;
+  color: #e0e0ff;
+  line-height: 24px;
+  transition: width 0.5s ease-in-out;
 }
 
-.navegacao-historico {
-  padding: 25px; /* espaço interno */
-  background-color: #ffffff; /* fundo branco */
-  border-radius: 12px; /* bordas arredondadas */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* sombra suave */
-  max-width: 700px; /* largura máxima */
-  margin-right: auto; /* centraliza à esquerda */
+/* === BUTTONS - Soft Neon Glow === */
+.btn {
+  padding: 12px 28px;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #e0e0ff;
+  background: linear-gradient(135deg, #5e5eff, #9a9aff);
+  box-shadow: 0 0 8px #7f7fff;
+  transition: all 0.3s ease-in-out;
 }
 
-.navegacao-historico h4 {
-  font-size: 20px; /* tamanho da fonte do título */
-  margin-bottom: 15px; /* espaço abaixo do título */
-  color: #333333; /* cor do texto do título */
+.btn:hover {
+  background: linear-gradient(135deg, #8a8aff, #c1c1ff);
+  box-shadow: 0 0 20px #9a9aff;
 }
 
-.navegacao-historico ul {
-  list-style-type: none; /* remove marcadores da lista */
-  padding-left: 0; /* remove padding da lista */
+.btn-danger {
+  background: linear-gradient(135deg, #ff5e5e, #ff9a9a);
+  box-shadow: 0 0 8px #ff7f7f;
+  margin-left: 52px;
 }
 
-.navegacao-historico ul li {
-  padding: 8px 0; /* espaço interno do item da lista */
-  border-bottom: 1px solid #eaeaea; /* borda abaixo do item */
-  font-size: 16px; /* tamanho da fonte do item */
-  color: #555; /* cor do texto do item */
+.btn-danger:hover {
+  background: linear-gradient(135deg, #ff8a8a, #ffc1c1);
+  box-shadow: 0 0 20px #ff9a9a;
 }
 
-.navegacao-historico ul li:last-child {
-  border-bottom: none; /* remove borda do último item */
+/* === PROFILE NAVIGATION === */
+.profile-nav .user-heading {
+  background: rgba(40, 40, 60, 0.6);
+  border-radius: 16px 16px 0 0;
+  padding: 35px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(100, 100, 255, 0.2);
 }
 
+.profile-nav .user-heading a img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #7f7fff;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 10px #7f7fff;
+}
+
+.profile-nav .user-heading a img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #a0a0ff;
+}
+
+.profile-nav .user-heading h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #c0c0ff;
+}
+
+.profile-nav ul > li > a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  background: rgba(40, 40, 60, 0.6);
+  color: #c0c0ff;
+  padding: 12px 50px;
+  text-decoration: none;
+  box-shadow: 0 6px 15px rgba(100, 100, 255, 0.1);
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease-in-out;
+  border-radius: 12px;
+}
+
+.profile-nav ul > li > a:hover {
+  background: #5a5aff;
+  color: #e0e0ff;
+  border-left: 4px solid #c0c0ff;
+}
+
+/* === COMMENTS === */
+.comentarios-section textarea {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #e0e0ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.comentarios-section textarea:focus {
+  border-color: #7f7fff;
+  box-shadow: 0 0 8px #7f7fff;
+}
+
+/* === LINKS & Text === */
+.aula-card .card-title a {
+  color: #a6a6ff;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.aula-card .card-title a:hover {
+  text-decoration: underline;
+  color: #d0d0ff;
+}
+
+/* === NAV PILL === */
 .nav.nav-pills.nav-stacked li a {
-  display: flex; /* usa flexbox para layout */
-  align-items: center; /* alinha verticalmente */
-  justify-content: center; /* centraliza horizontalmente */
-  gap: 8px; /* espaço entre os elementos */
-  font-size: 18px; /* tamanho da fonte do link background: #faf9f7; /* fundo do link */
-  color: #040404; /* cor do texto do link */
-  padding: 12px 64.2px; /* espaço interno do link */
-  border-left: 4px solid transparent; /* borda esquerda transparente */
-  text-decoration: none; /* remove sublinhado */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* sombra suave */
-  transition: all 0.3s ease-in-out; /* transição suave para o link */
+  background: rgba(40, 40, 60, 0.6);
+  color: #c0c0ff;
+  border-left: 4px solid transparent;
+  box-shadow: 0 6px 15px rgba(100, 100, 255, 0.1);
+  padding: 12px 64px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .nav.nav-pills.nav-stacked li a:hover {
-  background: #4a4b8b; /* cor de fundo ao passar o mouse */
-  color: #faf9f7; /* cor do texto ao passar o mouse */
+  background: #6b6bff;
+  color: #e0e0ff;
+  border-left: 4px solid #c0c0ff;
+  box-shadow: 0 8px 25px rgba(120, 120, 255, 0.3);
 }
+
+/* === RESPONSIVE tweaks === */
+@media screen and (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .profile-nav,
+  .profile-info,
+  .bio-graph-heading,
+  .bio-graph-heading button[type="submit"] {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .profile-nav ul > li > a {
+    padding: 12px 0;
+    box-sizing: border-box;
+  }
+
+  .profile-info {
+    align-items: center;
+    padding-right: 0;
+  }
+
+  .bio-graph-heading {
+    padding: 20px;
+  }
+}
+

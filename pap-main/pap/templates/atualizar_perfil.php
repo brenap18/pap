@@ -8,10 +8,10 @@ if (!isset($_SESSION['id'])) {
     exit();
 }
 
-//envia o formulario
+// envia o formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_SESSION['id'];
-    $name = trim($_POST['name']);
+    $user_name = trim($_POST['user_name']);
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
@@ -23,10 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
     }
 
-    // atualiza o nome
-    $sql = "UPDATE users SET name = ? WHERE id = ?";
+    // atualiza o user_name
+    $sql = "UPDATE users SET user_name = ? WHERE id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $name, $id);
+    $stmt->bind_param("si", $user_name, $id);
     $stmt->execute();
 
     // atualiza a senha se for fornecida

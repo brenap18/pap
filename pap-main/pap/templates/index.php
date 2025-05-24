@@ -82,7 +82,12 @@ if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php'
                 <div class="col-lg-5">
                     <div class="intro-excerpt">
                         <h1>Bem-vindo ao <span class="d-block">Kiocode</span></h1>
-                        <p class="mb-4" style="font-size: 17px;">O Kiocode é um site dedicado ao ensino de C++. Aqui você encontrará uma abordagem prática e direta para aprender a programar. Nossas aulas são projetadas para te ajudar a entender os conceitos fundamentais e aplicá-los na prática.</p>
+<div style="max-width: 100%; padding-right: 20px;">
+    <p class="mb-4" style="font-size:20px; width: 140%; margin-right: 20px;">
+        O Kiocode é um site dedicado ao ensino de C++. Aqui você encontrará uma abordagem prática e direta para aprender a programar. Nossas aulas são projetadas para te ajudar a entender os conceitos fundamentais e aplicá-los na prática.
+    </p>
+</div>
+
                     </div>
                 </div>
             </div>
@@ -94,39 +99,41 @@ if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php'
     <div class="answer-section">
         <div class="container">
             <div class="col-12 text-center mb-5">
-                <h2 class="section-title">Porquê escolher o Kiocode?</h2>
+
+    <h2 class="section-title" style="font-size: 35px;">Porquê escolher o Kiocode?</h2>
+
             </div>
 
             <div class="row">
                 <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                     <a class="answer-one">
                         <img src="http://localhost/pap-main/pap/static/images/gratis.png" class="img-fluid answer-thumbnail" alt="Grátis">
-                        <h3 class="answer-title">Grátis</h3>
-                        <span class="answer-why">Disponibilizamos conteúdos de C++ de forma gratuita, podendo aprender sem preocupações com mensalidades ou custos.</span>
+                        <h3 class="answer-title" style="color: black; font-size: 25px;">Grátis</h3>
+                        <span class="answer-why" style="font-size: 15px; margin-top: 20px;">Disponibilizamos conteúdos de C++ de forma gratuita, podendo aprender sem preocupações com mensalidades ou custos.</span>
                     </a>
                 </div>
-
+                                
                 <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                     <a class="answer-one">
                         <img src="http://localhost/pap-main/pap/static/images/suporte.png" class="img-fluid answer-thumbnail" alt="Suporte Exclusivo">
-                        <h3 class="answer-title">Suporte Exclusivo</h3>
-                        <span class="answer-why">Os exemplos de código vêm acompanhados de comentários de outros alunos para ajudar com as tuas dúvidas.</span>
+                        <h3 class="answer-title" style="color: black; font-size: 25px;">Suporte Exclusivo</h3>
+                        <span class="answer-why" style="font-size: 15px; margin-top: 20px;">Os exemplos de código vêm acompanhados de comentários de outros alunos para ajudar com as tuas dúvidas.</span>
                     </a>
                 </div>
-
+                                
                 <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                     <a class="answer-one">
                         <img src="http://localhost/pap-main/pap/static/images/foco.png" class="img-fluid answer-thumbnail" alt="Foco no Prático">
-                        <h3 class="answer-title">Foco no Prático</h3>
-                        <span class="answer-why">O conteúdo é apresentado de forma clara e simples, sem complicações desnecessárias.</span>
+                        <h3 class="answer-title" style="color: black; font-size: 25px;">Foco no Prático</h3>
+                        <span class="answer-why" style="font-size: 15px; margin-top: 20px;">O conteúdo é apresentado de forma clara e simples, sem complicações desnecessárias.</span>
                     </a>
                 </div>
-
+                                
                 <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                     <a class="answer-one">
                         <img src="http://localhost/pap-main/pap/static/images/plataformas.png" class="img-fluid answer-thumbnail" alt="Fácil de Aceder">
-                        <h3 class="answer-title">Fácil de Aceder</h3>
-                        <span class="answer-why">A plataforma é fácil de aceder rapidamente ao conteúdo de que precisas em qualquer plataforma.</span>
+                        <h3 class="answer-title" style="color: black; font-size: 25px;">Fácil de Aceder</h3>
+                        <span class="answer-why" style="font-size: 15px; margin-top: 20px;">A plataforma é fácil de aceder rapidamente ao conteúdo de que precisas em qualquer plataforma.</span>
                     </a>
                 </div>
             </div>
@@ -146,9 +153,9 @@ if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php'
                     </div>
                 </div>
                 <div class="col-lg-5 ps-lg-5">
-                    <h2 class="section-title mb-4">Onde começar?</h2>
-                    <p>Para começar a aprendizagem:</p>
-                    <ul class="list-unstyled custom-list my-4">
+                    <h2 class="section-title mb-4" style="font-size: 50px;">Onde começar?</h2>
+                    <p style="font-size: 25px; margin-top: 50px">Para começar a aprendizagem:</p>
+                    <ul class="list-unstyled custom-list my-4" style="font-size: 18px; margin-top: 50px">
                         <li>Cria uma conta ou faz login na tua conta existente</li>
                         <li>Acede às aulas e escolhe o tópico que desejas aprender</li>
                         <li>Comunique com outros utilizadores se tiver dúvidas ou precisar de ajuda</li>
@@ -164,9 +171,6 @@ if (!isset($_SESSION['id']) && basename($_SERVER['PHP_SELF']) !== 'register.php'
         <div class="container relative">
             <div class="row g-5 mb-5">
                 <div class="col-lg-4">
-                    <div class="mb-4 footer-logo-wrap">
-                        <a href="#" class="footer-logo">Kiocode</a>
-                    </div>
                     <div class="row">
                         <div class="col-lg-8">
                             <div class="subscription-form">

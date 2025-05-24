@@ -173,7 +173,6 @@ if (count($_SESSION['history']) > 5) {
   <div class="container relative">
     <div class="row g-5 mb-5">
       <div class="col-lg-4">
-        <div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Kiocode</a></div>
         <div class="row">
           <div class="col-lg-8">
             <div class="subscription-form">

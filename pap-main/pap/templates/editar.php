@@ -102,9 +102,12 @@ if (!isset($_SESSION['id'])) {
             </form>
             <h1 class="mt-3"><?php echo $_SESSION['name']; ?></h1>
           </div>
-          <ul class="nav nav-pills nav-stacked">
-            <li><a href="utilizador.php"><i class="fa fa-user"></i> Voltar ao perfil</a></li>
-          </ul>
+          <div class="d-grid gap-2 mt-3">
+  <a href="utilizador.php" class="btn btn-outline-primary">
+    <i class="fa fa-user"></i> Voltar ao perfil
+  </a>
+</div>
+
         </div>
       </div>
 
@@ -128,8 +131,8 @@ if (!isset($_SESSION['id'])) {
             <!-- Formulário de atualização -->
             <form action="atualizar_perfil.php" method="post" class="mt-4">
               <div class="mb-3">
-                <label for="name" class="form-label">Nome:</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo htmlspecialchars($_SESSION['name']); ?>" required>
+                <label for="name" class="form-label">Username:</label>
+                <input type="text" class="form-control" id="user_name" name="user_name" value="<?php echo htmlspecialchars($_SESSION['user_name']); ?>" required>
               </div>
 
               <div class="mb-3">

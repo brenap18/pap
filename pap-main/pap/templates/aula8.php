@@ -11,7 +11,7 @@ if (!isset($_SESSION['id'])) {
 
 $usuario_id = $_SESSION['id'];
 $usuario_nome = $_SESSION['name'];
-$aula_id = 12;
+$aula_id = 8;
 
 // ligação à base de dados
 $servername = "localhost";
@@ -50,37 +50,41 @@ $comentarios = getComentarios($conn, $aula_id);
 ?>
 
 
+
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="favicon.png">
+
   <meta name="description" content="Site dedicado ao ensino de C++" />
   <meta name="keywords" content="bootstrap, bootstrap4, C++, programação" />
 
   <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../static/css/comentario.css" rel="stylesheet">
   <link href="../static/css/tiny-slider.css" rel="stylesheet">
   <link href="../static/css/style.css" rel="stylesheet">
   <link href="../static/css/aulas.css" rel="stylesheet">
+  <link href="../static/css/comentario.css" rel="stylesheet">
+
 
   <!-- Link to Prism.js for syntax highlighting -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
 
-  <title>Aula 12 - Kiocode</title>
+
+  <title>Aula 8 - Kiocode</title>
 </head>
+
 <body>
 
   <!-- Início da Navegação -->
   <nav class="custom-navbar navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navegação do Kiocode">
     <div class="container">
-      <div class="navbar-brand">
+    <div class="navbar-brand">
         <a href="index.php">
           <img src="http://localhost/pap-main/pap/static/images/logo.png" alt="Logo" class="logo">
         </a>
@@ -88,92 +92,137 @@ $comentarios = getComentarios($conn, $aula_id);
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarsFurni">
         <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-          <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="sobre.php">Sobre nós</a></li>
-          <li class="nav-item"><a class="nav-link" href="aulas.php">Aulas</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.php">Contactos</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.php">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sobre.php">Sobre nós</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="aulas.php">Aulas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.php">Contactos</a>
+          </li>
         </ul>
+
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-          <?php
-          if (isset($_SESSION['id'])) {
-              echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-          } else {
-              echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
-          }
-          ?>
-        </ul>
+    		<?php
+    		if (isset($_SESSION['id'])) {
+        		// User is logged in -> Direct to user page
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		} else {
+        		// User is NOT logged in -> Direct to login/register page
+        		echo '<li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>';
+    		}
+    		?>
+		</ul>
       </div>
     </div>
   </nav>
   <!-- Fim da Navegação -->
 
   <!-- Main Content Section -->
-  <div class="aula-content-section">
-    <div class="aula-container" style="margin-left: -40px;">
-      <div class="aula-content-wrapper">
-        <!-- Sidebar Container -->
-        <div id="sidebar-container"></div>
+<div class="aula-content-section">
+  <div class="aula-container" style="margin-left: -40px;">
+    <div class="aula-content-wrapper">
 
-        <!-- Main Content -->
-        <div class="aulas-main-content">
-          <!-- Table of Contents (TOC) -->
-    <div class="toc-container">
-      <ul style="list-style: none; padding: 0; font-size: 14px;">
-        <li style="margin-bottom: 8px; margin-top: 2px"><a href="#classe">O que são classes?</a></li>
-        <li style="margin-bottom: 8px;"><a href="#declaracao">Declarar uma classe</a></li>
-        <li style="margin-bottom: 8px;"><a href="#criar">Criar objetos</a></li>
-        <li style="margin-bottom: 8px;"><a href="#acesso">Acesso e Modificação de Atributos</a></li>
-      </ul>
-    </div>
-          <h2 id=classe class="aulas-section-title">Classes em C++</h2>
-          <h3 class="aulas-section-h3">- O que são Classes?</h3>
-          <p style="max-width: 80%;">Uma <strong>classe</strong> em C++ é um modelo que define atributos e comportamentos para criar objetos...</p>
-          <hr>
+      <div id="sidebar-container"></div>
 
-          <h4 id=declaracao class="aulas-section-h4">Declarar uma classe</h4>
-          <p style="max-width: 80%;">Para declarar uma classe, usamos a palavra-chave `class`...</p>
-          <div class="code-section">
-            <h3>Declarar classe</h3>
-            <pre><code class="language-c++">class Carro {
-    public:
-        std::string modelo;
-        int ano;
-        Carro(std::string m, int a) : modelo(m), ano(a) {}
-    };
-            </code></pre>
-          </div>
+      <div class="aulas-main-content">
 
-          <h4 id=criar class="aulas-section-h4">Criar objetos</h4>
-          <p style="max-width: 80%;">Uma vez definida a classe, é possível criar objetos a partir dela...</p>
-          <div class="code-section">
-            <h3>Objetos</h3>
-            <pre><code class="language-c++">Carro meuCarro("Fusca", 1970);</code></pre>
-          </div>
+        <div class="toc-container" style="margin-top: 40px;">
+          <ul style="list-style: none; padding: 0; font-size: 14px;">
+            <li style="margin-bottom: 8px;"><a href="#for">Laço for</a></li>
+            <li style="margin-bottom: 8px;"><a href="#while">Laço while</a></li>
+            <li style="margin-bottom: 8px;"><a href="#do-while">Laço do-while</a></li>
+          </ul>
+        </div>
 
-          <h4 id=acesso class="aulas-section-h4">Acesso e Modificação de Atributos</h4>
-          <p style="max-width: 80%;">Os atributos de um objeto podem ser acedidos e modificados diretamente...</p>
-          <div class="code-section">
-            <h3>aaaa</h3>
-            <pre><code class="language-c++">std::cout << "Modelo: " << meuCarro.modelo << ", Ano: " << meuCarro.ano << std::endl;
-meuCarro.ano = 2020;</code></pre>
-          </div>
+        <h2 class="aulas-section-title">Laços de Repetição em C++</h2>
 
-          <!-- Botões "Próximo" e "Anterior" -->
-          <div class="aulas-buttons-container">
-            <div class="container text-center">
-              <a class="btn btn-secondary me-3" href="aula11.php">Anterior</a>
-              <a class="btn btn-secondary" href="aula13.php">Próximo</a>
-            </div>
+        <p style="max-width: 80%;">
+          Laços de repetição são estruturas utilizadas para repetir um bloco de código várias vezes, de acordo com uma condição definida. Eles são úteis quando precisamos executar uma tarefa múltiplas vezes sem escrever o mesmo código repetidamente.
+        </p>
+
+        <h3 id="for" class="aulas-section-h3">- Laço <code>for</code></h3>
+        <p style="max-width: 80%;">
+          O laço <code>for</code> é usado quando sabemos exatamente quantas vezes queremos repetir uma ação. Ele é composto por três partes: inicialização, condição e incremento.
+        </p>
+        <hr>
+        <div class="code-section">
+          <pre><code class="language-c++">
+// Imprime os números de 1 a 5
+for (int i = 1; i <= 5; i++) {
+    std::cout << i << std::endl;
+}
+          </code></pre>
+        </div>
+
+        <p style="max-width: 80%;">
+          Aqui, <code>int i = 1</code> é a inicialização, <code>i &lt;= 5</code> é a condição de parada, e <code>i++</code> é o incremento. O código dentro do laço será executado enquanto <code>i</code> for menor ou igual a 5.
+        </p>
+
+        <h3 id="while" class="aulas-section-h3">- Laço <code>while</code></h3>
+        <p style="max-width: 80%;">
+          O laço <code>while</code> é usado quando não sabemos exatamente quantas vezes o código será repetido. A condição é verificada antes de cada iteração.
+        </p>
+        <hr>
+        <div class="code-section">
+          <pre><code class="language-c++">
+// Imprime os números de 1 a 5
+int i = 1;
+while (i <= 5) {
+    std::cout << i << std::endl;
+    i++;
+}
+          </code></pre>
+        </div>
+
+        <p style="max-width: 80%;">
+          Neste exemplo, enquanto a variável <code>i</code> for menor ou igual a 5, o bloco de código será executado. A variável é incrementada dentro do laço.
+        </p>
+
+        <h3 id="do-while" class="aulas-section-h3">- Laço <code>do-while</code></h3>
+        <p style="max-width: 80%;">
+          O laço <code>do-while</code> é parecido com o <code>while</code>, mas garante que o bloco de código será executado ao menos uma vez, pois a condição é verificada após a execução.
+        </p>
+        <hr>
+        <div class="code-section">
+          <pre><code class="language-c++">
+// Imprime os números de 1 a 5
+int i = 1;
+do {
+    std::cout << i << std::endl;
+    i++;
+} while (i <= 5);
+          </code></pre>
+        </div>
+
+        <p style="max-width: 80%;">
+          Mesmo que a condição não seja verdadeira inicialmente, o laço <code>do-while</code> executa o código pelo menos uma vez. É útil quando precisamos garantir a execução inicial.
+        </p>
+
+        <div class="aulas-buttons-container">
+          <div class="container text-center">
+            <a class="btn btn-secondary me-3" href="aula7.php">Anterior</a>
+            <a class="btn btn-secondary" href="aula9.php">Próximo</a>
           </div>
         </div>
+
       </div>
     </div>
   </div>
-            
-  <!-- Comentários -->
-  <div class="comentarios-section">
+</div>
+
+
+
+
+<!-- Comentários -->
+<div class="comentarios-section">
     <h3>Comentários</h3>
     <form action="" method="POST">
         <div class="form-group">
@@ -200,8 +249,6 @@ meuCarro.ano = 2020;</code></pre>
         <?php endforeach; ?>
     </div>
 </div>
-
-
   <!-- Footer Section -->
   <footer class="footer-section aulas">
     <div class="container relative aulas">
@@ -241,6 +288,8 @@ meuCarro.ano = 2020;</code></pre>
       </div>
     </div>
   </footer>
+
+
   <script>
   // Espera o conteúdo carregar
   document.addEventListener("DOMContentLoaded", function () {
@@ -289,5 +338,8 @@ meuCarro.ano = 2020;</code></pre>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/tiny-slider.js"></script>
   <script src="js/custom.js"></script>
+
 </body>
 </html>
+
+

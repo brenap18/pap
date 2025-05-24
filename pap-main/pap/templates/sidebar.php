@@ -35,7 +35,7 @@ $aulas_categorias = [
 $current_page = basename($_SERVER['PHP_SELF']); // obtém o nome da página atual
 
 // progresso do curso
-$total_aulas = 14; // número total de aulas
+$total_aulas = 13; // número total de aulas
 // conta quantas aulas o usuário já visitou, se o histórico de aulas está salvo na sessão
 $aulas_visitadas = isset($_SESSION['historico_aulas']) ? count(array_unique($_SESSION['historico_aulas'])) : 0;
 // calcula o progresso em percentual
@@ -47,7 +47,6 @@ $progresso = ($aulas_visitadas / $total_aulas) * 100;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sidebar de Aulas - Kiocode</title>
 </head>
 <body>
 

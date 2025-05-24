@@ -66,7 +66,7 @@ $comentarios = getComentarios($conn, $aula_id);
   <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
 
-  <title>Aula 1 - Kiocode</title>
+  <title>Aula Explicação - Kiocode</title>
 </head>
 
 <body>
@@ -94,9 +94,9 @@ $comentarios = getComentarios($conn, $aula_id);
 
         <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
           <?php if (isset($_SESSION['id'])): ?>
-            <li><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>
+            <li style="max-width: 80%;"><a class="nav-link" href="utilizador.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>
           <?php else: ?>
-            <li><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>
+            <li style="max-width: 80%;"><a class="nav-link" href="login.php"><img src="http://localhost/pap-main/pap/static/images/user.png"></a></li>
           <?php endif; ?>
         </ul>
       </div>
@@ -112,13 +112,11 @@ $comentarios = getComentarios($conn, $aula_id);
         <!-- Sidebar -->
         <div id="sidebar-container"></div>
 
-        <!-- Botão toggle -->
-        <button class="sidebar-toggle-btn">></button>
 
         <!-- Conteúdo da aula -->
         <div class="aulas-main-content">
           <h2 class="aulas-section-title">O que é C++?</h2>
-          <p>
+          <p style="max-width: 80%;">
             C++ é uma linguagem de programação multiplataforma que pode ser utilizada para criar aplicações de alto desempenho.
             Foi desenvolvida por Bjarne Stroustrup como uma extensão da linguagem C.
             C++ oferece aos programadores um alto nível de controlo sobre os recursos do sistema e a memória.
@@ -129,7 +127,7 @@ $comentarios = getComentarios($conn, $aula_id);
             <div class="aulas-col-6 aulas-col-md-6">
               <div class="aulas-feature">
                 <h2 class="aulas-section-title">Porque Usar C++</h2>
-                <p>
+                <p style="max-width: 80%;">
                   C++ é uma das linguagens mais populares do mundo. É usada em sistemas operativos, GUIs e sistemas embutidos.
                   Oferece orientação a objetos, reutilização de código, e é portátil. Além disso, tem semelhanças com C, C# e Java.
                 </p>
@@ -156,10 +154,10 @@ $comentarios = getComentarios($conn, $aula_id);
     <div class="container relative aulas">
       <div class="row g-5 mb-5">
         <div class="col-lg-4">
-          <div class="mb-4 aulas-footer-logo-wrap"><a href="#" class="aulas-footer-logo">Kiocode</a></div>
           <div class="row">
             <div class="col-lg-8">
-              <div class="aulas-subscription-form">
+                                            <div class="aulas-subscription-form" style="margin-left: -110px;">
+
                 <h3 class="d-flex align-items-center">
                   <span class="me-1"><img src="http://localhost/pap-main/pap/static/images//envelope-outline.svg" alt="Image" class="img-fluid"></span>
                   <span>Contacte-nos</span>
@@ -174,14 +172,16 @@ $comentarios = getComentarios($conn, $aula_id);
   
       <div class="border-top aulas-copyright">
         <div class="row pt-4">
-          <div class="col-lg-6">
-            <p class="mb-2 text-center text-lg-start aulas-copyright-text">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.</p>
-          </div>
+          <div class="col-lg-6" style="text-align: left; padding-left: 60px; padding-top: 30px;">
+    <p class="mb-2 text-center text-lg-start aulas-copyright-text" style="margin-left: auto; margin-right: auto; color: white !important;">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.
+    </p>
+</div>
   
           <div class="col-lg-6 text-center text-lg-end">
             <ul class="list-unstyled d-inline-flex ms-auto aulas-terms">
               <li class="me-4"><a href="#" class="aulas-terms-link">Terms &amp; Conditions</a></li>
-              <li><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
+              <li style="max-width: 80%;"><a href="#" class="aulas-privacy-link">Privacy Policy</a></li>
             </ul>	
           </div>
         </div>
